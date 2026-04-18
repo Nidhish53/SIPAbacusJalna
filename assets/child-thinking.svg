@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" fill="none">
+  <!-- Background circle -->
+  <circle cx="200" cy="210" r="160" fill="#FFF4EE" opacity="0.5"/>
+  
+  <!-- Body / Shirt -->
+  <path d="M140 280 C140 250, 160 230, 200 225 C240 230, 260 250, 260 280 L260 360 C260 370, 255 375, 245 375 L155 375 C145 375, 140 370, 140 360 Z" fill="#E8500A"/>
+  <path d="M150 280 C150 260, 165 240, 200 236 C235 240, 250 260, 250 280 L250 300 L150 300 Z" fill="#FF7A3D" opacity="0.4"/>
+  
+  <!-- Collar -->
+  <path d="M180 235 L200 250 L220 235" stroke="#C43D06" stroke-width="3" fill="none" stroke-linecap="round"/>
+  
+  <!-- Neck -->
+  <rect x="188" y="218" width="24" height="20" rx="8" fill="#FFDAB9"/>
+  
+  <!-- Head -->
+  <ellipse cx="200" cy="160" rx="62" ry="68" fill="#FFDAB9"/>
+  
+  <!-- Hair -->
+  <path d="M138 150 C138 105, 165 78, 200 75 C235 78, 262 105, 262 150 C262 130, 250 95, 200 90 C150 95, 138 130, 138 150 Z" fill="#2C1810"/>
+  <path d="M138 155 C135 140, 140 120, 155 108" stroke="#2C1810" stroke-width="12" stroke-linecap="round" fill="none"/>
+  <path d="M262 155 C265 140, 260 120, 245 108" stroke="#2C1810" stroke-width="12" stroke-linecap="round" fill="none"/>
+  <!-- Hair bangs -->
+  <path d="M155 115 C165 95, 195 85, 200 88 C180 92, 160 105, 155 125 Z" fill="#3D2517"/>
+  <path d="M245 115 C235 95, 205 85, 200 88 C220 92, 240 105, 245 125 Z" fill="#3D2517"/>
+  
+  <!-- Eyes -->
+  <ellipse cx="178" cy="165" rx="9" ry="10" fill="white"/>
+  <ellipse cx="222" cy="165" rx="9" ry="10" fill="white"/>
+  <circle cx="180" cy="163" r="5" fill="#2C1810"/>
+  <circle cx="224" cy="163" r="5" fill="#2C1810"/>
+  <circle cx="182" cy="161" r="2" fill="white"/>
+  <circle cx="226" cy="161" r="2" fill="white"/>
+  
+  <!-- Eyebrows (thinking expression - one raised) -->
+  <path d="M168 148 Q178 142, 188 148" stroke="#2C1810" stroke-width="3" stroke-linecap="round" fill="none"/>
+  <path d="M212 144 Q222 138, 232 146" stroke="#2C1810" stroke-width="3" stroke-linecap="round" fill="none"/>
+  
+  <!-- Nose -->
+  <path d="M198 172 Q200 180, 204 177" stroke="#E8B89D" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  
+  <!-- Mouth (slight thinking smile) -->
+  <path d="M188 192 Q200 198, 212 192" stroke="#C4846C" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  
+  <!-- Left arm (hand on chin - thinking pose) -->
+  <path d="M145 280 C130 270, 118 250, 125 230 C128 220, 140 215, 150 220 L165 195" stroke="#FFDAB9" stroke-width="22" stroke-linecap="round" fill="none"/>
+  <!-- Hand on chin -->
+  <circle cx="167" cy="197" r="14" fill="#FFDAB9"/>
+  <path d="M158 190 L168 200" stroke="#E8B89D" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M162 188 L170 196" stroke="#E8B89D" stroke-width="1.5" stroke-linecap="round"/>
+  
+  <!-- Right arm -->
+  <path d="M255 280 C270 270, 275 260, 270 245 C265 235, 255 240, 250 250" stroke="#FFDAB9" stroke-width="20" stroke-linecap="round" fill="none"/>
+  
+  <!-- Thought bubbles -->
+  <circle cx="280" cy="120" r="8" fill="#FFB347" opacity="0.6"/>
+  <circle cx="300" cy="95" r="12" fill="#FFB347" opacity="0.5"/>
+  <circle cx="325" cy="65" r="18" fill="#FFB347" opacity="0.4"/>
+  
+  <!-- Math symbols floating around -->
+  <text x="310" y="72" font-family="Arial" font-size="16" font-weight="bold" fill="#E8500A" opacity="0.7">+</text>
+  <text x="322" y="60" font-family="Arial" font-size="14" font-weight="bold" fill="#C43D06" opacity="0.6">×</text>
+  <text x="336" y="72" font-family="Arial" font-size="16" font-weight="bold" fill="#FF7A3D" opacity="0.7">=</text>
+  
+  <!-- Small numbers floating -->
+  <text x="85" y="115" font-family="Arial" font-size="18" font-weight="bold" fill="#E8500A" opacity="0.35">7</text>
+  <text x="105" y="90" font-family="Arial" font-size="22" font-weight="bold" fill="#FFB347" opacity="0.3">3</text>
+  <text x="75" y="140" font-family="Arial" font-size="16" font-weight="bold" fill="#C43D06" opacity="0.3">9</text>
+  <text x="295" y="140" font-family="Arial" font-size="20" font-weight="bold" fill="#FFB347" opacity="0.35">5</text>
+  <text x="315" y="115" font-family="Arial" font-size="15" font-weight="bold" fill="#E8500A" opacity="0.3">2</text>
+  
+  <!-- Lightbulb icon above head -->
+  <g transform="translate(240, 70)">
+    <path d="M0 25 C0 12, 10 0, 20 0 C30 0, 40 12, 40 25 C40 32, 35 36, 30 40 L10 40 C5 36, 0 32, 0 25Z" fill="#FFB347" opacity="0.8"/>
+    <rect x="12" y="40" width="16" height="6" rx="2" fill="#E8500A" opacity="0.6"/>
+    <line x1="20" y1="12" x2="20" y2="30" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.8"/>
+    <circle cx="20" cy="33" r="2" fill="white" opacity="0.8"/>
+    <!-- Glow -->
+    <circle cx="20" cy="22" r="28" fill="#FFB347" opacity="0.12"/>
+  </g>
+</svg>
