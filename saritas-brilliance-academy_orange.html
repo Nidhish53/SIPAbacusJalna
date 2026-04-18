@@ -1,0 +1,1914 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#e8500a" />
+  <title>Sarita's Brilliance Academy – SIP Abacus</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+  <style>
+    /* ─── DESIGN TOKENS ──────────────────────────────── */
+    :root {
+      --orange: #e8500a;
+      --orange-dk: #c43d06;
+      --orange-lt: #ff7a3d;
+      --orange-pale: #fff4ee;
+      --orange-mist: #fde8da;
+      --amber: #ffb347;
+      --white: #ffffff;
+      --off-white: #fdf9f7;
+      --bg: #faf6f3;
+      --card: #ffffff;
+      --text: #1c1208;
+      --text-soft: #5c4a3a;
+      --muted: #a08870;
+      --border: #edd9cc;
+      --border-lt: #f5ece5;
+      --wa: #25d366;
+      --radius: 20px;
+      --radius-sm: 12px;
+      --shadow-sm: 0 2px 14px rgba(232, 80, 10, .07);
+      --shadow-md: 0 6px 28px rgba(232, 80, 10, .14);
+      --shadow-lg: 0 14px 48px rgba(232, 80, 10, .2);
+      --shadow-card: 0 1px 8px rgba(100, 50, 10, .08);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── HERO ───────────────────────────────────────── */
+    .hero {
+      background: linear-gradient(150deg, #b83505 0%, #e8500a 45%, #ff7a3d 100%);
+      color: var(--white);
+      padding: clamp(36px, 7vw, 60px) clamp(16px, 5vw, 40px) 44px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 90% 10%, rgba(255, 255, 255, .13) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 50% at 10% 90%, rgba(255, 179, 71, .18) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      right: 0;
+      height: 42px;
+      background: var(--bg);
+      clip-path: ellipse(56% 100% at 50% 100%);
+    }
+
+    .deco {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .07);
+    }
+
+    .deco-1 {
+      width: 220px;
+      height: 220px;
+      top: -70px;
+      right: -70px;
+    }
+
+    .deco-2 {
+      width: 130px;
+      height: 130px;
+      bottom: 10px;
+      left: -45px;
+    }
+
+    .deco-3 {
+      width: 60px;
+      height: 60px;
+      top: 30px;
+      left: 30px;
+    }
+
+    /* Views badge */
+    .views-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(255, 255, 255, .15);
+      border: 1px solid rgba(255, 255, 255, .28);
+      border-radius: 999px;
+      padding: 6px 18px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .05em;
+      margin-bottom: 24px;
+      backdrop-filter: blur(8px);
+      animation: fadeDown .6s ease both;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .views-badge .count {
+      color: var(--amber);
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .views-badge.bumped::after {
+      content: '+1';
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--amber);
+      font-size: 11px;
+      font-weight: 900;
+      animation: floatUp .9s ease forwards;
+      pointer-events: none;
+    }
+
+    @keyframes floatUp {
+      0% {
+        opacity: 1;
+        transform: translateY(-50%);
+      }
+
+      100% {
+        opacity: 0;
+        transform: translateY(-220%);
+      }
+    }
+
+    .count-flip {
+      display: inline-block;
+      animation: countPop .4s cubic-bezier(.34, 1.56, .64, 1);
+    }
+
+    @keyframes countPop {
+      0% {
+        transform: scale(1.7) translateY(-4px);
+        opacity: .3;
+      }
+
+      100% {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+      }
+    }
+
+    /* Avatar */
+    .avatar-ring {
+      width: clamp(92px, 22vw, 118px);
+      height: clamp(92px, 22vw, 118px);
+      border-radius: 50%;
+      margin: 0 auto 18px;
+      padding: 4px;
+      background: linear-gradient(135deg, var(--amber), rgba(255, 255, 255, .9), var(--amber));
+      box-shadow: 0 0 0 6px rgba(255, 255, 255, .18), var(--shadow-lg);
+      animation: fadeDown .7s .1s ease both;
+    }
+
+    .avatar-ring img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      background: var(--orange-dk);
+      border: 3px solid var(--white);
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 5.5vw, 2.4rem);
+      font-weight: 900;
+      line-height: 1.12;
+      margin-bottom: 4px;
+      animation: fadeDown .7s .2s ease both;
+    }
+
+    .hero h1 em {
+      display: block;
+      font-style: italic;
+      color: var(--amber);
+      font-size: 88%;
+    }
+
+    .director-tag {
+      font-size: 13px;
+      color: rgba(255, 255, 255, .8);
+      font-weight: 500;
+      margin-bottom: 28px;
+      animation: fadeDown .7s .3s ease both;
+    }
+
+    .director-tag strong {
+      color: #fff;
+      font-weight: 800;
+    }
+
+    /* Action buttons */
+    .action-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      max-width: 380px;
+      margin: 0 auto;
+      animation: fadeUp .7s .4s ease both;
+    }
+
+    @media (max-width: 340px) {
+      .action-bar {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .action-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, .14);
+      border: 1px solid rgba(255, 255, 255, .24);
+      border-radius: 16px;
+      padding: clamp(10px, 3vw, 14px) 6px;
+      color: #fff;
+      text-decoration: none;
+      font-size: 10.5px;
+      font-weight: 800;
+      letter-spacing: .04em;
+      backdrop-filter: blur(8px);
+      transition: background .2s, transform .18s, box-shadow .2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .action-btn:hover {
+      background: rgba(255, 255, 255, .26);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, .18);
+    }
+
+    .action-btn:active {
+      transform: scale(.94);
+    }
+
+    .ab-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 19px;
+      transition: transform .2s;
+    }
+
+    .action-btn:hover .ab-icon {
+      transform: scale(1.14);
+    }
+
+    .ab-call .ab-icon {
+      background: rgba(255, 255, 255, .2);
+    }
+
+    .ab-wa .ab-icon {
+      background: rgba(37, 211, 102, .35);
+    }
+
+    .ab-map .ab-icon {
+      background: rgba(255, 255, 255, .2);
+    }
+
+    .ab-mail .ab-icon {
+      background: rgba(255, 255, 255, .2);
+    }
+
+    /* ─── NAV ────────────────────────────────────────── */
+    .nav-wrap {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--orange-dk);
+      box-shadow: 0 3px 20px rgba(196, 61, 6, .35);
+      display: flex;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .nav-tabs {
+      display: flex;
+      width: 100%;
+      max-width: 1200px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      scroll-snap-type: x mandatory;
+    }
+
+    .nav-tabs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .nav-tabs a {
+      scroll-snap-align: start;
+      flex-shrink: 0;
+      padding: 14px 16px;
+      color: rgba(255, 255, 255, .65);
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      border-bottom: 3px solid transparent;
+      transition: color .2s, border-color .2s, background .2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .nav-tabs a:hover,
+    .nav-tabs a.active {
+      color: var(--amber);
+      border-bottom-color: var(--amber);
+      background: rgba(255, 255, 255, .08);
+    }
+
+    @media (max-width: 768px) {
+      .nav-tabs {
+        justify-content: flex-start;
+        padding-left: 6px;
+      }
+
+      .nav-tabs a {
+        font-size: 10.5px;
+        padding: 12px 13px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .nav-tabs a {
+        font-size: 10px;
+        padding: 11px 11px;
+      }
+    }
+
+    /* ─── LAYOUT ─────────────────────────────────────── */
+    .page {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 0 clamp(12px, 4vw, 24px) 52px;
+    }
+
+    .section {
+      padding: 32px 0 0;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--orange-dk);
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .st-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--orange), var(--orange-lt));
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      flex-shrink: 0;
+      box-shadow: 0 3px 10px rgba(232, 80, 10, .3);
+    }
+
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 2px;
+      background: linear-gradient(90deg, var(--border), transparent);
+      border-radius: 2px;
+    }
+
+    /* ─── CARD BASE ──────────────────────────────────── */
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+      border: 1px solid var(--border-lt);
+    }
+
+    /* ─── CONTACT ────────────────────────────────────── */
+    .contact-rows .crow {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 15px 18px;
+      border-bottom: 1px solid var(--border-lt);
+      transition: background .15s;
+    }
+
+    .contact-rows .crow:last-child {
+      border-bottom: none;
+    }
+
+    .contact-rows .crow:hover {
+      background: var(--orange-pale);
+    }
+
+    .crow-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 11px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      margin-top: 1px;
+    }
+
+    .ci-map {
+      background: #fff3ee;
+    }
+
+    .ci-mail {
+      background: #fff8ee;
+    }
+
+    .ci-phone {
+      background: #fffaee;
+    }
+
+    .crow-body {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .crow-label {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 2px;
+    }
+
+    .crow-val {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .crow-val a {
+      color: var(--orange-dk);
+      text-decoration: none;
+    }
+
+    .crow-val a:hover {
+      color: var(--orange);
+      text-decoration: underline;
+    }
+
+    .save-card-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 14px;
+      background: linear-gradient(135deg, var(--orange-dk), var(--orange));
+      color: #fff;
+      text-align: center;
+      padding: 15px;
+      border-radius: var(--radius);
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 14px;
+      letter-spacing: .04em;
+      box-shadow: 0 6px 22px rgba(232, 80, 10, .32);
+      transition: transform .18s, box-shadow .2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .save-card-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 32px rgba(232, 80, 10, .38);
+    }
+
+    .save-card-btn:active {
+      transform: scale(.98);
+    }
+
+    /* ─── QUICK LINKS ────────────────────────────────── */
+    .link-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .link-card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 16px 18px;
+      box-shadow: var(--shadow-card);
+      border: 1px solid var(--border-lt);
+      text-decoration: none;
+      color: var(--text);
+      transition: transform .18s, box-shadow .2s, background .15s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .link-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+      background: var(--orange-pale);
+    }
+
+    .link-card:active {
+      transform: scale(.98);
+    }
+
+    .lc-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+
+    .lc-wa {
+      background: linear-gradient(135deg, #25d366, #128c7e);
+    }
+
+    .lc-call {
+      background: linear-gradient(135deg, var(--orange-lt), var(--orange-dk));
+    }
+
+    .lc-name {
+      font-weight: 800;
+      font-size: 15px;
+      color: var(--orange-dk);
+    }
+
+    .lc-sub {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .lc-arrow {
+      margin-left: auto;
+      color: var(--muted);
+      font-size: 20px;
+    }
+
+    /* ─── ABOUT ──────────────────────────────────────── */
+    .info-table .irow {
+      display: flex;
+      align-items: baseline;
+      padding: 13px 18px;
+      border-bottom: 1px solid var(--border-lt);
+      font-size: 14px;
+      gap: 12px;
+    }
+
+    .info-table .irow:last-child {
+      border-bottom: none;
+    }
+
+    .irow-key {
+      font-weight: 800;
+      width: 140px;
+      flex-shrink: 0;
+      color: var(--orange-dk);
+      font-size: 13px;
+    }
+
+    .irow-val {
+      color: var(--text-soft);
+    }
+
+    .spec-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    @media (max-width: 400px) {
+      .spec-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .spec-item {
+      background: var(--card);
+      border: 1px solid var(--border-lt);
+      border-radius: var(--radius-sm);
+      padding: 11px 13px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .spec-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--orange);
+      flex-shrink: 0;
+    }
+
+    .prose-block {
+      background: var(--card);
+      border-radius: var(--radius);
+      border: 1px solid var(--border-lt);
+      padding: 18px 20px;
+      font-size: 14px;
+      line-height: 1.85;
+      color: var(--text-soft);
+      box-shadow: var(--shadow-card);
+      margin-bottom: 18px;
+    }
+
+    .prose-block strong {
+      color: var(--orange-dk);
+      font-weight: 800;
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 400px) {
+      .why-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .why-card {
+      background: var(--card);
+      border: 1px solid var(--border-lt);
+      border-radius: 14px;
+      padding: 14px;
+      box-shadow: var(--shadow-card);
+      font-size: 13px;
+      color: var(--text-soft);
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      transition: transform .18s, box-shadow .2s;
+    }
+
+    .why-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .why-tick {
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .why-title {
+      font-weight: 800;
+      color: var(--orange-dk);
+      display: block;
+      font-size: 13.5px;
+      margin-bottom: 2px;
+    }
+
+    .ach-list {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      margin-bottom: 20px;
+    }
+
+    .ach-item {
+      background: linear-gradient(135deg, var(--orange-pale), #fff);
+      border-left: 4px solid var(--orange);
+      border-radius: var(--radius-sm);
+      padding: 12px 16px;
+      font-size: 13.5px;
+      color: var(--text-soft);
+      box-shadow: var(--shadow-card);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .ach-item span {
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    /* Accordion */
+    .accordion {
+      background: var(--card);
+      border: 1px solid var(--border-lt);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+      margin-bottom: 8px;
+    }
+
+    .acc-header {
+      width: 100%;
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 18px;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--orange-dk);
+      text-align: left;
+      transition: background .15s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .acc-header:hover {
+      background: var(--orange-pale);
+    }
+
+    .acc-arrow {
+      transition: transform .25s;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .acc-header.open .acc-arrow {
+      transform: rotate(180deg);
+    }
+
+    .acc-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .35s ease;
+    }
+
+    .acc-body.open {
+      max-height: 900px;
+    }
+
+    .acc-inner {
+      padding: 0 18px 18px;
+      font-size: 13.5px;
+      line-height: 1.8;
+      color: var(--text-soft);
+    }
+
+    .acc-inner ol {
+      padding-left: 20px;
+    }
+
+    .acc-inner li {
+      margin-bottom: 7px;
+    }
+
+    /* ─── SERVICES ───────────────────────────────────── */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 12px;
+    }
+
+    .svc-card {
+      background: var(--card);
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border-lt);
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+      transition: transform .2s, box-shadow .2s;
+    }
+
+    .svc-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .svc-card img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      display: block;
+    }
+
+    .svc-enq {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 10px 8px;
+      background: var(--orange);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 12px;
+      letter-spacing: .04em;
+      transition: background .2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .svc-enq:hover {
+      background: var(--orange-dk);
+    }
+
+    /* ─── PAYMENT ────────────────────────────────────── */
+    .pay-section-title {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 14px 18px 6px;
+      display: block;
+    }
+
+    .pay-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 13px 18px;
+      border-bottom: 1px solid var(--border-lt);
+      font-size: 14px;
+    }
+
+    .pay-row:last-child {
+      border-bottom: none;
+    }
+
+    .pay-key {
+      font-weight: 700;
+      color: var(--orange-dk);
+    }
+
+    .pay-val {
+      color: var(--text-soft);
+      font-weight: 600;
+      font-size: 13.5px;
+    }
+
+    .upi-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--orange-pale);
+      color: var(--orange-dk);
+      border-radius: 8px;
+      padding: 3px 10px;
+      font-size: 12px;
+      font-weight: 800;
+      border: 1px solid var(--border);
+    }
+
+    /* ─── GALLERY ────────────────────────────────────── */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .gallery-grid img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: transform .2s, box-shadow .2s, border-color .2s;
+    }
+
+    .gallery-grid img:hover {
+      transform: scale(1.05);
+      box-shadow: var(--shadow-md);
+      border-color: var(--orange);
+    }
+
+    /* Lightbox */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(28, 12, 5, .93);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .lightbox.open {
+      display: flex;
+      animation: fadeIn .2s ease;
+    }
+
+    .lb-img {
+      max-width: 100%;
+      max-height: 85vh;
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, .6);
+    }
+
+    .lb-close {
+      position: fixed;
+      top: 16px;
+      right: 20px;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .15);
+      border: none;
+      color: #fff;
+      font-size: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .lb-close:hover {
+      background: var(--orange);
+    }
+
+    .lb-nav {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .15);
+      border: none;
+      color: #fff;
+      font-size: 22px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .lb-nav:hover {
+      background: var(--orange);
+    }
+
+    .lb-prev {
+      left: 12px;
+    }
+
+    .lb-next {
+      right: 12px;
+    }
+
+    /* ─── FEEDBACK ───────────────────────────────────── */
+    .feedback-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      border: 1px solid var(--border-lt);
+      box-shadow: var(--shadow-card);
+      padding: 28px 20px;
+      text-align: center;
+    }
+
+    .feedback-card p {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 20px;
+      line-height: 1.65;
+    }
+
+    .google-review-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--white);
+      border: 2px solid var(--border);
+      border-radius: 14px;
+      padding: 14px 28px;
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 800;
+      font-size: 15px;
+      box-shadow: var(--shadow-sm);
+      transition: transform .18s, box-shadow .2s, border-color .2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .google-review-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+      border-color: #4285f4;
+    }
+
+    .google-review-btn:active {
+      transform: scale(.97);
+    }
+
+    .g-logo {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: conic-gradient(#4285f4 90deg, #ea4335 90deg 180deg, #fbbc04 180deg 270deg, #34a853 270deg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 900;
+      font-size: 14px;
+    }
+
+    .rating-preview {
+      display: flex;
+      justify-content: center;
+      gap: 5px;
+      margin-top: 20px;
+    }
+
+    .rating-preview span {
+      font-size: 26px;
+    }
+
+    /* ─── ENQUIRY ────────────────────────────────────── */
+    .enquiry-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      border: 1px solid var(--border-lt);
+      box-shadow: var(--shadow-card);
+      padding: 22px 20px;
+    }
+
+    .form-group {
+      margin-bottom: 14px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--muted);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 13px 15px;
+      font-family: inherit;
+      font-size: 14px;
+      outline: none;
+      background: var(--off-white);
+      color: var(--text);
+      transition: border-color .2s, box-shadow .2s, background .2s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: var(--orange);
+      box-shadow: 0 0 0 4px rgba(232, 80, 10, .1);
+      background: #fff;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    @media (max-width: 420px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .wa-submit {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 15px;
+      border-radius: var(--radius);
+      background: linear-gradient(135deg, #25d366, #1aad56);
+      color: #fff;
+      font-weight: 800;
+      font-size: 15px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 6px 20px rgba(37, 211, 102, .3);
+      transition: transform .18s, box-shadow .2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .wa-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(37, 211, 102, .35);
+    }
+
+    .wa-submit:active {
+      transform: scale(.98);
+    }
+
+    /* ─── SHARE ──────────────────────────────────────── */
+    .share-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      border: 1px solid var(--border-lt);
+      box-shadow: var(--shadow-card);
+      padding: 24px 20px;
+      text-align: center;
+    }
+
+    .share-url-box {
+      background: var(--orange-mist);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 11px 14px;
+      font-size: 13px;
+      color: var(--orange-dk);
+      font-weight: 700;
+      margin-bottom: 16px;
+      word-break: break-all;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .share-btns {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 22px;
+    }
+
+    .share-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 20px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      border: none;
+      text-decoration: none;
+      letter-spacing: .03em;
+      transition: transform .18s, opacity .2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .share-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .share-btn:active {
+      transform: scale(.97);
+    }
+
+    .sb-wa {
+      background: var(--wa);
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(37, 211, 102, .3);
+    }
+
+    .sb-copy {
+      background: var(--orange);
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(232, 80, 10, .3);
+    }
+
+    .qr-wrap img {
+      width: 140px;
+      height: 140px;
+      object-fit: contain;
+      border-radius: var(--radius-sm);
+      border: 4px solid var(--orange-mist);
+      display: block;
+      margin: 0 auto;
+    }
+
+    .qr-label {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 8px;
+      font-weight: 600;
+    }
+
+    /* ─── TOAST ──────────────────────────────────────── */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: var(--orange-dk);
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 999px;
+      font-size: 13.5px;
+      font-weight: 700;
+      box-shadow: var(--shadow-lg);
+      z-index: 9998;
+      transition: transform .3s cubic-bezier(.34, 1.56, .64, 1);
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* ─── FOOTER ─────────────────────────────────────── */
+    footer {
+      background: var(--orange-dk);
+      color: rgba(255, 255, 255, .6);
+      text-align: center;
+      padding: 22px 16px;
+      font-size: 12.5px;
+    }
+
+    footer a {
+      color: var(--amber);
+      text-decoration: none;
+      font-weight: 800;
+    }
+
+    /* ─── ANIMATIONS ─────────────────────────────────── */
+    @keyframes fadeDown {
+      from {
+        opacity: 0;
+        transform: translateY(-14px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .55s ease, transform .55s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ─── RESPONSIVE ─────────────────────────────────── */
+    @media (max-width: 480px) {
+      .services-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .gallery-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 5px;
+      }
+    }
+
+    @media (min-width: 600px) {
+      .services-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (min-width: 700px) {
+      .hero {
+        padding: 60px 48px 46px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ═══ STICKY NAV ══════════════════════════════════ -->
+  <div class="nav-wrap">
+    <nav class="nav-tabs" id="navTabs" role="navigation" aria-label="Page sections">
+      <a href="#contact-section" class="active">Contact</a>
+      <a href="#links-section">Links</a>
+      <a href="#about-section">About</a>
+      <a href="#services-section">Services</a>
+      <a href="#payment-section">Payment</a>
+      <a href="#gallery-section">Gallery</a>
+      <a href="#feedback-section">Feedback</a>
+      <a href="#enquiry-section">Enquiry</a>
+      <a href="#share-section">Share</a>
+    </nav>
+  </div>
+
+  <!-- ═══ HERO ═══════════════════════════════════════ -->
+  <header class="hero" id="home-section">
+    <div class="deco deco-1"></div>
+    <div class="deco deco-2"></div>
+    <div class="deco deco-3"></div>
+
+    <div class="views-badge" id="viewsBadge">
+      👁 Views: <span class="count" id="viewCount">—</span>
+    </div>
+
+    <div class="avatar-ring">
+      <img src="https://d3k88l35vy59af.cloudfront.net/A160/businesses/4825/1742028310747.png"
+        alt="Sarita's Brilliance Academy" onerror="this.style.background='linear-gradient(135deg,#e8500a,#c43d06)'" />
+    </div>
+
+    <h1>Sarita's<em>Brilliance Academy</em></h1>
+    <p class="director-tag"><strong>Ms. Sarita Dinesh Zanwar</strong> &mdash; Director</p>
+
+    <div class="action-bar">
+      <a href="tel:+917020392423" class="action-btn ab-call" aria-label="Call us">
+        <span class="ab-icon">📞</span>Call
+      </a>
+      <a href="https://wa.me/917020392423?text=Hi!%20I%20got%20your%20reference%20from%20the%20digital%20vCard.%20I%27d%20like%20to%20know%20more."
+        class="action-btn ab-wa" target="_blank" rel="noopener" aria-label="WhatsApp">
+        <span class="ab-icon">💬</span>WhatsApp
+      </a>
+      <a href="https://www.google.com/maps/place/SIP+Abacus+Jalna/@19.850269,75.8998101,17z/data=!3m1!4b1!4m6!3m5!1s0x3bda59fd1b50ab0b:0x454f78c52f824c51!8m2!3d19.850269!4d75.902385!16s%2Fg%2F11fy2pgzvq"
+        class="action-btn ab-map" target="_blank" rel="noopener" aria-label="Get Directions">
+        <span class="ab-icon">📍</span>Direction
+      </a>
+      <a href="mailto:sipabacusjalna@gmail.com" class="action-btn ab-mail" aria-label="Send Mail">
+        <span class="ab-icon">✉️</span>Mail
+      </a>
+    </div>
+  </header>
+
+  <main class="page">
+
+    <!-- ═══ CONTACT ════════════════════════════════════ -->
+    <section class="section reveal" id="contact-section">
+      <h2 class="section-title"><span class="st-icon">📞</span>Contact Us</h2>
+      <div class="card contact-rows">
+        <div class="crow">
+          <span class="crow-icon ci-map">📍</span>
+          <div class="crow-body">
+            <div class="crow-label">Address</div>
+            <div class="crow-val">
+              <a href="https://www.google.com/maps/place/SIP+Abacus+Jalna/@19.850269,75.8998101,17z" target="_blank"
+                rel="noopener">
+                Sarita's Brilliance Academy, Opp. Buldhana Urban Bank,<br />R P Road, Jalna, Maharashtra 431203
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="crow">
+          <span class="crow-icon ci-mail">✉️</span>
+          <div class="crow-body">
+            <div class="crow-label">Email</div>
+            <div class="crow-val"><a href="mailto:sipabacusjalna@gmail.com">sipabacusjalna@gmail.com</a></div>
+          </div>
+        </div>
+        <div class="crow">
+          <span class="crow-icon ci-phone">📱</span>
+          <div class="crow-body">
+            <div class="crow-label">Phone</div>
+            <div class="crow-val">
+              <a href="tel:+917020392423">+91-7020392423</a>&nbsp;·&nbsp;
+              <a href="tel:+919511833179">+91-9511833179</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a href="https://vcard-bucket.s3.us-east-2.amazonaws.com/A160/4642/4642.vcf" class="save-card-btn" download>
+        💾&nbsp;&nbsp;Add to Phone Book
+      </a>
+    </section>
+
+    <!-- ═══ LINKS ═══════════════════════════════════════ -->
+    <section class="section reveal" id="links-section">
+      <h2 class="section-title"><span class="st-icon">🔗</span>Quick Links</h2>
+      <div class="link-cards">
+        <a href="https://wa.me/917020392423" class="link-card" target="_blank" rel="noopener">
+          <span class="lc-icon lc-wa">💬</span>
+          <div>
+            <div class="lc-name">WhatsApp</div>
+            <div class="lc-sub">Chat with us directly on WhatsApp</div>
+          </div>
+          <span class="lc-arrow">›</span>
+        </a>
+        <a href="tel:+917020392423" class="link-card">
+          <span class="lc-icon lc-call">📞</span>
+          <div>
+            <div class="lc-name">Call Now</div>
+            <div class="lc-sub">Tap to call +91-7020392423</div>
+          </div>
+          <span class="lc-arrow">›</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ═══ ABOUT ═══════════════════════════════════════ -->
+    <section class="section reveal" id="about-section">
+      <h2 class="section-title"><span class="st-icon">ℹ️</span>About Us</h2>
+
+      <div class="card info-table" style="margin-bottom:18px;">
+        <div class="irow"><span class="irow-key">Business Name</span><span class="irow-val">Sarita's Brilliance
+            Academy</span></div>
+        <div class="irow"><span class="irow-key">Category</span><span class="irow-val">Education &amp; Coaching</span>
+        </div>
+        <div class="irow"><span class="irow-key">Year of Est.</span><span class="irow-val">2008</span></div>
+        <div class="irow"><span class="irow-key">Nature</span><span class="irow-val">SIP Abacus Institute</span></div>
+      </div>
+
+      <h3 class="section-title" style="font-size:1rem;margin-bottom:12px;"><span class="st-icon">⭐</span>Our
+        Specialities</h3>
+      <div class="spec-grid" style="margin-bottom:20px;">
+        <div class="spec-item"><span class="spec-dot"></span>Knowledgeable professionals</div>
+        <div class="spec-item"><span class="spec-dot"></span>Complete client satisfaction</div>
+        <div class="spec-item"><span class="spec-dot"></span>Ethical business policies</div>
+        <div class="spec-item"><span class="spec-dot"></span>Reliable services</div>
+        <div class="spec-item"><span class="spec-dot"></span>Stay in touch with customers</div>
+        <div class="spec-item"><span class="spec-dot"></span>Transparent dealings</div>
+        <div class="spec-item"><span class="spec-dot"></span>We listen &amp; provide solutions</div>
+        <div class="spec-item"><span class="spec-dot"></span>Happy client experience</div>
+      </div>
+
+      <div class="prose-block">
+        <strong>Sarita's Brilliance Academy</strong>, associated with <strong>International SIP Academy</strong>, is a
+        leading SIP Abacus institute dedicated to the skill development of children. Established in
+        <strong>2008</strong>, we empower young minds through fun and interactive learning techniques.<br /><br />
+        Our structured <strong>SIP Abacus Programme</strong> combines the Eastern <strong>Abacus System</strong> with
+        the Western science of <strong>Brain Gym</strong>, helping children develop superior arithmetic skills,
+        concentration, memory, and confidence.
+      </div>
+
+      <h3 class="section-title" style="font-size:1rem;margin-bottom:12px;"><span class="st-icon">✅</span>Why Choose SIP
+        Abacus?</h3>
+      <div class="why-grid">
+        <div class="why-card"><span class="why-tick">🎓</span>
+          <div><span class="why-title">Intl. Curriculum</span>Scientifically designed for progressive learning</div>
+        </div>
+        <div class="why-card"><span class="why-tick">👶</span>
+          <div><span class="why-title">Small Batches</span>Personalised attention for every child</div>
+        </div>
+        <div class="why-card"><span class="why-tick">🎲</span>
+          <div><span class="why-title">Interactive Aids</span>Quick grasping through engaging tools</div>
+        </div>
+        <div class="why-card"><span class="why-tick">🎮</span>
+          <div><span class="why-title">Fun Approach</span>Games &amp; puzzles make math enjoyable</div>
+        </div>
+        <div class="why-card"><span class="why-tick">💻</span>
+          <div><span class="why-title">Digital Board</span>India's first digital Abacus learning</div>
+        </div>
+        <div class="why-card"><span class="why-tick">🧠</span>
+          <div><span class="why-title">Brain Gym</span>Boosts focus, memory &amp; creativity</div>
+        </div>
+      </div>
+
+      <h3 class="section-title" style="font-size:1rem;margin-bottom:12px;"><span class="st-icon">🎯</span>Our Vision
+      </h3>
+      <div class="prose-block">
+        To create a <strong>national impact</strong> by developing world-class programs that <strong>unlock the mental
+          potential</strong> of children, preparing them for a brighter future.
+      </div>
+
+      <h3 class="section-title" style="font-size:1rem;margin-bottom:12px;"><span class="st-icon">🏆</span>Achievements
+      </h3>
+      <div class="ach-list">
+        <div class="ach-item"><span>🏅</span>Member of <strong>WAAMA</strong> – World Association of Abacus &amp; Mental
+          Arithmetic</div>
+        <div class="ach-item"><span>🏅</span>Member of <strong>AAMARDA</strong> – Asia Abacus &amp; Mental Arithmetic
+          R&amp;D Affiliation</div>
+        <div class="ach-item"><span>📖</span>Featured <strong>5 times</strong> in Limca Book of Records</div>
+        <div class="ach-item"><span>🎖️</span><strong>ISO 9001:2015</strong> Certified Organisation since 2006</div>
+        <div class="ach-item"><span>🥇</span><strong>Best Coaching Institute in Skill Development</strong> for Children
+          (2015)</div>
+      </div>
+
+      <h3 class="section-title" style="font-size:1rem;margin-bottom:12px;"><span class="st-icon">👩‍💼</span>Leadership
+      </h3>
+      <div class="prose-block">
+        <strong>Ms. Sarita Dinesh Zanwar</strong>, Director of Sarita's Brilliance Academy, brings over <strong>18 years
+          of experience</strong> in the education sector. Under her leadership the academy has trained <strong>over
+          5,000+ children</strong> and empowered numerous women by providing career opportunities as SIP Abacus
+        instructors.
+      </div>
+
+      <div class="accordion">
+        <button class="acc-header" id="termsBtn" aria-expanded="false" aria-controls="termsBody">
+          📋 Terms &amp; Conditions <span class="acc-arrow">▾</span>
+        </button>
+        <div class="acc-body" id="termsBody" role="region" aria-labelledby="termsBtn">
+          <div class="acc-inner">
+            <ol>
+              <li><strong>Acceptance of Terms</strong> – By accessing our services you agree to be bound by these Terms.
+              </li>
+              <li><strong>Services</strong> – We provide Offline Coaching.</li>
+              <li><strong>Registration</strong> – You must register your child before joining the course.</li>
+              <li><strong>Payment &amp; Refunds</strong> – All installment payments are non-refundable. No further fees
+                are charged if a child discontinues.</li>
+              <li><strong>Termination</strong> – We reserve the right to suspend or terminate registration at any time.
+              </li>
+              <li><strong>Disclaimer</strong> – We do not guarantee content will meet all specific expectations.</li>
+              <li><strong>Privacy Policy</strong> – Your use of services is governed by our Privacy Policy.</li>
+              <li><strong>Changes</strong> – We reserve the right to modify these Terms at any time.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ SERVICES ════════════════════════════════════ -->
+    <section class="section reveal" id="services-section">
+      <h2 class="section-title"><span class="st-icon">🎒</span>Our Services</h2>
+      <div class="services-grid">
+        <div class="svc-card"><img src="https://d3k88l35vy59af.cloudfront.net/A160/4642/1744874868925.jpeg"
+            alt="Service" loading="lazy" /><a
+            href="https://wa.me/917020392423?text=Hi!%20I%20am%20interested%20in%20your%20services." class="svc-enq"
+            target="_blank" rel="noopener">💬 Enquiry</a></div>
+        <div class="svc-card"><img src="https://d3k88l35vy59af.cloudfront.net/A160/4642/1744874722797.jpeg"
+            alt="Service" loading="lazy" /><a
+            href="https://wa.me/917020392423?text=Hi!%20I%20am%20interested%20in%20your%20services." class="svc-enq"
+            target="_blank" rel="noopener">💬 Enquiry</a></div>
+        <div class="svc-card"><img src="https://d3k88l35vy59af.cloudfront.net/A160/4642/1744874731309.jpeg"
+            alt="Service" loading="lazy" /><a
+            href="https://wa.me/917020392423?text=Hi!%20I%20am%20interested%20in%20your%20services." class="svc-enq"
+            target="_blank" rel="noopener">💬 Enquiry</a></div>
+        <div class="svc-card"><img src="https://d3k88l35vy59af.cloudfront.net/A160/4642/1744874739619.jpeg"
+            alt="Service" loading="lazy" /><a
+            href="https://wa.me/917020392423?text=Hi!%20I%20am%20interested%20in%20your%20services." class="svc-enq"
+            target="_blank" rel="noopener">💬 Enquiry</a></div>
+        <div class="svc-card"><img src="https://d3k88l35vy59af.cloudfront.net/A160/4642/1742035826831.png" alt="Service"
+            loading="lazy" /><a href="https://wa.me/917020392423?text=Hi!%20I%20am%20interested%20in%20your%20services."
+            class="svc-enq" target="_blank" rel="noopener">💬 Enquiry</a></div>
+        <div class="svc-card"><img src="https://d3k88l35vy59af.cloudfront.net/A160/4642/1742035884533.png" alt="Service"
+            loading="lazy" /><a href="https://wa.me/917020392423?text=Hi!%20I%20am%20interested%20in%20your%20services."
+            class="svc-enq" target="_blank" rel="noopener">💬 Enquiry</a></div>
+        <div class="svc-card"><img src="https://d3k88l35vy59af.cloudfront.net/A160/4642/1742035935590.png" alt="Service"
+            loading="lazy" /><a href="https://wa.me/917020392423?text=Hi!%20I%20am%20interested%20in%20your%20services."
+            class="svc-enq" target="_blank" rel="noopener">💬 Enquiry</a></div>
+        <div class="svc-card"><img src="https://d3k88l35vy59af.cloudfront.net/A160/4642/1742035966072.png" alt="Service"
+            loading="lazy" /><a href="https://wa.me/917020392423?text=Hi!%20I%20am%20interested%20in%20your%20services."
+            class="svc-enq" target="_blank" rel="noopener">💬 Enquiry</a></div>
+        <div class="svc-card"><img src="https://d3k88l35vy59af.cloudfront.net/A160/4642/1742035985953.png" alt="Service"
+            loading="lazy" /><a href="https://wa.me/917020392423?text=Hi!%20I%20am%20interested%20in%20your%20services."
+            class="svc-enq" target="_blank" rel="noopener">💬 Enquiry</a></div>
+        <div class="svc-card"><img src="https://d3k88l35vy59af.cloudfront.net/A160/4642/1742036001775.png" alt="Service"
+            loading="lazy" /><a href="https://wa.me/917020392423?text=Hi!%20I%20am%20interested%20in%20your%20services."
+            class="svc-enq" target="_blank" rel="noopener">💬 Enquiry</a></div>
+        <div class="svc-card"><img src="https://d3k88l35vy59af.cloudfront.net/A160/4642/1742036013904.png" alt="Service"
+            loading="lazy" /><a href="https://wa.me/917020392423?text=Hi!%20I%20am%20interested%20in%20your%20services."
+            class="svc-enq" target="_blank" rel="noopener">💬 Enquiry</a></div>
+        <div class="svc-card"><img src="https://d3k88l35vy59af.cloudfront.net/A160/4642/1742036075758.png" alt="Service"
+            loading="lazy" /><a href="https://wa.me/917020392423?text=Hi!%20I%20am%20interested%20in%20your%20services."
+            class="svc-enq" target="_blank" rel="noopener">💬 Enquiry</a></div>
+        <div class="svc-card"><img src="https://d3k88l35vy59af.cloudfront.net/A160/4642/1742036122250.png" alt="Service"
+            loading="lazy" /><a href="https://wa.me/917020392423?text=Hi!%20I%20am%20interested%20in%20your%20services."
+            class="svc-enq" target="_blank" rel="noopener">💬 Enquiry</a></div>
+        <div class="svc-card"><img src="https://d3k88l35vy59af.cloudfront.net/A160/4642/1742040017482.png" alt="Service"
+            loading="lazy" /><a href="https://wa.me/917020392423?text=Hi!%20I%20am%20interested%20in%20your%20services."
+            class="svc-enq" target="_blank" rel="noopener">💬 Enquiry</a></div>
+      </div>
+    </section>
+
+    <!-- ═══ PAYMENT ════════════════════════════════════ -->
+    <section class="section reveal" id="payment-section">
+      <h2 class="section-title"><span class="st-icon">💳</span>Payment Options</h2>
+      <div class="card" style="margin-bottom:16px;">
+        <span class="pay-section-title">UPI Payments</span>
+        <div class="pay-row"><span class="pay-key">📱 Paytm</span><span class="pay-val"><span class="upi-chip">✓
+              UPI</span>&nbsp;+91-9422326062</span></div>
+        <div class="pay-row"><span class="pay-key">📱 PhonePe</span><span class="pay-val"><span class="upi-chip">✓
+              UPI</span>&nbsp;+91-9422326062</span></div>
+        <div class="pay-row"><span class="pay-key">📱 Google Pay</span><span class="pay-val"><span class="upi-chip">✓
+              UPI</span>&nbsp;+91-9422326062</span></div>
+      </div>
+      <div class="card">
+        <span class="pay-section-title">Bank Account Details</span>
+        <div class="pay-row"><span class="pay-key">Bank</span><span class="pay-val">HDFC Bank</span></div>
+        <div class="pay-row"><span class="pay-key">IFSC</span><span class="pay-val">HDFC00001387</span></div>
+        <div class="pay-row"><span class="pay-key">Account Name</span><span class="pay-val">Sarita Dinesh Zanwar</span>
+        </div>
+        <div class="pay-row"><span class="pay-key">Account No.</span><span class="pay-val">50100018624380</span></div>
+      </div>
+    </section>
+
+    <!-- ═══ GALLERY ════════════════════════════════════ -->
+    <section class="section reveal" id="gallery-section">
+      <h2 class="section-title"><span class="st-icon">🖼️</span>Gallery</h2>
+      <div class="gallery-grid" id="galleryGrid">
+        <img src="https://d3k88l35vy59af.cloudfront.net/A160/4642/1742041952402.jpeg" alt="Gallery 1" loading="lazy" />
+        <img src="https://d3k88l35vy59af.cloudfront.net/A160/4642/1742041952403.jpeg" alt="Gallery 2" loading="lazy" />
+        <img src="https://d3k88l35vy59af.cloudfront.net/A160/4642/1742041952404.jpeg" alt="Gallery 3" loading="lazy" />
+        <img src="https://d3k88l35vy59af.cloudfront.net/A160/4642/1742041952405.jpeg" alt="Gallery 4" loading="lazy" />
+        <img src="https://d3k88l35vy59af.cloudfront.net/A160/4642/1742288347440.jpeg" alt="Gallery 5" loading="lazy" />
+        <img src="https://d3k88l35vy59af.cloudfront.net/A160/4642/1742996469314.jpeg" alt="Gallery 6" loading="lazy" />
+        <img src="https://d3k88l35vy59af.cloudfront.net/A160/4642/1742996469315.jpeg" alt="Gallery 7" loading="lazy" />
+        <img src="https://d3k88l35vy59af.cloudfront.net/A160/4642/1742996469316.jpeg" alt="Gallery 8" loading="lazy" />
+        <img src="https://d3k88l35vy59af.cloudfront.net/A160/4642/1742996469317.jpeg" alt="Gallery 9" loading="lazy" />
+        <img src="https://d3k88l35vy59af.cloudfront.net/A160/4642/1742996469318.jpeg" alt="Gallery 10" loading="lazy" />
+        <img src="https://d3k88l35vy59af.cloudfront.net/A160/4642/1749551229023.jpg" alt="Gallery 11" loading="lazy" />
+        <img src="https://d3k88l35vy59af.cloudfront.net/A160/4642/1749551250913.jpg" alt="Gallery 12" loading="lazy" />
+        <img src="https://d3k88l35vy59af.cloudfront.net/A160/4642/1749551269891.jpg" alt="Gallery 13" loading="lazy" />
+      </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+      <button class="lb-close" id="lbClose" aria-label="Close">✕</button>
+      <button class="lb-nav lb-prev" id="lbPrev" aria-label="Previous">‹</button>
+      <img class="lb-img" id="lbImg" src="" alt="Gallery image" />
+      <button class="lb-nav lb-next" id="lbNext" aria-label="Next">›</button>
+    </div>
+
+    <!-- ═══ FEEDBACK ════════════════════════════════════ -->
+    <section class="section reveal" id="feedback-section">
+      <h2 class="section-title"><span class="st-icon">⭐</span>Feedback</h2>
+      <div class="feedback-card">
+        <p>Love what we do? Leave us a review on Google and help other parents discover Sarita's Brilliance Academy!</p>
+        <a href="https://www.google.com/maps/place/SIP+Abacus+Jalna/@19.850269,75.902385,17z/data=!3m1!4b1!4m6!3m5!1s0x3bda59fd1b50ab0b:0x454f78c52f824c51!8m2!3d19.850269!4d75.902385!16s%2Fg%2F11fy2pgzvq"
+          target="_blank" rel="noopener" class="google-review-btn" aria-label="Rate us on Google">
+          <span class="g-logo">G</span>
+          Rate us on Google
+        </a>
+        <div class="rating-preview" aria-hidden="true">
+          <span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ ENQUIRY ════════════════════════════════════ -->
+    <section class="section reveal" id="enquiry-section">
+      <h2 class="section-title"><span class="st-icon">📩</span>Enquiry</h2>
+      <div class="enquiry-card">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="eq-name">Your Name</label>
+            <input type="text" id="eq-name" placeholder="Full name" autocomplete="name" />
+          </div>
+          <div class="form-group">
+            <label for="eq-phone">Mobile Number</label>
+            <input type="tel" id="eq-phone" placeholder="+91 XXXXXXXXXX" autocomplete="tel" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="eq-email">Email Address</label>
+          <input type="email" id="eq-email" placeholder="email@example.com" autocomplete="email" />
+        </div>
+        <div class="form-group">
+          <label for="eq-child">Child's Age / Grade (optional)</label>
+          <input type="text" id="eq-child" placeholder="e.g. 7 years / Class 2" />
+        </div>
+        <div class="form-group">
+          <label for="eq-msg">Message</label>
+          <textarea id="eq-msg" rows="3" placeholder="I'd like to know more about…"></textarea>
+        </div>
+        <button class="wa-submit" id="enqSubmit" aria-label="Send enquiry on WhatsApp">
+          💬&nbsp;&nbsp;Send Enquiry on WhatsApp
+        </button>
+      </div>
+    </section>
+
+    <!-- ═══ SHARE ════════════════════════════════════════ -->
+    <section class="section reveal" id="share-section">
+      <h2 class="section-title"><span class="st-icon">📤</span>Share</h2>
+      <div class="share-card">
+        <div class="share-url-box">🔗&nbsp;&nbsp;sipabacusjalna.in</div>
+        <div class="share-btns">
+          <a href="https://wa.me/?text=Check%20out%20Sarita%27s%20Brilliance%20Academy%20%E2%80%93%20SIP%20Abacus%20Jalna%20https://sipabacusjalna.in"
+            class="share-btn sb-wa" target="_blank" rel="noopener">💬 Share on WhatsApp</a>
+          <button class="share-btn sb-copy" id="copyBtn">📋 Copy Link</button>
+        </div>
+        <div>
+          <img src="https://vcard-bucket.s3.us-east-2.amazonaws.com/A160/4642/4642_qr.png" alt="QR Code"
+            style="width:140px;height:140px;object-fit:contain;border-radius:12px;border:4px solid #fde8da;display:block;margin:0 auto;" />
+          <div class="qr-label">Scan QR to open profile</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══ FOOTER ══════════════════════════════════════ -->
+  <footer>
+    © 2026 <a href="https://sipabacusjalna.in" target="_blank" rel="noopener">sipabacusjalna.in</a>
+    &nbsp;·&nbsp; Sarita's Brilliance Academy, Jalna
+  </footer>
+
+  <div class="toast" id="toast" aria-live="polite"></div>
+
+  <script>
+    /* ── View counter ────────────────────────────────── */
+    (function () {
+      const STORAGE_KEY = 'sba_view_count';
+      const SESSION_KEY = 'sba_counted_session';
+      const ANIM_KEY = 'sba_animated';
+      const BASE_COUNT = 586;
+
+      let count = parseInt(localStorage.getItem(STORAGE_KEY) || BASE_COUNT, 10);
+
+      if (!sessionStorage.getItem(SESSION_KEY)) {
+        count += 1;
+        localStorage.setItem(STORAGE_KEY, count);
+        sessionStorage.setItem(SESSION_KEY, '1');
+        setTimeout(() => {
+          const badge = document.getElementById('viewsBadge');
+          badge.classList.add('bumped');
+          setTimeout(() => badge.classList.remove('bumped'), 1100);
+        }, 900);
+      }
+
+      const el = document.getElementById('viewCount');
+      if (!sessionStorage.getItem(ANIM_KEY)) {
+        sessionStorage.setItem(ANIM_KEY, '1');
+        let current = Math.max(BASE_COUNT, count - 20);
+        const tick = () => {
+          current++;
+          el.textContent = current.toLocaleString('en-IN');
+          if (current < count) requestAnimationFrame(tick);
+          else el.innerHTML = `<span class="count-flip">${count.toLocaleString('en-IN')}</span>`;
+        };
+        setTimeout(tick, 700);
+      } else {
+        el.textContent = count.toLocaleString('en-IN');
+      }
+    })();
+
+    /* ── Scroll reveal ───────────────────────────────── */
+    const revealObs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); } });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+    /* ── Active nav highlight ────────────────────────── */
+    const navLinks = document.querySelectorAll('.nav-tabs a');
+    const navObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const id = e.target.id;
+          navLinks.forEach(a => {
+            const hit = a.getAttribute('href') === '#' + id;
+            a.classList.toggle('active', hit);
+            if (hit) a.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+          });
+        }
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    document.querySelectorAll('section[id]').forEach(s => navObs.observe(s));
+
+    /* ── Smooth nav click ────────────────────────────── */
+    navLinks.forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        const t = document.querySelector(a.getAttribute('href'));
+        if (t) window.scrollTo({ top: t.getBoundingClientRect().top + scrollY - 52, behavior: 'smooth' });
+      });
+    });
+
+    /* ── Terms accordion ─────────────────────────────── */
+    const termsBtn = document.getElementById('termsBtn');
+    const termsBody = document.getElementById('termsBody');
+    termsBtn.addEventListener('click', () => {
+      const open = termsBody.classList.toggle('open');
+      termsBtn.classList.toggle('open', open);
+      termsBtn.setAttribute('aria-expanded', open);
+    });
+
+    /* ── Lightbox ────────────────────────────────────── */
+    const galleryImgs = [...document.querySelectorAll('#galleryGrid img')];
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lbImg');
+    let lbIdx = 0;
+    function openLB(idx) { lbIdx = idx; lbImg.src = galleryImgs[idx].src; lbImg.alt = galleryImgs[idx].alt; lb.classList.add('open'); document.body.style.overflow = 'hidden'; }
+    function closeLB() { lb.classList.remove('open'); document.body.style.overflow = ''; lbImg.src = ''; }
+    function lbNav(dir) { lbIdx = (lbIdx + dir + galleryImgs.length) % galleryImgs.length; lbImg.src = galleryImgs[lbIdx].src; lbImg.alt = galleryImgs[lbIdx].alt; }
+    galleryImgs.forEach((img, i) => img.addEventListener('click', () => openLB(i)));
+    document.getElementById('lbClose').addEventListener('click', closeLB);
+    document.getElementById('lbPrev').addEventListener('click', () => lbNav(-1));
+    document.getElementById('lbNext').addEventListener('click', () => lbNav(1));
+    lb.addEventListener('click', e => { if (e.target === lb) closeLB(); });
+    document.addEventListener('keydown', e => {
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'Escape') closeLB();
+      if (e.key === 'ArrowLeft') lbNav(-1);
+      if (e.key === 'ArrowRight') lbNav(1);
+    });
+    let lbTX = null;
+    lb.addEventListener('touchstart', e => { lbTX = e.touches[0].clientX; }, { passive: true });
+    lb.addEventListener('touchend', e => {
+      if (lbTX === null) return;
+      if (Math.abs(e.changedTouches[0].clientX - lbTX) > 50) lbNav(e.changedTouches[0].clientX < lbTX ? 1 : -1);
+      lbTX = null;
+    });
+
+    /* ── Toast ───────────────────────────────────────── */
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg; t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2800);
+    }
+
+    /* ── Copy link ───────────────────────────────────── */
+    document.getElementById('copyBtn').addEventListener('click', () => {
+      navigator.clipboard.writeText('https://sipabacusjalna.in')
+        .then(() => showToast('✅ Link copied!'))
+        .catch(() => showToast('Please copy manually.'));
+    });
+
+    /* ── WhatsApp enquiry ────────────────────────────── */
+    document.getElementById('enqSubmit').addEventListener('click', () => {
+      const name = document.getElementById('eq-name').value.trim();
+      const phone = document.getElementById('eq-phone').value.trim();
+      const email = document.getElementById('eq-email').value.trim();
+      const child = document.getElementById('eq-child').value.trim();
+      const msg = document.getElementById('eq-msg').value.trim();
+      if (!name) { showToast('⚠️ Please enter your name.'); return; }
+      if (!phone) { showToast('⚠️ Please enter your mobile number.'); return; }
+      let text = `Hi! I am interested in Sarita%27s Brilliance Academy (SIP Abacus).%0A%0A`;
+      text += `*Name:* ${encodeURIComponent(name)}%0A`;
+      text += `*Phone:* ${encodeURIComponent(phone)}%0A`;
+      if (email) text += `*Email:* ${encodeURIComponent(email)}%0A`;
+      if (child) text += `*Child%27s Age%2FGrade:* ${encodeURIComponent(child)}%0A`;
+      if (msg) text += `*Message:* ${encodeURIComponent(msg)}%0A`;
+      window.open(`https://wa.me/917020392423?text=${text}`, '_blank');
+    });
+  </script>
+</body>
+
+</html>
