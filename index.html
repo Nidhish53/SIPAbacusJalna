@@ -1,16 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="theme-color" content="#e8500a" />
   <title>Sarita's Brilliance Academy – SIP Abacus</title>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
-    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
-    /* ─── DESIGN TOKENS ──────────────────────────────── */
     :root {
       --orange: #e8500a;
       --orange-dk: #c43d06;
@@ -30,2021 +26,463 @@
       --wa: #25d366;
       --radius: 20px;
       --radius-sm: 12px;
-      --shadow-sm: 0 2px 14px rgba(232, 80, 10, .07);
-      --shadow-md: 0 6px 28px rgba(232, 80, 10, .14);
-      --shadow-lg: 0 14px 48px rgba(232, 80, 10, .2);
-      --shadow-card: 0 1px 8px rgba(100, 50, 10, .08);
+      --shadow-sm: 0 2px 14px rgba(232,80,10,.07);
+      --shadow-md: 0 6px 28px rgba(232,80,10,.14);
+      --shadow-lg: 0 14px 48px rgba(232,80,10,.2);
+      --shadow-card: 0 1px 8px rgba(100,50,10,.08);
     }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased}
 
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-      margin: 0;
+    /* ── HERO ── */
+    .hero{background:linear-gradient(150deg,#b83505 0%,#e8500a 45%,#ff7a3d 100%);color:#fff;padding:clamp(36px,7vw,60px) clamp(16px,5vw,40px) 44px;text-align:center;position:relative;overflow:hidden}
+    .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 90% 10%,rgba(255,255,255,.13) 0%,transparent 65%),radial-gradient(ellipse 50% 50% at 10% 90%,rgba(255,179,71,.18) 0%,transparent 60%);pointer-events:none}
+    .hero::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:42px;background:var(--bg);clip-path:ellipse(56% 100% at 50% 100%)}
+    .deco{position:absolute;border-radius:50%;background:rgba(255,255,255,.07)}
+    .deco-1{width:220px;height:220px;top:-70px;right:-70px}
+    .deco-2{width:130px;height:130px;bottom:10px;left:-45px}
+    .deco-3{width:60px;height:60px;top:30px;left:30px}
+
+    .views-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.28);border-radius:999px;padding:6px 18px;font-size:12px;font-weight:700;letter-spacing:.05em;margin-bottom:24px;backdrop-filter:blur(8px);animation:fadeDown .6s ease both;position:relative;overflow:hidden}
+    .views-badge .count{color:var(--amber);font-size:13px;font-weight:900}
+    .views-badge.bumped::after{content:'+1';position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--amber);font-size:11px;font-weight:900;animation:floatUp .9s ease forwards;pointer-events:none}
+    @keyframes floatUp{0%{opacity:1;transform:translateY(-50%)}100%{opacity:0;transform:translateY(-220%)}}
+    .count-flip{display:inline-block;animation:countPop .4s cubic-bezier(.34,1.56,.64,1)}
+    @keyframes countPop{0%{transform:scale(1.7) translateY(-4px);opacity:.3}100%{transform:scale(1) translateY(0);opacity:1}}
+
+    .avatar-ring{width:clamp(92px,22vw,118px);height:clamp(92px,22vw,118px);border-radius:50%;margin:0 auto 18px;padding:4px;background:linear-gradient(135deg,var(--amber),rgba(255,255,255,.9),var(--amber));box-shadow:0 0 0 6px rgba(255,255,255,.18),var(--shadow-lg);animation:fadeDown .7s .1s ease both}
+    .avatar-ring img{width:100%;height:100%;border-radius:50%;object-fit:cover;background:var(--orange-dk);border:3px solid #fff}
+    .hero h1{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,5.5vw,2.4rem);font-weight:900;line-height:1.12;margin-bottom:4px;animation:fadeDown .7s .2s ease both}
+    .hero h1 em{display:block;font-style:italic;color:var(--amber);font-size:88%}
+    .director-tag{font-size:13px;color:rgba(255,255,255,.8);font-weight:500;margin-bottom:28px;animation:fadeDown .7s .3s ease both}
+    .director-tag strong{color:#fff;font-weight:800}
+
+    .action-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:380px;margin:0 auto;animation:fadeUp .7s .4s ease both}
+    @media(max-width:340px){.action-bar{grid-template-columns:repeat(2,1fr)}}
+    .action-btn{display:flex;flex-direction:column;align-items:center;gap:6px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.24);border-radius:16px;padding:clamp(10px,3vw,14px) 6px;color:#fff;text-decoration:none;font-size:10.5px;font-weight:800;letter-spacing:.04em;backdrop-filter:blur(8px);transition:background .2s,transform .18s,box-shadow .2s;-webkit-tap-highlight-color:transparent}
+    .action-btn:hover{background:rgba(255,255,255,.26);box-shadow:0 8px 20px rgba(0,0,0,.18)}
+    .action-btn:active{transform:scale(.94)}
+    .ab-icon{width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:19px;transition:transform .2s}
+    .action-btn:hover .ab-icon{transform:scale(1.14)}
+    .ab-call .ab-icon{background:rgba(255,255,255,.2)}
+    .ab-wa .ab-icon{background:rgba(37,211,102,.35)}
+    .ab-map .ab-icon,.ab-mail .ab-icon{background:rgba(255,255,255,.2)}
+
+    /* ── NAV ── */
+    .nav-wrap{position:sticky;top:0;z-index:100;background:var(--orange-dk);box-shadow:0 3px 20px rgba(196,61,6,.35);display:flex;justify-content:center;overflow:hidden;align-items:center}
+    .nav-tabs{display:flex;width:100%;max-width:1200px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory}
+    .nav-tabs::-webkit-scrollbar{display:none}
+    .nav-tabs a{scroll-snap-align:start;flex-shrink:0;padding:14px 16px;color:rgba(255,255,255,.65);text-decoration:none;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;border-bottom:3px solid transparent;transition:color .2s,border-color .2s,background .2s;-webkit-tap-highlight-color:transparent}
+    .nav-tabs a:hover,.nav-tabs a.active{color:var(--amber);border-bottom-color:var(--amber);background:rgba(255,255,255,.08)}
+    @media(max-width:768px){.nav-tabs{justify-content:flex-start;padding-left:6px}.nav-tabs a{font-size:10.5px;padding:12px 13px}}
+    @media(max-width:480px){.nav-tabs a{font-size:10px;padding:11px 11px}}
+
+    /* ── LAYOUT ── */
+    .page{max-width:700px;margin:0 auto;padding:0 clamp(12px,4vw,24px) 52px}
+    .section{padding:32px 0 0}
+    .section-title{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--orange-dk);margin-bottom:18px;display:flex;align-items:center;gap:12px}
+    .st-icon{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--orange),var(--orange-lt));color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;box-shadow:0 3px 10px rgba(232,80,10,.3)}
+    .section-title::after{content:'';flex:1;height:2px;background:linear-gradient(90deg,var(--border),transparent);border-radius:2px}
+
+    .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow-card);overflow:hidden;border:1px solid var(--border-lt)}
+
+    /* ── CONTACT ── */
+    .contact-rows .crow{display:flex;align-items:flex-start;gap:14px;padding:15px 18px;border-bottom:1px solid var(--border-lt);transition:background .15s}
+    .contact-rows .crow:last-child{border-bottom:none}
+    .contact-rows .crow:hover{background:var(--orange-pale)}
+    .crow-icon{width:40px;height:40px;border-radius:11px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:18px;margin-top:1px}
+    .ci-map{background:#fff3ee}.ci-mail{background:#fff8ee}.ci-phone{background:#fffaee}
+    .crow-body{flex:1;min-width:0}
+    .crow-label{font-size:10px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+    .crow-val{font-size:14px;font-weight:600;color:var(--text);line-height:1.5}
+    .crow-val a{color:var(--orange-dk);text-decoration:none}
+    .crow-val a:hover{color:var(--orange);text-decoration:underline}
+
+    /* second address badge */
+    .addr-branch{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;background:var(--orange-pale);color:var(--orange-dk);border:1px solid var(--border);border-radius:6px;padding:2px 8px;margin-bottom:4px}
+
+    .save-card-btn{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:14px;background:linear-gradient(135deg,var(--orange-dk),var(--orange));color:#fff;text-align:center;padding:15px;border-radius:var(--radius);text-decoration:none;font-weight:800;font-size:14px;letter-spacing:.04em;box-shadow:0 6px 22px rgba(232,80,10,.32);transition:transform .18s,box-shadow .2s;-webkit-tap-highlight-color:transparent}
+    .save-card-btn:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(232,80,10,.38)}
+    .save-card-btn:active{transform:scale(.98)}
+
+    /* ── LINKS ── */
+    .link-cards{display:flex;flex-direction:column;gap:12px}
+    .link-card{display:flex;align-items:center;gap:16px;background:var(--card);border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow-card);border:1px solid var(--border-lt);text-decoration:none;color:var(--text);transition:transform .18s,box-shadow .2s,background .15s;-webkit-tap-highlight-color:transparent}
+    .link-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);background:var(--orange-pale)}
+    .link-card:active{transform:scale(.98)}
+    .lc-icon{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0}
+    .lc-wa{background:linear-gradient(135deg,#25d366,#128c7e)}
+    .lc-call{background:linear-gradient(135deg,var(--orange-lt),var(--orange-dk))}
+    .lc-name{font-weight:800;font-size:15px;color:var(--orange-dk)}
+    .lc-sub{font-size:12px;color:var(--muted);margin-top:2px}
+    .lc-arrow{margin-left:auto;color:var(--muted);font-size:20px}
+
+    /* ── ABOUT ── */
+    .info-table .irow{display:flex;align-items:baseline;padding:13px 18px;border-bottom:1px solid var(--border-lt);font-size:14px;gap:12px}
+    .info-table .irow:last-child{border-bottom:none}
+    .irow-key{font-weight:800;width:140px;flex-shrink:0;color:var(--orange-dk);font-size:13px}
+    .irow-val{color:var(--text-soft)}
+    .spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:18px}
+    @media(max-width:400px){.spec-grid{grid-template-columns:1fr}}
+    .spec-item{background:var(--card);border:1px solid var(--border-lt);border-radius:var(--radius-sm);padding:11px 13px;font-size:13px;font-weight:600;color:var(--text);display:flex;align-items:center;gap:9px;box-shadow:var(--shadow-card)}
+    .spec-dot{width:8px;height:8px;border-radius:50%;background:var(--orange);flex-shrink:0}
+    .prose-block{background:var(--card);border-radius:var(--radius);border:1px solid var(--border-lt);padding:18px 20px;font-size:14px;line-height:1.85;color:var(--text-soft);box-shadow:var(--shadow-card);margin-bottom:18px}
+    .prose-block strong{color:var(--orange-dk);font-weight:800}
+    .why-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+    @media(max-width:400px){.why-grid{grid-template-columns:1fr}}
+    .why-card{background:var(--card);border:1px solid var(--border-lt);border-radius:14px;padding:14px;box-shadow:var(--shadow-card);font-size:13px;color:var(--text-soft);display:flex;gap:10px;align-items:flex-start;transition:transform .18s,box-shadow .2s}
+    .why-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-md)}
+    .why-tick{font-size:18px;flex-shrink:0}
+    .why-title{font-weight:800;color:var(--orange-dk);display:block;font-size:13.5px;margin-bottom:2px}
+    .ach-list{display:flex;flex-direction:column;gap:9px;margin-bottom:20px}
+    .ach-item{background:linear-gradient(135deg,var(--orange-pale),#fff);border-left:4px solid var(--orange);border-radius:var(--radius-sm);padding:12px 16px;font-size:13.5px;color:var(--text-soft);box-shadow:var(--shadow-card);display:flex;align-items:center;gap:10px}
+    .ach-item span{font-size:18px;flex-shrink:0}
+
+    .accordion{background:var(--card);border:1px solid var(--border-lt);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-card);margin-bottom:8px}
+    .acc-header{width:100%;background:none;border:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;padding:15px 18px;font-family:inherit;font-size:14px;font-weight:800;color:var(--orange-dk);text-align:left;transition:background .15s;-webkit-tap-highlight-color:transparent}
+    .acc-header:hover{background:var(--orange-pale)}
+    .acc-arrow{transition:transform .25s;color:var(--muted);font-size:12px}
+    .acc-header.open .acc-arrow{transform:rotate(180deg)}
+    .acc-body{max-height:0;overflow:hidden;transition:max-height .35s ease}
+    .acc-body.open{max-height:900px}
+    .acc-inner{padding:0 18px 18px;font-size:13.5px;line-height:1.8;color:var(--text-soft)}
+    .acc-inner ol{padding-left:20px}
+    .acc-inner li{margin-bottom:7px}
+
+    .testimonials-summary{background:linear-gradient(135deg,var(--orange-pale),#fff);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-top:18px;display:flex;align-items:center;justify-content:center;gap:20px;text-align:center}
+    .ts-stat{display:flex;flex-direction:column;align-items:center}
+    .ts-number{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;color:var(--orange-dk)}
+    .ts-label{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+    .ts-divider{width:1px;height:40px;background:var(--border)}
+
+    /* ── ABACUS SECTION ── */
+    .why-sip-wrap{background:var(--card);border-radius:var(--radius);border:1px solid var(--border-lt);box-shadow:var(--shadow-card);padding:28px 22px;margin-bottom:20px;overflow:hidden}
+    .why-sip-inner{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center}
+    @media(max-width:640px){.why-sip-inner{grid-template-columns:1fr;gap:22px}}
+    .wsa-title{font-family:'Playfair Display',serif;font-size:clamp(1.15rem,3.5vw,1.4rem);font-weight:900;color:var(--orange-dk);margin-bottom:18px;position:relative;display:inline-block}
+    .wsa-title::before{content:'';position:absolute;left:-6px;right:-6px;bottom:2px;height:40%;background:linear-gradient(90deg,var(--amber),var(--orange-mist));border-radius:4px 14px 4px 10px;z-index:0;opacity:.5;transform:rotate(-.8deg)}
+    .wsa-title span{position:relative;z-index:1}
+    .wsa-text{font-size:14px;line-height:1.85;color:var(--text-soft)}
+    .wsa-text p{margin-bottom:14px}
+    .wsa-text strong{color:var(--orange-dk);font-weight:800}
+    .wsa-text .wsa-highlight{color:var(--orange);font-weight:800}
+    .wsa-visual{position:relative;min-height:300px;display:flex;align-items:center;justify-content:center}
+    @media(max-width:640px){.wsa-visual{min-height:260px}}
+    .wsa-child-img{width:clamp(180px,50vw,260px);height:auto;position:relative;z-index:1;filter:drop-shadow(0 6px 20px rgba(232,80,10,.12))}
+    .problem-label{position:absolute;background:transparent;padding:7px 14px;font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(10px,2.2vw,13px);color:var(--text);z-index:2;white-space:nowrap;line-height:1.3;text-align:center}
+    .problem-label::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,var(--amber),var(--orange-mist));border-radius:4px var(--radius-sm) 4px 10px;z-index:-1;opacity:.55;transform:rotate(-1deg)}
+    .pl-1{top:8%;left:5%;--rot:-3deg;animation:floatLabel 3s ease-in-out infinite;animation-delay:0s}
+    .pl-2{top:5%;right:0%;--rot:2deg;animation:floatLabel 3s ease-in-out infinite;animation-delay:.6s}
+    .pl-3{bottom:25%;left:-2%;--rot:-2deg;animation:floatLabel 3s ease-in-out infinite;animation-delay:1.2s}
+    .pl-4{bottom:8%;right:-2%;--rot:1.5deg;animation:floatLabel 3s ease-in-out infinite;animation-delay:1.8s}
+    @keyframes floatLabel{0%,100%{transform:translateY(0) rotate(var(--rot,-2deg))}50%{transform:translateY(-6px) rotate(var(--rot,-2deg))}}
+    @media(max-width:420px){.problem-label{font-size:9.5px;padding:5px 10px}.pl-1{left:0}.pl-2{right:0}.pl-3{left:0}.pl-4{right:0}}
+
+    .modules-wrap{background:linear-gradient(150deg,var(--amber) 0%,#ffb347 50%,#ffa726 100%);border-radius:var(--radius);padding:28px 22px;position:relative;overflow:hidden;border:1px solid var(--border)}
+    .modules-wrap::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--orange-dk),var(--orange),var(--amber),var(--orange),var(--orange-dk))}
+    .modules-header{font-family:'Playfair Display',serif;font-size:clamp(1rem,3.5vw,1.2rem);font-weight:700;color:var(--text);margin-bottom:20px;font-style:italic}
+    .module-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:22px}
+    @media(max-width:520px){.module-cards{grid-template-columns:repeat(2,1fr)}}
+    .module-card{border-radius:var(--radius-sm);padding:16px 10px 14px;text-align:center;border:1px solid var(--border-lt);box-shadow:var(--shadow-card);transition:transform .25s,box-shadow .25s;cursor:default}
+    .module-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md)}
+    .mc-junior{background:#f3e5f5}.mc-foundation{background:#fce4ec}.mc-advanced{background:#e8f5e9}.mc-grandmaster{background:#ffebee}
+    .module-icon{width:48px;height:48px;border-radius:var(--radius-sm);margin:0 auto 8px;display:flex;align-items:center;justify-content:center;font-size:26px;background:rgba(255,255,255,.6)}
+    .module-card h4{font-family:'Playfair Display',serif;font-size:clamp(12px,2.5vw,14px);font-weight:700;font-style:italic;color:var(--text);line-height:1.25}
+    .mod-features{display:grid;grid-template-columns:1fr 1fr;gap:14px 24px;margin-bottom:22px}
+    @media(max-width:500px){.mod-features{grid-template-columns:1fr;gap:12px}}
+    .mod-feat-item{display:flex;align-items:flex-start;gap:10px}
+    .mf-icon{width:38px;height:38px;border-radius:var(--radius-sm);background:rgba(255,255,255,.4);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;border:1px solid rgba(255,255,255,.5)}
+    .mf-text{font-size:13px;font-weight:700;color:var(--text);line-height:1.45}
+    .mod-cta-row{display:flex;gap:12px;flex-wrap:wrap}
+    .mod-cta{display:inline-flex;align-items:center;gap:8px;padding:12px 26px;border-radius:var(--radius-sm);font-weight:800;font-size:14px;text-decoration:none;letter-spacing:.03em;transition:transform .18s,box-shadow .2s;-webkit-tap-highlight-color:transparent;cursor:pointer}
+    .mod-cta:hover{transform:translateY(-2px)}
+    .mod-cta:active{transform:scale(.97)}
+    .cta-know-more{background:var(--card);color:var(--orange-dk);border:2px solid var(--orange-dk)}
+    .cta-know-more:hover{box-shadow:var(--shadow-md)}
+    .cta-trial{background:linear-gradient(135deg,var(--orange),var(--orange-dk));color:#fff;border:2px solid transparent;box-shadow:0 4px 14px rgba(232,80,10,.3)}
+    .cta-trial:hover{box-shadow:0 8px 22px rgba(232,80,10,.4)}
+
+    /* ── PAYMENT ── */
+    .pay-section-title{font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);padding:14px 18px 6px;display:block}
+    .pay-row{display:flex;align-items:center;justify-content:space-between;padding:13px 18px;border-bottom:1px solid var(--border-lt);font-size:14px}
+    .pay-row:last-child{border-bottom:none}
+    .pay-key{font-weight:700;color:var(--orange-dk)}
+    .pay-val{color:var(--text-soft);font-weight:600;font-size:13.5px}
+    .upi-chip{display:inline-flex;align-items:center;gap:5px;background:var(--orange-pale);color:var(--orange-dk);border-radius:8px;padding:3px 10px;font-size:12px;font-weight:800;border:1px solid var(--border)}
+
+    /* ── GALLERY CAROUSEL ── */
+    .gallery-carousel{position:relative;overflow:hidden;border-radius:var(--radius);background:var(--card);border:1px solid var(--border-lt);box-shadow:var(--shadow-card)}
+    .gallery-track{display:flex;transition:transform .5s cubic-bezier(.4,0,.2,1)}
+    .gallery-slide{min-width:100%;position:relative}
+    .gallery-slide img{width:100%;max-height:420px;object-fit:contain;display:block;cursor:pointer;background:var(--off-white)}
+    .gallery-counter{position:absolute;top:12px;right:12px;background:rgba(0,0,0,.55);color:#fff;font-size:12px;font-weight:700;padding:4px 12px;border-radius:999px;backdrop-filter:blur(4px);z-index:3;pointer-events:none}
+    .gallery-nav-btn{position:absolute;top:50%;transform:translateY(-50%);width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.85);border:1px solid var(--border-lt);color:var(--orange-dk);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:3;transition:background .2s,transform .18s,box-shadow .2s;-webkit-tap-highlight-color:transparent;box-shadow:var(--shadow-sm)}
+    .gallery-nav-btn:hover{background:var(--card);box-shadow:var(--shadow-md);transform:translateY(-50%) scale(1.1)}
+    .gallery-nav-btn:active{transform:translateY(-50%) scale(.95)}
+    .gal-prev{left:10px}.gal-next{right:10px}
+    .gallery-dots{display:flex;justify-content:center;gap:8px;padding:14px 0;background:var(--card)}
+    .gallery-dot{width:8px;height:8px;border-radius:50%;background:var(--border);border:none;cursor:pointer;transition:background .25s,transform .2s,width .25s;-webkit-tap-highlight-color:transparent}
+    .gallery-dot.active{background:var(--orange);width:22px;border-radius:4px}
+    .gallery-dot:hover:not(.active){background:var(--orange-lt)}
+
+    /* ── LIGHTBOX ── */
+    .lightbox{display:none;position:fixed;inset:0;z-index:9999;background:rgba(28,12,5,.93);align-items:center;justify-content:center;padding:20px}
+    .lightbox.open{display:flex;animation:fadeIn .2s ease}
+    .lb-img{max-width:100%;max-height:85vh;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.6)}
+    .lb-close{position:fixed;top:16px;right:20px;width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.15);border:none;color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;-webkit-tap-highlight-color:transparent}
+    .lb-close:hover{background:var(--orange)}
+    .lb-nav{position:fixed;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.15);border:none;color:#fff;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;-webkit-tap-highlight-color:transparent}
+    .lb-nav:hover{background:var(--orange)}
+    .lb-prev{left:12px}.lb-next{right:12px}
+
+    /* ── TESTIMONIALS ── */
+    .testimonials-wrapper{position:relative;overflow:hidden;border-radius:var(--radius)}
+    .testimonials-track{display:flex;transition:transform .55s cubic-bezier(.4,0,.2,1)}
+    .testimonial-slide{min-width:100%;padding:0 2px;box-sizing:border-box}
+    .testimonial-card{background:var(--card);border-radius:var(--radius);border:1px solid var(--border-lt);box-shadow:var(--shadow-card);padding:28px 24px;position:relative;overflow:hidden}
+    .testimonial-card::before{content:'\201C';position:absolute;top:-8px;left:16px;font-family:'Playfair Display',serif;font-size:80px;color:var(--orange-pale);line-height:1;pointer-events:none}
+    .tc-stars{display:flex;gap:3px;margin-bottom:14px;font-size:18px}
+    .tc-quote{font-size:14px;line-height:1.8;color:var(--text-soft);font-style:italic;margin-bottom:18px;position:relative;z-index:1}
+    .tc-author{display:flex;align-items:center;gap:12px}
+    .tc-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--orange),var(--orange-lt));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:18px;flex-shrink:0}
+    .tc-name{font-weight:800;font-size:14px;color:var(--orange-dk)}
+    .tc-role{font-size:12px;color:var(--muted);margin-top:1px}
+    .testimonials-nav{display:flex;justify-content:center;align-items:center;gap:16px;margin-top:18px}
+    .tn-btn{width:38px;height:38px;border-radius:50%;border:2px solid var(--border);background:var(--card);color:var(--orange-dk);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s,border-color .2s,transform .18s;-webkit-tap-highlight-color:transparent}
+    .tn-btn:hover{background:var(--orange-pale);border-color:var(--orange);transform:scale(1.08)}
+    .tn-btn:active{transform:scale(.95)}
+    .tn-dots{display:flex;gap:8px}
+    .tn-dot{width:10px;height:10px;border-radius:50%;background:var(--border);border:none;cursor:pointer;transition:background .25s,transform .2s;-webkit-tap-highlight-color:transparent}
+    .tn-dot.active{background:var(--orange);transform:scale(1.25)}
+    .tn-dot:hover:not(.active){background:var(--orange-lt)}
+
+    /* ── FEEDBACK ── */
+    .feedback-card{background:var(--card);border-radius:var(--radius);border:1px solid var(--border-lt);box-shadow:var(--shadow-card);padding:28px 20px;text-align:center}
+    .feedback-card p{font-size:14px;color:var(--muted);margin-bottom:20px;line-height:1.65}
+    .google-review-btn{display:inline-flex;align-items:center;gap:12px;background:#fff;border:2px solid var(--border);border-radius:14px;padding:14px 28px;text-decoration:none;color:var(--text);font-weight:800;font-size:15px;box-shadow:var(--shadow-sm);transition:transform .18s,box-shadow .2s,border-color .2s;-webkit-tap-highlight-color:transparent}
+    .google-review-btn:hover{transform:translateY(-2px);box-shadow:var(--shadow-md);border-color:#4285f4}
+    .google-review-btn:active{transform:scale(.97)}
+    .g-logo{width:30px;height:30px;border-radius:50%;background:conic-gradient(#4285f4 90deg,#ea4335 90deg 180deg,#fbbc04 180deg 270deg,#34a853 270deg);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:14px}
+    .rating-preview{display:flex;justify-content:center;gap:5px;margin-top:20px}
+    .rating-preview span{font-size:26px}
+
+    /* ── ENQUIRY ── */
+    .enquiry-card{background:var(--card);border-radius:var(--radius);border:1px solid var(--border-lt);box-shadow:var(--shadow-card);padding:22px 20px}
+    .form-group{margin-bottom:14px}
+    .form-group label{display:block;font-size:11px;font-weight:800;color:var(--muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.07em}
+    .form-group input,.form-group textarea{width:100%;border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:13px 15px;font-family:inherit;font-size:14px;outline:none;background:var(--off-white);color:var(--text);transition:border-color .2s,box-shadow .2s,background .2s}
+    .form-group input:focus,.form-group textarea:focus{border-color:var(--orange);box-shadow:0 0 0 4px rgba(232,80,10,.1);background:#fff}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    @media(max-width:420px){.form-row{grid-template-columns:1fr}}
+    .form-group textarea{resize:vertical;min-height:100px}
+    .wa-submit{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:15px;border-radius:var(--radius);background:linear-gradient(135deg,#25d366,#1aad56);color:#fff;font-weight:800;font-size:15px;border:none;cursor:pointer;text-decoration:none;box-shadow:0 6px 20px rgba(37,211,102,.3);transition:transform .18s,box-shadow .2s;-webkit-tap-highlight-color:transparent}
+    .wa-submit:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(37,211,102,.35)}
+    .wa-submit:active{transform:scale(.98)}
+
+    /* ── SHARE ── */
+    .share-card{background:var(--card);border-radius:var(--radius);border:1px solid var(--border-lt);box-shadow:var(--shadow-card);padding:24px 20px;text-align:center}
+    .share-url-box{background:var(--orange-mist);border:1px solid var(--border);border-radius:10px;padding:11px 14px;font-size:13px;color:var(--orange-dk);font-weight:700;margin-bottom:16px;word-break:break-all;display:flex;align-items:center;gap:10px}
+    .share-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:22px}
+    .share-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:var(--radius-sm);font-size:13px;font-weight:800;cursor:pointer;border:none;text-decoration:none;letter-spacing:.03em;transition:transform .18s,opacity .2s;-webkit-tap-highlight-color:transparent}
+    .share-btn:hover{transform:translateY(-2px)}
+    .share-btn:active{transform:scale(.97)}
+    .sb-wa{background:var(--wa);color:#fff;box-shadow:0 4px 14px rgba(37,211,102,.3)}
+    .sb-copy{background:var(--orange);color:#fff;box-shadow:0 4px 14px rgba(232,80,10,.3)}
+
+    /* ── TOAST ── */
+    .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--orange-dk);color:#fff;padding:12px 24px;border-radius:999px;font-size:13.5px;font-weight:700;box-shadow:var(--shadow-lg);z-index:9998;transition:transform .3s cubic-bezier(.34,1.56,.64,1);pointer-events:none;white-space:nowrap}
+    .toast.show{transform:translateX(-50%) translateY(0)}
+
+    /* ══════════════════════════════════════════════════
+       ── FOOTER (new rich layout) ──
+    ══════════════════════════════════════════════════ */
+    .site-footer {
+      background: var(--orange-dk);
+      color: rgba(255,255,255,.75);
+      font-size: 13px;
       padding: 0;
     }
 
-    html {
-      scroll-behavior: smooth;
+    /* Top strip: logo + address  |  links  |  book session */
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1.2fr;
+      gap: 32px;
+      padding: 40px clamp(16px,5vw,48px) 36px;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+    @media(max-width:700px){
+      .footer-top { grid-template-columns: 1fr 1fr; }
+    }
+    @media(max-width:480px){
+      .footer-top { grid-template-columns: 1fr; gap:24px; }
     }
 
-    body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* ─── HERO ───────────────────────────────────────── */
-    .hero {
-      background: linear-gradient(150deg, #b83505 0%, #e8500a 45%, #ff7a3d 100%);
-      color: var(--white);
-      padding: clamp(36px, 7vw, 60px) clamp(16px, 5vw, 40px) 44px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 80% 60% at 90% 10%, rgba(255, 255, 255, .13) 0%, transparent 65%),
-        radial-gradient(ellipse 50% 50% at 10% 90%, rgba(255, 179, 71, .18) 0%, transparent 60%);
-      pointer-events: none;
-    }
-
-    .hero::after {
-      content: '';
-      position: absolute;
-      bottom: -1px;
-      left: 0;
-      right: 0;
-      height: 42px;
-      background: var(--bg);
-      clip-path: ellipse(56% 100% at 50% 100%);
-    }
-
-    .deco {
-      position: absolute;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, .07);
-    }
-
-    .deco-1 {
-      width: 220px;
-      height: 220px;
-      top: -70px;
-      right: -70px;
-    }
-
-    .deco-2 {
-      width: 130px;
-      height: 130px;
-      bottom: 10px;
-      left: -45px;
-    }
-
-    .deco-3 {
-      width: 60px;
-      height: 60px;
-      top: 30px;
-      left: 30px;
-    }
-
-    /* Views badge */
-    .views-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      background: rgba(255, 255, 255, .15);
-      border: 1px solid rgba(255, 255, 255, .28);
-      border-radius: 999px;
-      padding: 6px 18px;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: .05em;
-      margin-bottom: 24px;
-      backdrop-filter: blur(8px);
-      animation: fadeDown .6s ease both;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .views-badge .count {
-      color: var(--amber);
-      font-size: 13px;
-      font-weight: 900;
-    }
-
-    .views-badge.bumped::after {
-      content: '+1';
-      position: absolute;
-      right: 14px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--amber);
-      font-size: 11px;
-      font-weight: 900;
-      animation: floatUp .9s ease forwards;
-      pointer-events: none;
-    }
-
-    @keyframes floatUp {
-      0% {
-        opacity: 1;
-        transform: translateY(-50%);
-      }
-
-      100% {
-        opacity: 0;
-        transform: translateY(-220%);
-      }
-    }
-
-    .count-flip {
-      display: inline-block;
-      animation: countPop .4s cubic-bezier(.34, 1.56, .64, 1);
-    }
-
-    @keyframes countPop {
-      0% {
-        transform: scale(1.7) translateY(-4px);
-        opacity: .3;
-      }
-
-      100% {
-        transform: scale(1) translateY(0);
-        opacity: 1;
-      }
-    }
-
-    /* Avatar */
-    .avatar-ring {
-      width: clamp(92px, 22vw, 118px);
-      height: clamp(92px, 22vw, 118px);
-      border-radius: 50%;
-      margin: 0 auto 18px;
-      padding: 4px;
-      background: linear-gradient(135deg, var(--amber), rgba(255, 255, 255, .9), var(--amber));
-      box-shadow: 0 0 0 6px rgba(255, 255, 255, .18), var(--shadow-lg);
-      animation: fadeDown .7s .1s ease both;
-    }
-
-    .avatar-ring img {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      object-fit: cover;
-      background: var(--orange-dk);
-      border: 3px solid var(--white);
-    }
-
-    .hero h1 {
+    /* Column 1 — brand + addresses */
+    .footer-brand h2 {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(1.6rem, 5.5vw, 2.4rem);
+      font-size: 1.15rem;
       font-weight: 900;
-      line-height: 1.12;
+      color: #fff;
+      line-height: 1.2;
       margin-bottom: 4px;
-      animation: fadeDown .7s .2s ease both;
     }
-
-    .hero h1 em {
-      display: block;
-      font-style: italic;
-      color: var(--amber);
-      font-size: 88%;
-    }
-
-    .director-tag {
-      font-size: 13px;
-      color: rgba(255, 255, 255, .8);
-      font-weight: 500;
-      margin-bottom: 28px;
-      animation: fadeDown .7s .3s ease both;
-    }
-
-    .director-tag strong {
-      color: #fff;
-      font-weight: 800;
-    }
-
-    /* Action buttons */
-    .action-bar {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-      max-width: 380px;
-      margin: 0 auto;
-      animation: fadeUp .7s .4s ease both;
-    }
-
-    @media (max-width: 340px) {
-      .action-bar {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    .action-btn {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-      background: rgba(255, 255, 255, .14);
-      border: 1px solid rgba(255, 255, 255, .24);
-      border-radius: 16px;
-      padding: clamp(10px, 3vw, 14px) 6px;
-      color: #fff;
-      text-decoration: none;
-      font-size: 10.5px;
-      font-weight: 800;
-      letter-spacing: .04em;
-      backdrop-filter: blur(8px);
-      transition: background .2s, transform .18s, box-shadow .2s;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .action-btn:hover {
-      background: rgba(255, 255, 255, .26);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, .18);
-    }
-
-    .action-btn:active {
-      transform: scale(.94);
-    }
-
-    .ab-icon {
-      width: 38px;
-      height: 38px;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 19px;
-      transition: transform .2s;
-    }
-
-    .action-btn:hover .ab-icon {
-      transform: scale(1.14);
-    }
-
-    .ab-call .ab-icon {
-      background: rgba(255, 255, 255, .2);
-    }
-
-    .ab-wa .ab-icon {
-      background: rgba(37, 211, 102, .35);
-    }
-
-    .ab-map .ab-icon {
-      background: rgba(255, 255, 255, .2);
-    }
-
-    .ab-mail .ab-icon {
-      background: rgba(255, 255, 255, .2);
-    }
-
-    /* ─── NAV ────────────────────────────────────────── */
-    .nav-wrap {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: var(--orange-dk);
-      box-shadow: 0 3px 20px rgba(196, 61, 6, .35);
-      display: flex;
-      justify-content: center;
-      overflow: hidden;
-      align-items: center;
-    }
-
-    .nav-tabs {
-      display: flex;
-      width: 100%;
-      max-width: 1200px;
-      overflow-x: auto;
-      scrollbar-width: none;
-      -webkit-overflow-scrolling: touch;
-      scroll-snap-type: x mandatory;
-    }
-
-    .nav-tabs::-webkit-scrollbar {
-      display: none;
-    }
-
-    .nav-tabs a {
-      scroll-snap-align: start;
-      flex-shrink: 0;
-      padding: 14px 16px;
-      color: rgba(255, 255, 255, .65);
-      text-decoration: none;
+    .footer-brand h2 em { font-style: italic; color: var(--amber); }
+    .footer-brand .footer-tagline {
       font-size: 11px;
-      font-weight: 800;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      white-space: nowrap;
-      border-bottom: 3px solid transparent;
-      transition: color .2s, border-color .2s, background .2s;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .nav-tabs a:hover,
-    .nav-tabs a.active {
-      color: var(--amber);
-      border-bottom-color: var(--amber);
-      background: rgba(255, 255, 255, .08);
-    }
-
-    @media (max-width: 768px) {
-      .nav-tabs {
-        justify-content: flex-start;
-        padding-left: 6px;
-      }
-
-      .nav-tabs a {
-        font-size: 10.5px;
-        padding: 12px 13px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .nav-tabs a {
-        font-size: 10px;
-        padding: 11px 11px;
-      }
-    }
-
-    /* ─── LAYOUT ─────────────────────────────────────── */
-    .page {
-      max-width: 700px;
-      margin: 0 auto;
-      padding: 0 clamp(12px, 4vw, 24px) 52px;
-    }
-
-    .section {
-      padding: 32px 0 0;
-    }
-
-    .section-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.3rem;
       font-weight: 700;
-      color: var(--orange-dk);
-      margin-bottom: 18px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .st-icon {
-      width: 34px;
-      height: 34px;
-      border-radius: 10px;
-      background: linear-gradient(135deg, var(--orange), var(--orange-lt));
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 15px;
-      flex-shrink: 0;
-      box-shadow: 0 3px 10px rgba(232, 80, 10, .3);
-    }
-
-    .section-title::after {
-      content: '';
-      flex: 1;
-      height: 2px;
-      background: linear-gradient(90deg, var(--border), transparent);
-      border-radius: 2px;
-    }
-
-    /* ─── CARD BASE ──────────────────────────────────── */
-    .card {
-      background: var(--card);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow-card);
-      overflow: hidden;
-      border: 1px solid var(--border-lt);
-    }
-
-    /* ─── CONTACT ────────────────────────────────────── */
-    .contact-rows .crow {
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
-      padding: 15px 18px;
-      border-bottom: 1px solid var(--border-lt);
-      transition: background .15s;
-    }
-
-    .contact-rows .crow:last-child {
-      border-bottom: none;
-    }
-
-    .contact-rows .crow:hover {
-      background: var(--orange-pale);
-    }
-
-    .crow-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 11px;
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      margin-top: 1px;
-    }
-
-    .ci-map {
-      background: #fff3ee;
-    }
-
-    .ci-mail {
-      background: #fff8ee;
-    }
-
-    .ci-phone {
-      background: #fffaee;
-    }
-
-    .crow-body {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .crow-label {
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: .09em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 2px;
-    }
-
-    .crow-val {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--text);
-      line-height: 1.5;
-    }
-
-    .crow-val a {
-      color: var(--orange-dk);
-      text-decoration: none;
-    }
-
-    .crow-val a:hover {
-      color: var(--orange);
-      text-decoration: underline;
-    }
-
-    .save-card-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 14px;
-      background: linear-gradient(135deg, var(--orange-dk), var(--orange));
-      color: #fff;
-      text-align: center;
-      padding: 15px;
-      border-radius: var(--radius);
-      text-decoration: none;
-      font-weight: 800;
-      font-size: 14px;
-      letter-spacing: .04em;
-      box-shadow: 0 6px 22px rgba(232, 80, 10, .32);
-      transition: transform .18s, box-shadow .2s;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .save-card-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 32px rgba(232, 80, 10, .38);
-    }
-
-    .save-card-btn:active {
-      transform: scale(.98);
-    }
-
-    /* ─── QUICK LINKS ────────────────────────────────── */
-    .link-cards {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .link-card {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      background: var(--card);
-      border-radius: var(--radius);
-      padding: 16px 18px;
-      box-shadow: var(--shadow-card);
-      border: 1px solid var(--border-lt);
-      text-decoration: none;
-      color: var(--text);
-      transition: transform .18s, box-shadow .2s, background .15s;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .link-card:hover {
-      transform: translateY(-3px);
-      box-shadow: var(--shadow-md);
-      background: var(--orange-pale);
-    }
-
-    .link-card:active {
-      transform: scale(.98);
-    }
-
-    .lc-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 24px;
-      flex-shrink: 0;
-    }
-
-    .lc-wa {
-      background: linear-gradient(135deg, #25d366, #128c7e);
-    }
-
-    .lc-call {
-      background: linear-gradient(135deg, var(--orange-lt), var(--orange-dk));
-    }
-
-    .lc-name {
-      font-weight: 800;
-      font-size: 15px;
-      color: var(--orange-dk);
-    }
-
-    .lc-sub {
-      font-size: 12px;
-      color: var(--muted);
-      margin-top: 2px;
-    }
-
-    .lc-arrow {
-      margin-left: auto;
-      color: var(--muted);
-      font-size: 20px;
-    }
-
-    /* ─── ABOUT ──────────────────────────────────────── */
-    .info-table .irow {
-      display: flex;
-      align-items: baseline;
-      padding: 13px 18px;
-      border-bottom: 1px solid var(--border-lt);
-      font-size: 14px;
-      gap: 12px;
-    }
-
-    .info-table .irow:last-child {
-      border-bottom: none;
-    }
-
-    .irow-key {
-      font-weight: 800;
-      width: 140px;
-      flex-shrink: 0;
-      color: var(--orange-dk);
-      font-size: 13px;
-    }
-
-    .irow-val {
-      color: var(--text-soft);
-    }
-
-    .spec-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-      margin-bottom: 18px;
-    }
-
-    @media (max-width: 400px) {
-      .spec-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .spec-item {
-      background: var(--card);
-      border: 1px solid var(--border-lt);
-      border-radius: var(--radius-sm);
-      padding: 11px 13px;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text);
-      display: flex;
-      align-items: center;
-      gap: 9px;
-      box-shadow: var(--shadow-card);
-    }
-
-    .spec-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--orange);
-      flex-shrink: 0;
-    }
-
-    .prose-block {
-      background: var(--card);
-      border-radius: var(--radius);
-      border: 1px solid var(--border-lt);
-      padding: 18px 20px;
-      font-size: 14px;
-      line-height: 1.85;
-      color: var(--text-soft);
-      box-shadow: var(--shadow-card);
-      margin-bottom: 18px;
-    }
-
-    .prose-block strong {
-      color: var(--orange-dk);
-      font-weight: 800;
-    }
-
-    .why-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-
-    @media (max-width: 400px) {
-      .why-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .why-card {
-      background: var(--card);
-      border: 1px solid var(--border-lt);
-      border-radius: 14px;
-      padding: 14px;
-      box-shadow: var(--shadow-card);
-      font-size: 13px;
-      color: var(--text-soft);
-      display: flex;
-      gap: 10px;
-      align-items: flex-start;
-      transition: transform .18s, box-shadow .2s;
-    }
-
-    .why-card:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-md);
-    }
-
-    .why-tick {
-      font-size: 18px;
-      flex-shrink: 0;
-    }
-
-    .why-title {
-      font-weight: 800;
-      color: var(--orange-dk);
-      display: block;
-      font-size: 13.5px;
-      margin-bottom: 2px;
-    }
-
-    .ach-list {
-      display: flex;
-      flex-direction: column;
-      gap: 9px;
-      margin-bottom: 20px;
-    }
-
-    .ach-item {
-      background: linear-gradient(135deg, var(--orange-pale), #fff);
-      border-left: 4px solid var(--orange);
-      border-radius: var(--radius-sm);
-      padding: 12px 16px;
-      font-size: 13.5px;
-      color: var(--text-soft);
-      box-shadow: var(--shadow-card);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .ach-item span {
-      font-size: 18px;
-      flex-shrink: 0;
-    }
-
-    /* Accordion */
-    .accordion {
-      background: var(--card);
-      border: 1px solid var(--border-lt);
-      border-radius: var(--radius);
-      overflow: hidden;
-      box-shadow: var(--shadow-card);
-      margin-bottom: 8px;
-    }
-
-    .acc-header {
-      width: 100%;
-      background: none;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 15px 18px;
-      font-family: inherit;
-      font-size: 14px;
-      font-weight: 800;
-      color: var(--orange-dk);
-      text-align: left;
-      transition: background .15s;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .acc-header:hover {
-      background: var(--orange-pale);
-    }
-
-    .acc-arrow {
-      transition: transform .25s;
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    .acc-header.open .acc-arrow {
-      transform: rotate(180deg);
-    }
-
-    .acc-body {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height .35s ease;
-    }
-
-    .acc-body.open {
-      max-height: 900px;
-    }
-
-    .acc-inner {
-      padding: 0 18px 18px;
-      font-size: 13.5px;
-      line-height: 1.8;
-      color: var(--text-soft);
-    }
-
-    .acc-inner ol {
-      padding-left: 20px;
-    }
-
-    .acc-inner li {
-      margin-bottom: 7px;
-    }
-
-    /* ─── SERVICES ───────────────────────────────────── */
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-      gap: 12px;
-    }
-
-    .svc-card {
-      background: var(--card);
-      border-radius: 16px;
-      overflow: hidden;
-      border: 1px solid var(--border-lt);
-      box-shadow: var(--shadow-card);
-      display: flex;
-      flex-direction: column;
-      transition: transform .2s, box-shadow .2s;
-    }
-
-    .svc-card:hover {
-      transform: translateY(-3px);
-      box-shadow: var(--shadow-md);
-    }
-
-    .svc-card img {
-      width: 100%;
-      aspect-ratio: 4/3;
-      object-fit: cover;
-      display: block;
-    }
-
-    .svc-enq {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      padding: 10px 8px;
-      background: var(--orange);
-      color: #fff;
-      text-decoration: none;
-      font-weight: 800;
-      font-size: 12px;
-      letter-spacing: .04em;
-      transition: background .2s;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .svc-enq:hover {
-      background: var(--orange-dk);
-    }
-
-    /* ─── PAYMENT ────────────────────────────────────── */
-    .pay-section-title {
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: .09em;
-      text-transform: uppercase;
-      color: var(--muted);
-      padding: 14px 18px 6px;
-      display: block;
-    }
-
-    .pay-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 13px 18px;
-      border-bottom: 1px solid var(--border-lt);
-      font-size: 14px;
-    }
-
-    .pay-row:last-child {
-      border-bottom: none;
-    }
-
-    .pay-key {
-      font-weight: 700;
-      color: var(--orange-dk);
-    }
-
-    .pay-val {
-      color: var(--text-soft);
-      font-weight: 600;
-      font-size: 13.5px;
-    }
-
-    .upi-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      background: var(--orange-pale);
-      color: var(--orange-dk);
-      border-radius: 8px;
-      padding: 3px 10px;
-      font-size: 12px;
-      font-weight: 800;
-      border: 1px solid var(--border);
-    }
-
-    /* ─── GALLERY ────────────────────────────────────── */
-    /* Gallery Carousel */
-    .gallery-carousel {
-      position: relative;
-      overflow: hidden;
-      border-radius: var(--radius);
-      background: var(--card);
-      border: 1px solid var(--border-lt);
-      box-shadow: var(--shadow-card);
-    }
-
-    .gallery-track {
-      display: flex;
-      transition: transform .5s cubic-bezier(.4, 0, .2, 1);
-    }
-
-    .gallery-slide {
-      min-width: 100%;
-      position: relative;
-    }
-
-    .gallery-slide img {
-      width: 100%;
-      max-height: 420px;
-      object-fit: contain;
-      display: block;
-      cursor: pointer;
-      background: var(--off-white);
-    }
-
-    .gallery-counter {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      background: rgba(0, 0, 0, .55);
-      color: #fff;
-      font-size: 12px;
-      font-weight: 700;
-      padding: 4px 12px;
-      border-radius: 999px;
-      backdrop-filter: blur(4px);
-      z-index: 3;
-      pointer-events: none;
-    }
-
-    .gallery-nav-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, .85);
-      border: 1px solid var(--border-lt);
-      color: var(--orange-dk);
-      font-size: 18px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 3;
-      transition: background .2s, transform .18s, box-shadow .2s;
-      -webkit-tap-highlight-color: transparent;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .gallery-nav-btn:hover {
-      background: var(--card);
-      box-shadow: var(--shadow-md);
-      transform: translateY(-50%) scale(1.1);
-    }
-
-    .gallery-nav-btn:active {
-      transform: translateY(-50%) scale(.95);
-    }
-
-    .gal-prev {
-      left: 10px;
-    }
-
-    .gal-next {
-      right: 10px;
-    }
-
-    .gallery-dots {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      padding: 14px 0;
-      background: var(--card);
-    }
-
-    .gallery-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--border);
-      border: none;
-      cursor: pointer;
-      transition: background .25s, transform .2s, width .25s;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .gallery-dot.active {
-      background: var(--orange);
-      width: 22px;
-      border-radius: 4px;
-    }
-
-    .gallery-dot:hover:not(.active) {
-      background: var(--orange-lt);
-    }
-
-    /* Lightbox */
-    .lightbox {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      background: rgba(28, 12, 5, .93);
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-
-    .lightbox.open {
-      display: flex;
-      animation: fadeIn .2s ease;
-    }
-
-    .lb-img {
-      max-width: 100%;
-      max-height: 85vh;
-      border-radius: 16px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, .6);
-    }
-
-    .lb-close {
-      position: fixed;
-      top: 16px;
-      right: 20px;
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, .15);
-      border: none;
-      color: #fff;
-      font-size: 20px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background .2s;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .lb-close:hover {
-      background: var(--orange);
-    }
-
-    .lb-nav {
-      position: fixed;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, .15);
-      border: none;
-      color: #fff;
-      font-size: 22px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background .2s;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .lb-nav:hover {
-      background: var(--orange);
-    }
-
-    .lb-prev {
-      left: 12px;
-    }
-
-    .lb-next {
-      right: 12px;
-    }
-
-    /* ─── FEEDBACK ───────────────────────────────────── */
-    .feedback-card {
-      background: var(--card);
-      border-radius: var(--radius);
-      border: 1px solid var(--border-lt);
-      box-shadow: var(--shadow-card);
-      padding: 28px 20px;
-      text-align: center;
-    }
-
-    .feedback-card p {
-      font-size: 14px;
-      color: var(--muted);
-      margin-bottom: 20px;
-      line-height: 1.65;
-    }
-
-    .google-review-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      background: var(--white);
-      border: 2px solid var(--border);
-      border-radius: 14px;
-      padding: 14px 28px;
-      text-decoration: none;
-      color: var(--text);
-      font-weight: 800;
-      font-size: 15px;
-      box-shadow: var(--shadow-sm);
-      transition: transform .18s, box-shadow .2s, border-color .2s;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .google-review-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-md);
-      border-color: #4285f4;
-    }
-
-    .google-review-btn:active {
-      transform: scale(.97);
-    }
-
-    .g-logo {
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      background: conic-gradient(#4285f4 90deg, #ea4335 90deg 180deg, #fbbc04 180deg 270deg, #34a853 270deg);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #fff;
-      font-weight: 900;
-      font-size: 14px;
-    }
-
-    .rating-preview {
-      display: flex;
-      justify-content: center;
-      gap: 5px;
-      margin-top: 20px;
-    }
-
-    .rating-preview span {
-      font-size: 26px;
-    }
-
-    /* ─── ENQUIRY ────────────────────────────────────── */
-    .enquiry-card {
-      background: var(--card);
-      border-radius: var(--radius);
-      border: 1px solid var(--border-lt);
-      box-shadow: var(--shadow-card);
-      padding: 22px 20px;
-    }
-
-    .form-group {
-      margin-bottom: 14px;
-    }
-
-    .form-group label {
-      display: block;
-      font-size: 11px;
-      font-weight: 800;
-      color: var(--muted);
-      margin-bottom: 6px;
+      color: rgba(255,255,255,.5);
       text-transform: uppercase;
       letter-spacing: .07em;
-    }
-
-    .form-group input,
-    .form-group textarea {
-      width: 100%;
-      border: 1.5px solid var(--border);
-      border-radius: var(--radius-sm);
-      padding: 13px 15px;
-      font-family: inherit;
-      font-size: 14px;
-      outline: none;
-      background: var(--off-white);
-      color: var(--text);
-      transition: border-color .2s, box-shadow .2s, background .2s;
-    }
-
-    .form-group input:focus,
-    .form-group textarea:focus {
-      border-color: var(--orange);
-      box-shadow: 0 0 0 4px rgba(232, 80, 10, .1);
-      background: #fff;
-    }
-
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
-    @media (max-width: 420px) {
-      .form-row {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .form-group textarea {
-      resize: vertical;
-      min-height: 100px;
-    }
-
-    .wa-submit {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      width: 100%;
-      padding: 15px;
-      border-radius: var(--radius);
-      background: linear-gradient(135deg, #25d366, #1aad56);
-      color: #fff;
-      font-weight: 800;
-      font-size: 15px;
-      border: none;
-      cursor: pointer;
-      text-decoration: none;
-      box-shadow: 0 6px 20px rgba(37, 211, 102, .3);
-      transition: transform .18s, box-shadow .2s;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .wa-submit:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 28px rgba(37, 211, 102, .35);
-    }
-
-    .wa-submit:active {
-      transform: scale(.98);
-    }
-
-    /* ─── SHARE ──────────────────────────────────────── */
-    .share-card {
-      background: var(--card);
-      border-radius: var(--radius);
-      border: 1px solid var(--border-lt);
-      box-shadow: var(--shadow-card);
-      padding: 24px 20px;
-      text-align: center;
-    }
-
-    .share-url-box {
-      background: var(--orange-mist);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 11px 14px;
-      font-size: 13px;
-      color: var(--orange-dk);
-      font-weight: 700;
-      margin-bottom: 16px;
-      word-break: break-all;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .share-btns {
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-bottom: 22px;
-    }
-
-    .share-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 12px 20px;
-      border-radius: var(--radius-sm);
-      font-size: 13px;
-      font-weight: 800;
-      cursor: pointer;
-      border: none;
-      text-decoration: none;
-      letter-spacing: .03em;
-      transition: transform .18s, opacity .2s;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .share-btn:hover {
-      transform: translateY(-2px);
-    }
-
-    .share-btn:active {
-      transform: scale(.97);
-    }
-
-    .sb-wa {
-      background: var(--wa);
-      color: #fff;
-      box-shadow: 0 4px 14px rgba(37, 211, 102, .3);
-    }
-
-    .sb-copy {
-      background: var(--orange);
-      color: #fff;
-      box-shadow: 0 4px 14px rgba(232, 80, 10, .3);
-    }
-
-    .qr-wrap img {
-      width: 140px;
-      height: 140px;
-      object-fit: contain;
-      border-radius: var(--radius-sm);
-      border: 4px solid var(--orange-mist);
-      display: block;
-      margin: 0 auto;
-    }
-
-    .qr-label {
-      font-size: 12px;
-      color: var(--muted);
-      margin-top: 8px;
-      font-weight: 600;
-    }
-
-    /* ─── WHY SIP ABACUS SECTION ────────────────── */
-    .why-sip-wrap {
-      background: var(--card);
-      border-radius: var(--radius);
-      border: 1px solid var(--border-lt);
-      box-shadow: var(--shadow-card);
-      padding: 28px 22px;
-      margin-bottom: 20px;
-      overflow: hidden;
-    }
-
-    .why-sip-inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 28px;
-      align-items: center;
-    }
-
-    @media (max-width: 640px) {
-      .why-sip-inner {
-        grid-template-columns: 1fr;
-        gap: 22px;
-      }
-    }
-
-    .wsa-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.15rem, 3.5vw, 1.4rem);
-      font-weight: 900;
-      color: var(--orange-dk);
       margin-bottom: 18px;
-      position: relative;
+    }
+    .footer-addr-block { margin-bottom: 14px; }
+    .footer-addr-label {
       display: inline-block;
-    }
-
-    .wsa-title::before {
-      content: '';
-      position: absolute;
-      left: -6px;
-      right: -6px;
-      bottom: 2px;
-      height: 40%;
-      background: linear-gradient(90deg, var(--amber), var(--orange-mist));
-      border-radius: 4px 14px 4px 10px;
-      z-index: 0;
-      opacity: .5;
-      transform: rotate(-0.8deg);
-    }
-
-    .wsa-title span {
-      position: relative;
-      z-index: 1;
-    }
-
-    .wsa-text {
-      font-size: 14px;
-      line-height: 1.85;
-      color: var(--text-soft);
-    }
-
-    .wsa-text p {
-      margin-bottom: 14px;
-    }
-
-    .wsa-text strong {
-      color: var(--orange-dk);
+      font-size: 9.5px;
       font-weight: 800;
-    }
-
-    .wsa-text .wsa-highlight {
-      color: var(--orange);
-      font-weight: 800;
-    }
-
-    /* Right side - visual area with floating labels */
-    .wsa-visual {
-      position: relative;
-      min-height: 300px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    @media (max-width: 640px) {
-      .wsa-visual {
-        min-height: 260px;
-      }
-    }
-
-    .wsa-child-img {
-      width: clamp(180px, 50vw, 260px);
-      height: auto;
-      position: relative;
-      z-index: 1;
-      filter: drop-shadow(0 6px 20px rgba(232, 80, 10, .12));
-    }
-
-    .problem-label {
-      position: absolute;
-      background: transparent;
-      padding: 7px 14px;
-      font-family: 'Playfair Display', serif;
-      font-weight: 700;
-      font-size: clamp(10px, 2.2vw, 13px);
-      color: var(--text);
-      z-index: 2;
-      white-space: nowrap;
-      line-height: 1.3;
-      text-align: center;
-    }
-
-    .problem-label::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(90deg, var(--amber), var(--orange-mist));
-      border-radius: 4px var(--radius-sm) 4px 10px;
-      z-index: -1;
-      opacity: .55;
-      transform: rotate(-1deg);
-    }
-
-    .pl-1 {
-      top: 8%;
-      left: 5%;
-      transform: rotate(-3deg);
-    }
-
-    .pl-2 {
-      top: 5%;
-      right: 0%;
-      transform: rotate(2deg);
-    }
-
-    .pl-3 {
-      bottom: 25%;
-      left: -2%;
-      transform: rotate(-2deg);
-    }
-
-    .pl-4 {
-      bottom: 8%;
-      right: -2%;
-      transform: rotate(1.5deg);
-    }
-
-    @media (max-width: 420px) {
-      .problem-label {
-        font-size: 9.5px;
-        padding: 5px 10px;
-      }
-
-      .pl-1 {
-        left: 0;
-      }
-
-      .pl-2 {
-        right: 0;
-      }
-
-      .pl-3 {
-        left: 0;
-      }
-
-      .pl-4 {
-        right: 0;
-      }
-    }
-
-    @keyframes floatLabel {
-
-      0%,
-      100% {
-        transform: translateY(0) rotate(var(--rot, -2deg));
-      }
-
-      50% {
-        transform: translateY(-6px) rotate(var(--rot, -2deg));
-      }
-    }
-
-    .problem-label {
-      animation: floatLabel 3s ease-in-out infinite;
-    }
-
-    .pl-1 {
-      --rot: -3deg;
-      animation-delay: 0s;
-    }
-
-    .pl-2 {
-      --rot: 2deg;
-      animation-delay: .6s;
-    }
-
-    .pl-3 {
-      --rot: -2deg;
-      animation-delay: 1.2s;
-    }
-
-    .pl-4 {
-      --rot: 1.5deg;
-      animation-delay: 1.8s;
-    }
-
-    /* ─── MODULES SECTION ───────────────────────── */
-    .modules-wrap {
-      background: linear-gradient(150deg, var(--amber) 0%, #ffb347 50%, #ffa726 100%);
-      border-radius: var(--radius);
-      padding: 28px 22px;
-      position: relative;
-      overflow: hidden;
-      border: 1px solid var(--border);
-    }
-
-    .modules-wrap::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, var(--orange-dk), var(--orange), var(--amber), var(--orange), var(--orange-dk));
-    }
-
-    .modules-inner {
-      max-width: 100%;
-    }
-
-    .modules-header {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1rem, 3.5vw, 1.2rem);
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 20px;
-      font-style: italic;
-    }
-
-    .module-cards {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-      margin-bottom: 22px;
-    }
-
-    @media (max-width: 520px) {
-      .module-cards {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    .module-card {
-      border-radius: var(--radius-sm);
-      padding: 16px 10px 14px;
-      text-align: center;
-      border: 1px solid var(--border-lt);
-      box-shadow: var(--shadow-card);
-      transition: transform .25s, box-shadow .25s;
-      cursor: default;
-    }
-
-    .module-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-md);
-    }
-
-    .mc-junior {
-      background: #f3e5f5;
-    }
-
-    .mc-foundation {
-      background: #fce4ec;
-    }
-
-    .mc-advanced {
-      background: #e8f5e9;
-    }
-
-    .mc-grandmaster {
-      background: #ffebee;
-    }
-
-    .module-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: var(--radius-sm);
-      margin: 0 auto 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 26px;
-      background: rgba(255, 255, 255, .6);
-    }
-
-    .module-card h4 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(12px, 2.5vw, 14px);
-      font-weight: 700;
-      font-style: italic;
-      color: var(--text);
-      line-height: 1.25;
-    }
-
-    /* Feature grid */
-    .mod-features {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px 24px;
-      margin-bottom: 22px;
-    }
-
-    @media (max-width: 500px) {
-      .mod-features {
-        grid-template-columns: 1fr;
-        gap: 12px;
-      }
-    }
-
-    .mod-feat-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-    }
-
-    .mf-icon {
-      width: 38px;
-      height: 38px;
-      border-radius: var(--radius-sm);
-      background: rgba(255, 255, 255, .4);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      flex-shrink: 0;
-      border: 1px solid rgba(255, 255, 255, .5);
-    }
-
-    .mf-text {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--text);
-      line-height: 1.45;
-    }
-
-    /* CTA row */
-    .mod-cta-row {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .mod-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 12px 26px;
-      border-radius: var(--radius-sm);
-      font-weight: 800;
-      font-size: 14px;
-      text-decoration: none;
-      letter-spacing: .03em;
-      transition: transform .18s, box-shadow .2s;
-      -webkit-tap-highlight-color: transparent;
-      cursor: pointer;
-    }
-
-    .mod-cta:hover {
-      transform: translateY(-2px);
-    }
-
-    .mod-cta:active {
-      transform: scale(.97);
-    }
-
-    .cta-know-more {
-      background: var(--card);
-      color: var(--orange-dk);
-      border: 2px solid var(--orange-dk);
-    }
-
-    .cta-know-more:hover {
-      box-shadow: var(--shadow-md);
-    }
-
-    .cta-trial {
-      background: linear-gradient(135deg, var(--orange), var(--orange-dk));
-      color: var(--white);
-      border: 2px solid transparent;
-      box-shadow: 0 4px 14px rgba(232, 80, 10, .3);
-    }
-
-    .cta-trial:hover {
-      box-shadow: 0 8px 22px rgba(232, 80, 10, .4);
-    }
-
-    /* ─── PARENT TESTIMONIALS ─────────────────────────── */
-    .testimonials-wrapper {
-      position: relative;
-      overflow: hidden;
-      border-radius: var(--radius);
-    }
-
-    .testimonials-track {
-      display: flex;
-      transition: transform .55s cubic-bezier(.4, 0, .2, 1);
-    }
-
-    .testimonial-slide {
-      min-width: 100%;
-      padding: 0 2px;
-      box-sizing: border-box;
-    }
-
-    .testimonial-card {
-      background: var(--card);
-      border-radius: var(--radius);
-      border: 1px solid var(--border-lt);
-      box-shadow: var(--shadow-card);
-      padding: 28px 24px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .testimonial-card::before {
-      content: '\201C';
-      position: absolute;
-      top: -8px;
-      left: 16px;
-      font-family: 'Playfair Display', serif;
-      font-size: 80px;
-      color: var(--orange-pale);
-      line-height: 1;
-      pointer-events: none;
-    }
-
-    .tc-stars {
-      display: flex;
-      gap: 3px;
-      margin-bottom: 14px;
-      font-size: 18px;
-    }
-
-    .tc-quote {
-      font-size: 14px;
-      line-height: 1.8;
-      color: var(--text-soft);
-      font-style: italic;
-      margin-bottom: 18px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .tc-author {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .tc-avatar {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--orange), var(--orange-lt));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #fff;
-      font-weight: 900;
-      font-size: 18px;
-      flex-shrink: 0;
-    }
-
-    .tc-name {
-      font-weight: 800;
-      font-size: 14px;
-      color: var(--orange-dk);
-    }
-
-    .tc-role {
-      font-size: 12px;
-      color: var(--muted);
-      margin-top: 1px;
-    }
-
-    .testimonials-nav {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 16px;
-      margin-top: 18px;
-    }
-
-    .tn-btn {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      border: 2px solid var(--border);
-      background: var(--card);
-      color: var(--orange-dk);
-      font-size: 16px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background .2s, border-color .2s, transform .18s;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .tn-btn:hover {
-      background: var(--orange-pale);
-      border-color: var(--orange);
-      transform: scale(1.08);
-    }
-
-    .tn-btn:active {
-      transform: scale(.95);
-    }
-
-    .tn-dots {
-      display: flex;
-      gap: 8px;
-    }
-
-    .tn-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--border);
-      border: none;
-      cursor: pointer;
-      transition: background .25s, transform .2s;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .tn-dot.active {
-      background: var(--orange);
-      transform: scale(1.25);
-    }
-
-    .tn-dot:hover:not(.active) {
-      background: var(--orange-lt);
-    }
-
-    .testimonials-summary {
-      background: linear-gradient(135deg, var(--orange-pale), #fff);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 20px;
-      margin-top: 18px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 20px;
-      text-align: center;
-    }
-
-    .ts-stat {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .ts-number {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.5rem;
-      font-weight: 900;
-      color: var(--orange-dk);
-    }
-
-    .ts-label {
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--muted);
       text-transform: uppercase;
-      letter-spacing: .06em;
+      letter-spacing: .08em;
+      color: var(--amber);
+      background: rgba(255,179,71,.15);
+      border: 1px solid rgba(255,179,71,.25);
+      border-radius: 5px;
+      padding: 2px 8px;
+      margin-bottom: 5px;
     }
-
-    .ts-divider {
-      width: 1px;
-      height: 40px;
-      background: var(--border);
+    .footer-addr-block p {
+      font-size: 12.5px;
+      line-height: 1.6;
+      color: rgba(255,255,255,.7);
     }
-
-    /* ─── TOAST ──────────────────────────────────────── */
-    .toast {
-      position: fixed;
-      bottom: 24px;
-      left: 50%;
-      transform: translateX(-50%) translateY(80px);
-      background: var(--orange-dk);
-      color: #fff;
-      padding: 12px 24px;
-      border-radius: 999px;
-      font-size: 13.5px;
-      font-weight: 700;
-      box-shadow: var(--shadow-lg);
-      z-index: 9998;
-      transition: transform .3s cubic-bezier(.34, 1.56, .64, 1);
-      pointer-events: none;
-      white-space: nowrap;
-    }
-
-    .toast.show {
-      transform: translateX(-50%) translateY(0);
-    }
-
-    /* ─── FOOTER ─────────────────────────────────────── */
-    footer {
-      background: var(--orange-dk);
-      color: rgba(255, 255, 255, .6);
-      text-align: center;
-      padding: 22px 16px;
+    .footer-addr-block a {
+      color: rgba(255,255,255,.7);
+      text-decoration: none;
       font-size: 12.5px;
     }
+    .footer-addr-block a:hover { color: var(--amber); }
 
-    footer a {
-      color: var(--amber);
-      text-decoration: none;
+    /* Column 2 — quick links + social */
+    .footer-links-col h4 {
+      font-size: 11px;
       font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--amber);
+      margin-bottom: 14px;
+    }
+    .footer-nav-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      margin-bottom: 22px;
+    }
+    .footer-nav-links a {
+      color: rgba(255,255,255,.7);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      transition: color .2s, padding-left .2s;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .footer-nav-links a:hover { color: var(--amber); padding-left: 4px; }
+
+    /* Social row */
+    .footer-social { display: flex; gap: 10px; flex-wrap: wrap; }
+    .social-btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 8px 14px; border-radius: 10px;
+      font-size: 12.5px; font-weight: 800;
+      text-decoration: none;
+      transition: transform .18s, opacity .2s;
+      -webkit-tap-highlight-color: transparent;
+      border: 1.5px solid rgba(255,255,255,.2);
+    }
+    .social-btn:hover { transform: translateY(-2px); opacity: .9; }
+    .social-btn:active { transform: scale(.96); }
+    .sb-instagram {
+      background: linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);
+      color: #fff;
+    }
+    .sb-facebook {
+      background: #1877f2;
+      color: #fff;
+    }
+    .sb-whatsapp {
+      background: #25d366;
+      color: #fff;
     }
 
-    /* ─── ANIMATIONS ─────────────────────────────────── */
-    @keyframes fadeDown {
-      from {
-        opacity: 0;
-        transform: translateY(-14px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    /* Column 3 — Book a session */
+    .footer-book-col h4 {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--amber);
+      margin-bottom: 14px;
     }
-
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(14px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .footer-book-col p {
+      font-size: 12.5px;
+      line-height: 1.65;
+      color: rgba(255,255,255,.65);
+      margin-bottom: 16px;
     }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-      }
-
-      to {
-        opacity: 1;
-      }
+    .book-session-btn {
+      display: inline-flex; align-items: center; gap: 9px;
+      background: var(--amber);
+      color: var(--text);
+      font-weight: 800; font-size: 13px;
+      padding: 12px 20px; border-radius: 12px;
+      text-decoration: none;
+      box-shadow: 0 4px 16px rgba(255,179,71,.35);
+      transition: transform .18s, box-shadow .2s;
+      -webkit-tap-highlight-color: transparent;
+      letter-spacing: .02em;
     }
+    .book-session-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,179,71,.45); }
+    .book-session-btn:active { transform: scale(.97); }
 
-    .reveal {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity .55s ease, transform .55s ease;
+    /* Bottom strip */
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 16px clamp(16px,5vw,48px);
+      background: rgba(0,0,0,.12);
+      font-size: 12px;
+      color: rgba(255,255,255,.45);
     }
+    .footer-bottom a { color: var(--amber); text-decoration: none; font-weight: 700; }
+    .footer-bottom a:hover { text-decoration: underline; }
 
-    .reveal.visible {
-      opacity: 1;
-      transform: none;
-    }
+    /* ── ANIMATIONS ── */
+    @keyframes fadeDown{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+    .reveal{opacity:0;transform:translateY(24px);transition:opacity .55s ease,transform .55s ease}
+    .reveal.visible{opacity:1;transform:none}
 
-    /* ─── RESPONSIVE ─────────────────────────────────── */
-    @media (max-width: 480px) {
-      .services-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    @media (min-width: 600px) {
-      .services-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-
-    @media (min-width: 700px) {
-      .hero {
-        padding: 60px 48px 46px;
-      }
-    }
+    @media(max-width:480px){.services-grid{grid-template-columns:1fr 1fr}}
+    @media(min-width:600px){.services-grid{grid-template-columns:repeat(3,1fr)}}
+    @media(min-width:700px){.hero{padding:60px 48px 46px}}
   </style>
 </head>
-
 <body>
 
-  <!-- ═══ STICKY NAV ══════════════════════════════════ -->
+  <!-- NAV -->
   <div class="nav-wrap">
     <nav class="nav-tabs" id="navTabs" role="navigation" aria-label="Page sections">
       <a href="#about-section">About</a>
       <a href="#abacus-section">Abacus</a>
-      <!-- <a href="#services-section">Services</a> -->
       <a href="#payment-section">Payment</a>
-       <a href="#contact-section" class="active">Contact</a>
+      <a href="#contact-section" class="active">Contact</a>
       <a href="#links-section">Links</a>
       <a href="#gallery-section">Gallery</a>
       <a href="#testimonials-section">Testimonials</a>
@@ -2054,61 +492,38 @@
     </nav>
   </div>
 
-  <!-- ═══ HERO ═══════════════════════════════════════ -->
+  <!-- HERO -->
   <header class="hero" id="home-section">
     <div class="deco deco-1"></div>
     <div class="deco deco-2"></div>
     <div class="deco deco-3"></div>
-
-    <div class="views-badge" id="viewsBadge">
-      👁 Views: <span class="count" id="viewCount">—</span>
-    </div>
-
+    <div class="views-badge" id="viewsBadge">👁 Views: <span class="count" id="viewCount">—</span></div>
     <div class="avatar-ring">
       <img src="assets/sipabacuslogo.png" alt="Sarita's Brilliance Academy"
         onerror="this.style.background='linear-gradient(135deg,#e8500a,#c43d06)'" />
     </div>
-
     <h1>Sarita's<em>Brilliance Academy</em></h1>
     <p class="director-tag"><strong>Mrs. Sarita Dinesh Zanwar</strong> &mdash; Director</p>
-
     <div class="action-bar">
-      <a href="tel:+917020392423" class="action-btn ab-call" aria-label="Call us">
-        <span class="ab-icon">📞</span>Call
-      </a>
-      <a href="https://wa.me/917020392423?text=Hi!%20I%20got%20your%20reference%20from%20the%20digital%20vCard.%20I%27d%20like%20to%20know%20more."
-        class="action-btn ab-wa" target="_blank" rel="noopener" aria-label="WhatsApp">
-        <span class="ab-icon">💬</span>WhatsApp
-      </a>
-      <a href="https://www.google.com/maps/place/SIP+Abacus+Jalna/@19.850269,75.8998101,17z/data=!3m1!4b1!4m6!3m5!1s0x3bda59fd1b50ab0b:0x454f78c52f824c51!8m2!3d19.850269!4d75.902385!16s%2Fg%2F11fy2pgzvq"
-        class="action-btn ab-map" target="_blank" rel="noopener" aria-label="Get Directions">
-        <span class="ab-icon">📍</span>Direction
-      </a>
-      <a href="mailto:sipabacusjalna@gmail.com" class="action-btn ab-mail" aria-label="Send Mail">
-        <span class="ab-icon">✉️</span>Mail
-      </a>
-
+      <a href="tel:+917020392423" class="action-btn ab-call" aria-label="Call us"><span class="ab-icon">📞</span>Call</a>
+      <a href="https://wa.me/917020392423?text=Hi!%20I%20got%20your%20reference%20from%20the%20digital%20vCard.%20I%27d%20like%20to%20know%20more." class="action-btn ab-wa" target="_blank" rel="noopener" aria-label="WhatsApp"><span class="ab-icon">💬</span>WhatsApp</a>
+      <a href="https://www.google.com/maps/place/SIP+Abacus+Jalna/@19.850269,75.8998101,17z/data=!3m1!4b1!4m6!3m5!1s0x3bda59fd1b50ab0b:0x454f78c52f824c51!8m2!3d19.850269!4d75.902385!16s%2Fg%2F11fy2pgzvq" class="action-btn ab-map" target="_blank" rel="noopener" aria-label="Get Directions"><span class="ab-icon">📍</span>Direction</a>
+      <a href="mailto:sipabacusjalna@gmail.com" class="action-btn ab-mail" aria-label="Send Mail"><span class="ab-icon">✉️</span>Mail</a>
     </div>
   </header>
 
   <main class="page">
 
-    
-    <!-- ═══ ABOUT ═══════════════════════════════════════ -->
+    <!-- ABOUT -->
     <section class="section reveal" id="about-section">
       <h2 class="section-title"><span class="st-icon">ℹ️</span>About Us</h2>
-
       <div class="card info-table" style="margin-bottom:18px;">
-        <div class="irow"><span class="irow-key">Business Name</span><span class="irow-val">Sarita's Brilliance
-            Academy</span></div>
-        <div class="irow"><span class="irow-key">Category</span><span class="irow-val">Education &amp; Coaching</span>
-        </div>
+        <div class="irow"><span class="irow-key">Business Name</span><span class="irow-val">Sarita's Brilliance Academy</span></div>
+        <div class="irow"><span class="irow-key">Category</span><span class="irow-val">Education &amp; Coaching</span></div>
         <div class="irow"><span class="irow-key">Year of Est.</span><span class="irow-val">2008</span></div>
         <div class="irow"><span class="irow-key">Nature</span><span class="irow-val">SIP Abacus Institute</span></div>
       </div>
-
-      <h3 class="section-title" style="font-size:1rem;margin-bottom:12px;"><span class="st-icon">⭐</span>Our
-        Specialities</h3>
+      <h3 class="section-title" style="font-size:1rem;margin-bottom:12px;"><span class="st-icon">⭐</span>Our Specialities</h3>
       <div class="spec-grid" style="margin-bottom:20px;">
         <div class="spec-item"><span class="spec-dot"></span>Knowledgeable professionals</div>
         <div class="spec-item"><span class="spec-dot"></span>Complete client satisfaction</div>
@@ -2119,101 +534,48 @@
         <div class="spec-item"><span class="spec-dot"></span>We listen &amp; provide solutions</div>
         <div class="spec-item"><span class="spec-dot"></span>Happy client experience</div>
       </div>
-
       <div class="prose-block">
-        <strong>Sarita's Brilliance Academy</strong>, associated with <strong>International SIP Academy</strong>, is a
-        leading SIP Abacus institute dedicated to the skill development of children. Established in
-        <strong>2008</strong>, we empower young minds through fun and interactive learning techniques.<br /><br />
-        Our structured <strong>SIP Abacus Programme</strong> combines the Eastern <strong>Abacus System</strong> with
-        the Western science of <strong>Brain Gym</strong>, helping children develop superior arithmetic skills,
-        concentration, memory, and confidence.
+        <strong>Sarita's Brilliance Academy</strong>, associated with <strong>International SIP Academy</strong>, is a leading SIP Abacus institute dedicated to the skill development of children. Established in <strong>2008</strong>, we empower young minds through fun and interactive learning techniques.<br/><br/>
+        Our structured <strong>SIP Abacus Programme</strong> combines the Eastern <strong>Abacus System</strong> with the Western science of <strong>Brain Gym</strong>, helping children develop superior arithmetic skills, concentration, memory, and confidence.
       </div>
-
-      <h3 class="section-title" style="font-size:1rem;margin-bottom:12px;"><span class="st-icon">✅</span>Why Choose
-        Sarita's
-        Brilliance Academy?</h3>
+      <h3 class="section-title" style="font-size:1rem;margin-bottom:12px;"><span class="st-icon">✅</span>Why Choose Sarita's Brilliance Academy?</h3>
       <div class="why-grid">
-        <div class="why-card"><span class="why-tick">🎓</span>
-          <div><span class="why-title">Intl. Curriculum</span>Scientifically designed for progressive learning</div>
-        </div>
-        <div class="why-card"><span class="why-tick">👶</span>
-          <div><span class="why-title">Small Batches</span>Personalised attention for every child</div>
-        </div>
-        <div class="why-card"><span class="why-tick">🎲</span>
-          <div><span class="why-title">Interactive Aids</span>Quick grasping through engaging tools</div>
-        </div>
-        <div class="why-card"><span class="why-tick">🎮</span>
-          <div><span class="why-title">Fun Approach</span>Games &amp; puzzles make math enjoyable</div>
-        </div>
-        <div class="why-card"><span class="why-tick">💻</span>
-          <div><span class="why-title">Digital Board</span>India's first digital Abacus learning</div>
-        </div>
-        <div class="why-card"><span class="why-tick">🧠</span>
-          <div><span class="why-title">Brain Gym</span>Boosts focus, memory &amp; creativity</div>
-        </div>
+        <div class="why-card"><span class="why-tick">🎓</span><div><span class="why-title">Intl. Curriculum</span>Scientifically designed for progressive learning</div></div>
+        <div class="why-card"><span class="why-tick">👶</span><div><span class="why-title">Small Batches</span>Personalised attention for every child</div></div>
+        <div class="why-card"><span class="why-tick">🎲</span><div><span class="why-title">Interactive Aids</span>Quick grasping through engaging tools</div></div>
+        <div class="why-card"><span class="why-tick">🎮</span><div><span class="why-title">Fun Approach</span>Games &amp; puzzles make math enjoyable</div></div>
+        <div class="why-card"><span class="why-tick">💻</span><div><span class="why-title">Digital Board</span>India's first digital Abacus learning</div></div>
+        <div class="why-card"><span class="why-tick">🧠</span><div><span class="why-title">Brain Gym</span>Boosts focus, memory &amp; creativity</div></div>
       </div>
-
-      <h3 class="section-title" style="font-size:1rem;margin-bottom:12px;"><span class="st-icon">🎯</span>Our Vision
-      </h3>
-      <div class="prose-block">
-        To create a <strong>national impact</strong> by developing world-class programs that <strong>unlock the mental
-          potential</strong> of children, preparing them for a brighter future.
-      </div>
-
-      <h3 class="section-title" style="font-size:1rem;margin-bottom:12px;"><span class="st-icon">🏆</span>Achievements
-      </h3>
+      <h3 class="section-title" style="font-size:1rem;margin-bottom:12px;"><span class="st-icon">🎯</span>Our Vision</h3>
+      <div class="prose-block">To create a <strong>national impact</strong> by developing world-class programs that <strong>unlock the mental potential</strong> of children, preparing them for a brighter future.</div>
+      <h3 class="section-title" style="font-size:1rem;margin-bottom:12px;"><span class="st-icon">🏆</span>Achievements</h3>
       <div class="ach-list">
-        <div class="ach-item"><span>🏅</span>Member of <strong>WAAMA</strong> – World Association of Abacus &amp; Mental
-          Arithmetic</div>
-        <div class="ach-item"><span>🏅</span>Member of <strong>AAMARDA</strong> – Asia Abacus &amp; Mental Arithmetic
-          R&amp;D Affiliation</div>
+        <div class="ach-item"><span>🏅</span>Member of <strong>WAAMA</strong> – World Association of Abacus &amp; Mental Arithmetic</div>
+        <div class="ach-item"><span>🏅</span>Member of <strong>AAMARDA</strong> – Asia Abacus &amp; Mental Arithmetic R&amp;D Affiliation</div>
         <div class="ach-item"><span>📖</span>Featured <strong>5 times</strong> in Limca Book of Records</div>
         <div class="ach-item"><span>🎖️</span><strong>ISO 9001:2015</strong> Certified Organisation since 2006</div>
-        <div class="ach-item"><span>🥇</span><strong>Best Coaching Institute in Skill Development</strong> for Children
-          (2015)</div>
+        <div class="ach-item"><span>🥇</span><strong>Best Coaching Institute in Skill Development</strong> for Children (2015)</div>
       </div>
-
-      <h3 class="section-title" style="font-size:1rem;margin-bottom:12px;"><span class="st-icon">👩‍💼</span>Leadership
-      </h3>
-      <div class="prose-block">
-        <strong>Mrs. Sarita Dinesh Zanwar</strong>, Director of Sarita's Brilliance Academy, brings over <strong>18 years
-          of experience</strong> in the education sector. Under her leadership the academy has trained <strong>over
-          5,000+ children</strong> and empowered numerous women by providing career opportunities as SIP Abacus
-        instructors.
-      </div>
-
+      <h3 class="section-title" style="font-size:1rem;margin-bottom:12px;"><span class="st-icon">👩‍💼</span>Leadership</h3>
+      <div class="prose-block"><strong>Mrs. Sarita Dinesh Zanwar</strong>, Director of Sarita's Brilliance Academy, brings over <strong>18 years of experience</strong> in the education sector. Under her leadership the academy has trained <strong>over 5,000+ children</strong> and empowered numerous women by providing career opportunities as SIP Abacus instructors.</div>
       <div class="testimonials-summary">
-        <div class="ts-stat">
-          <span class="ts-number">5,000+</span>
-          <span class="ts-label">Students Trained</span>
-        </div>
+        <div class="ts-stat"><span class="ts-number">5,000+</span><span class="ts-label">Students Trained</span></div>
         <div class="ts-divider"></div>
-        <div class="ts-stat">
-          <span class="ts-number">18+</span>
-          <span class="ts-label">Years Experience</span>
-        </div>
+        <div class="ts-stat"><span class="ts-number">18+</span><span class="ts-label">Years Experience</span></div>
         <div class="ts-divider"></div>
-        <div class="ts-stat">
-          <span class="ts-number">4.9 ⭐</span>
-          <span class="ts-label">Parent Rating</span>
-        </div>
+        <div class="ts-stat"><span class="ts-number">4.9 ⭐</span><span class="ts-label">Parent Rating</span></div>
       </div>
-
-      <div class="accordion">
-        <button class="acc-header" id="termsBtn" aria-expanded="false" aria-controls="termsBody">
-          📋 Terms &amp; Conditions <span class="acc-arrow">▾</span>
-        </button>
+      <div class="accordion" style="margin-top:18px;">
+        <button class="acc-header" id="termsBtn" aria-expanded="false" aria-controls="termsBody">📋 Terms &amp; Conditions <span class="acc-arrow">▾</span></button>
         <div class="acc-body" id="termsBody" role="region" aria-labelledby="termsBtn">
           <div class="acc-inner">
             <ol>
-              <li><strong>Acceptance of Terms</strong> – By accessing our services you agree to be bound by these Terms.
-              </li>
+              <li><strong>Acceptance of Terms</strong> – By accessing our services you agree to be bound by these Terms.</li>
               <li><strong>Services</strong> – We provide Offline Coaching.</li>
               <li><strong>Registration</strong> – You must register your child before joining the course.</li>
-              <li><strong>Payment &amp; Refunds</strong> – All installment payments are non-refundable. No further fees
-                are charged if a child discontinues.</li>
-              <li><strong>Termination</strong> – We reserve the right to suspend or terminate registration at any time.
-              </li>
+              <li><strong>Payment &amp; Refunds</strong> – All installment payments are non-refundable. No further fees are charged if a child discontinues.</li>
+              <li><strong>Termination</strong> – We reserve the right to suspend or terminate registration at any time.</li>
               <li><strong>Disclaimer</strong> – We do not guarantee content will meet all specific expectations.</li>
               <li><strong>Privacy Policy</strong> – Your use of services is governed by our Privacy Policy.</li>
               <li><strong>Changes</strong> – We reserve the right to modify these Terms at any time.</li>
@@ -2223,25 +585,17 @@
       </div>
     </section>
 
-    <!-- ═══ WHY SIP ABACUS (white section) ═════════════ -->
+    <!-- ABACUS -->
     <section class="section reveal" id="abacus-section">
-      <!-- <h2 class="section-title"><span class="st-icon">🧮</span>Abacus Instrument</h2> -->
-
-      <!-- Part 1: Why SIP Abacus? -->
       <div class="why-sip-wrap">
         <div class="why-sip-inner">
           <div class="wsa-left">
             <h3 class="wsa-title"><span>Why SIP Abacus?</span></h3>
             <div class="wsa-text">
-              <p><strong>SIP Abacus</strong> is a skill development programme that can help in various aspects of your
-                child's development. SIP Abacus courses are designed to develop soft-skills, numerical abilities and
-                overall intelligence.</p>
-              <p>Children in today's smartphone-enabled world have just one problem – the constant distraction of
-                stimuli from smartphones, streaming platforms, and other devices.</p>
-              <p><strong>SIP Abacus program</strong> is tailored to engage your child productively, learning <span
-                  class="wsa-highlight">MATH in a fun way.</span></p>
-              <p>SIP Abacus makes your child <span class="wsa-highlight">5 times better</span>. To know how, click on
-                Know more.</p>
+              <p><strong>SIP Abacus</strong> is a skill development programme that can help in various aspects of your child's development. SIP Abacus courses are designed to develop soft-skills, numerical abilities and overall intelligence.</p>
+              <p>Children in today's smartphone-enabled world have just one problem – the constant distraction of stimuli from smartphones, streaming platforms, and other devices.</p>
+              <p><strong>SIP Abacus program</strong> is tailored to engage your child productively, learning <span class="wsa-highlight">MATH in a fun way.</span></p>
+              <p>SIP Abacus makes your child <span class="wsa-highlight">5 times better</span>. To know how, click on Know more.</p>
             </div>
           </div>
           <div class="wsa-visual">
@@ -2253,158 +607,77 @@
           </div>
         </div>
       </div>
-
-      <!-- Part 2: Modules (yellow section) -->
       <div class="modules-wrap">
         <div class="modules-inner">
           <p class="modules-header">SIP Abacus offers four modules of Abacus learning.</p>
-
           <div class="module-cards">
-            <div class="module-card mc-junior">
-              <div class="module-icon">🌱</div>
-              <h4>Junior<br>Module</h4>
-            </div>
-            <div class="module-card mc-foundation">
-              <div class="module-icon">🌿</div>
-              <h4>Foundation<br>Module</h4>
-            </div>
-            <div class="module-card mc-advanced">
-              <div class="module-icon">🌳</div>
-              <h4>Advanced<br>Module</h4>
-            </div>
-            <div class="module-card mc-grandmaster">
-              <div class="module-icon">🏆</div>
-              <h4>Grand Master<br>Module</h4>
-            </div>
+            <div class="module-card mc-junior"><div class="module-icon">🌱</div><h4>Junior<br>Module</h4></div>
+            <div class="module-card mc-foundation"><div class="module-icon">🌿</div><h4>Foundation<br>Module</h4></div>
+            <div class="module-card mc-advanced"><div class="module-icon">🌳</div><h4>Advanced<br>Module</h4></div>
+            <div class="module-card mc-grandmaster"><div class="module-icon">🏆</div><h4>Grand Master<br>Module</h4></div>
           </div>
-
           <div class="mod-features">
-            <div class="mod-feat-item">
-              <span class="mf-icon">👩‍🏫</span>
-              <span class="mf-text">Rigorously trained teachers with assessments</span>
-            </div>
-            <div class="mod-feat-item">
-              <span class="mf-icon">📈</span>
-              <span class="mf-text">Annual teacher up-gradation</span>
-            </div>
-            <div class="mod-feat-item">
-              <span class="mf-icon">👶</span>
-              <span class="mf-text">Small batch size for individual attention</span>
-            </div>
-            <div class="mod-feat-item">
-              <span class="mf-icon">📖</span>
-              <span class="mf-text">Periodic Course revision</span>
-            </div>
-            <div class="mod-feat-item">
-              <span class="mf-icon">💻</span>
-              <span class="mf-text">Both online and offline classes</span>
-            </div>
-            <div class="mod-feat-item">
-              <span class="mf-icon">🏅</span>
-              <span class="mf-text">Annual regional / National and International Competitions</span>
-            </div>
+            <div class="mod-feat-item"><span class="mf-icon">👩‍🏫</span><span class="mf-text">Rigorously trained teachers with assessments</span></div>
+            <div class="mod-feat-item"><span class="mf-icon">📈</span><span class="mf-text">Annual teacher up-gradation</span></div>
+            <div class="mod-feat-item"><span class="mf-icon">👶</span><span class="mf-text">Small batch size for individual attention</span></div>
+            <div class="mod-feat-item"><span class="mf-icon">📖</span><span class="mf-text">Periodic Course revision</span></div>
+            <div class="mod-feat-item"><span class="mf-icon">💻</span><span class="mf-text">Both online and offline classes</span></div>
+            <div class="mod-feat-item"><span class="mf-icon">🏅</span><span class="mf-text">Annual regional / National and International Competitions</span></div>
           </div>
-
           <div class="mod-cta-row">
-            <a href="https://wa.me/917020392423?text=Hi!%20I%20would%20like%20to%20know%20more%20about%20SIP%20Abacus%20courses."
-              class="mod-cta cta-know-more" target="_blank" rel="noopener">Know more</a>
-            <a href="https://wa.me/917020392423?text=Hi!%20I%20would%20like%20to%20book%20a%20free%20trial%20class%20for%20my%20child."
-              class="mod-cta cta-trial" target="_blank" rel="noopener">Book a Free Trial Class</a>
+            <a href="https://wa.me/917020392423?text=Hi!%20I%20would%20like%20to%20know%20more%20about%20SIP%20Abacus%20courses." class="mod-cta cta-know-more" target="_blank" rel="noopener">Know more</a>
+            <a href="https://wa.me/917020392423?text=Hi!%20I%20would%20like%20to%20book%20a%20free%20trial%20class%20for%20my%20child." class="mod-cta cta-trial" target="_blank" rel="noopener">Book a Free Trial Class</a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ═══ SERVICES ════════════════════════════════════ -->
-    <!-- <section class="section reveal" id="services-section">
-      <h2 class="section-title"><span class="st-icon">🎒</span>Our Services</h2>
-      <div class="services-grid">
-        <div class="svc-card"><img src="https://d3k88l35vy59af.cloudfront.net/A160/4642/1744874868925.jpeg"
-            alt="Service" loading="lazy" /><a
-            href="https://wa.me/917020392423?text=Hi!%20I%20am%20interested%20in%20your%20services." class="svc-enq"
-            target="_blank" rel="noopener">💬 Enquiry</a></div>
-        <div class="svc-card"><img src="https://d3k88l35vy59af.cloudfront.net/A160/4642/1744874722797.jpeg"
-            alt="Service" loading="lazy" /><a
-            href="https://wa.me/917020392423?text=Hi!%20I%20am%20interested%20in%20your%20services." class="svc-enq"
-            target="_blank" rel="noopener">💬 Enquiry</a></div>
-        <div class="svc-card"><img src="https://d3k88l35vy59af.cloudfront.net/A160/4642/1744874731309.jpeg"
-            alt="Service" loading="lazy" /><a
-            href="https://wa.me/917020392423?text=Hi!%20I%20am%20interested%20in%20your%20services." class="svc-enq"
-            target="_blank" rel="noopener">💬 Enquiry</a></div>
-        <div class="svc-card"><img src="https://d3k88l35vy59af.cloudfront.net/A160/4642/1744874739619.jpeg"
-            alt="Service" loading="lazy" /><a
-            href="https://wa.me/917020392423?text=Hi!%20I%20am%20interested%20in%20your%20services." class="svc-enq"
-            target="_blank" rel="noopener">💬 Enquiry</a></div>
-        <div class="svc-card"><img src="https://d3k88l35vy59af.cloudfront.net/A160/4642/1742035826831.png" alt="Service"
-            loading="lazy" /><a href="https://wa.me/917020392423?text=Hi!%20I%20am%20interested%20in%20your%20services."
-            class="svc-enq" target="_blank" rel="noopener">💬 Enquiry</a></div>
-        <div class="svc-card"><img src="https://d3k88l35vy59af.cloudfront.net/A160/4642/1742035884533.png" alt="Service"
-            loading="lazy" /><a href="https://wa.me/917020392423?text=Hi!%20I%20am%20interested%20in%20your%20services."
-            class="svc-enq" target="_blank" rel="noopener">💬 Enquiry</a></div>
-        <div class="svc-card"><img src="https://d3k88l35vy59af.cloudfront.net/A160/4642/1742035935590.png" alt="Service"
-            loading="lazy" /><a href="https://wa.me/917020392423?text=Hi!%20I%20am%20interested%20in%20your%20services."
-            class="svc-enq" target="_blank" rel="noopener">💬 Enquiry</a></div>
-        <div class="svc-card"><img src="https://d3k88l35vy59af.cloudfront.net/A160/4642/1742035966072.png" alt="Service"
-            loading="lazy" /><a href="https://wa.me/917020392423?text=Hi!%20I%20am%20interested%20in%20your%20services."
-            class="svc-enq" target="_blank" rel="noopener">💬 Enquiry</a></div>
-        <div class="svc-card"><img src="https://d3k88l35vy59af.cloudfront.net/A160/4642/1742035985953.png" alt="Service"
-            loading="lazy" /><a href="https://wa.me/917020392423?text=Hi!%20I%20am%20interested%20in%20your%20services."
-            class="svc-enq" target="_blank" rel="noopener">💬 Enquiry</a></div>
-        <div class="svc-card"><img src="https://d3k88l35vy59af.cloudfront.net/A160/4642/1742036001775.png" alt="Service"
-            loading="lazy" /><a href="https://wa.me/917020392423?text=Hi!%20I%20am%20interested%20in%20your%20services."
-            class="svc-enq" target="_blank" rel="noopener">💬 Enquiry</a></div>
-        <div class="svc-card"><img src="https://d3k88l35vy59af.cloudfront.net/A160/4642/1742036013904.png" alt="Service"
-            loading="lazy" /><a href="https://wa.me/917020392423?text=Hi!%20I%20am%20interested%20in%20your%20services."
-            class="svc-enq" target="_blank" rel="noopener">💬 Enquiry</a></div>
-        <div class="svc-card"><img src="https://d3k88l35vy59af.cloudfront.net/A160/4642/1742036075758.png" alt="Service"
-            loading="lazy" /><a href="https://wa.me/917020392423?text=Hi!%20I%20am%20interested%20in%20your%20services."
-            class="svc-enq" target="_blank" rel="noopener">💬 Enquiry</a></div>
-        <div class="svc-card"><img src="https://d3k88l35vy59af.cloudfront.net/A160/4642/1742036122250.png" alt="Service"
-            loading="lazy" /><a href="https://wa.me/917020392423?text=Hi!%20I%20am%20interested%20in%20your%20services."
-            class="svc-enq" target="_blank" rel="noopener">💬 Enquiry</a></div>
-        <div class="svc-card"><img src="https://d3k88l35vy59af.cloudfront.net/A160/4642/1742040017482.png" alt="Service"
-            loading="lazy" /><a href="https://wa.me/917020392423?text=Hi!%20I%20am%20interested%20in%20your%20services."
-            class="svc-enq" target="_blank" rel="noopener">💬 Enquiry</a></div>
-      </div>
-    </section> -->
-
-    <!-- ═══ PAYMENT ════════════════════════════════════ -->
+    <!-- PAYMENT -->
     <section class="section reveal" id="payment-section">
       <h2 class="section-title"><span class="st-icon">💳</span>Payment Options</h2>
       <div class="card" style="margin-bottom:16px;">
         <span class="pay-section-title">UPI Payments</span>
-        <div class="pay-row"><span class="pay-key">📱 Paytm</span><span class="pay-val"><span class="upi-chip">✓
-              UPI</span>&nbsp;+91-9422326062</span></div>
-        <div class="pay-row"><span class="pay-key">📱 PhonePe</span><span class="pay-val"><span class="upi-chip">✓
-              UPI</span>&nbsp;+91-9420002072</span></div>
-        <div class="pay-row"><span class="pay-key">📱 Google Pay</span><span class="pay-val"><span class="upi-chip">✓
-              UPI</span>&nbsp;+91-9422326062</span></div>
+        <div class="pay-row"><span class="pay-key">📱 Paytm</span><span class="pay-val"><span class="upi-chip">✓ UPI</span>&nbsp;+91-9422326062</span></div>
+        <div class="pay-row"><span class="pay-key">📱 PhonePe</span><span class="pay-val"><span class="upi-chip">✓ UPI</span>&nbsp;+91-9420002072</span></div>
+        <div class="pay-row"><span class="pay-key">📱 Google Pay</span><span class="pay-val"><span class="upi-chip">✓ UPI</span>&nbsp;+91-9422326062</span></div>
       </div>
-      <div class="card">
-        <span class="pay-section-title">Bank Account Details</span>
-        <div class="pay-row"><span class="pay-key">Bank</span><span class="pay-val">HDFC Bank</span></div>
-        <div class="pay-row"><span class="pay-key">IFSC</span><span class="pay-val">HDFC00001387</span></div>
-        <div class="pay-row"><span class="pay-key">Account Name</span><span class="pay-val">Sarita Dinesh Zanwar</span>
-        </div>
-        <div class="pay-row"><span class="pay-key">Account No.</span><span class="pay-val">50100018624380</span></div>
-      </div>
+
     </section>
-    <!-- ═══ CONTACT ════════════════════════════════════ -->
+
+    <!-- CONTACT — with TWO addresses -->
     <section class="section reveal" id="contact-section">
       <h2 class="section-title"><span class="st-icon">📞</span>Contact Us</h2>
       <div class="card contact-rows">
+
+        <!-- Address 1 -->
         <div class="crow">
           <span class="crow-icon ci-map">📍</span>
           <div class="crow-body">
             <div class="crow-label">Address</div>
+            <span class="addr-branch">Main Branch – R P Road</span>
             <div class="crow-val">
-              <a href="https://www.google.com/maps/place/SIP+Abacus+Jalna/@19.850269,75.8998101,17z" target="_blank"
-                rel="noopener">
-                Sarita's Brilliance Academy, Opp. Buldhana Urban Bank,<br />R P Road, Jalna, Maharashtra 431203
+              <a href="https://www.google.com/maps/place/SIP+Abacus+Jalna/@19.850269,75.8998101,17z" target="_blank" rel="noopener">
+                Sarita's Brilliance Academy, Opp. Buldhana Urban Bank,<br/>R P Road, Jalna, Maharashtra 431203
               </a>
             </div>
           </div>
         </div>
+
+        <!-- Address 2 -->
+        <div class="crow">
+          <span class="crow-icon ci-map">📍</span>
+          <div class="crow-body">
+            <div class="crow-label">Address</div>
+            <span class="addr-branch">Branch 2 – Old Jalna</span>
+            <div class="crow-val">
+              <a href="https://www.google.com/maps/search/SIP+Abacus+Old+Jalna+Bhagya+Nagar+Jalna+Maharashtra" target="_blank" rel="noopener">
+                SIP Abacus Old Jalna, behind Topes House,<br/>Bhagya Nagar, Jalna, Maharashtra 431203
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Email -->
         <div class="crow">
           <span class="crow-icon ci-mail">✉️</span>
           <div class="crow-body">
@@ -2412,6 +685,8 @@
             <div class="crow-val"><a href="mailto:sipabacusjalna@gmail.com">sipabacusjalna@gmail.com</a></div>
           </div>
         </div>
+
+        <!-- Phone -->
         <div class="crow">
           <span class="crow-icon ci-phone">📱</span>
           <div class="crow-body">
@@ -2428,54 +703,47 @@
       </a>
     </section>
 
-    <!-- ═══ LINKS ═══════════════════════════════════════ -->
+    <!-- LINKS -->
     <section class="section reveal" id="links-section">
       <h2 class="section-title"><span class="st-icon">🔗</span>Quick Links</h2>
       <div class="link-cards">
         <a href="https://wa.me/917020392423" class="link-card" target="_blank" rel="noopener">
           <span class="lc-icon lc-wa">💬</span>
-          <div>
-            <div class="lc-name">WhatsApp</div>
-            <div class="lc-sub">Chat with us directly on WhatsApp</div>
-          </div>
+          <div><div class="lc-name">WhatsApp</div><div class="lc-sub">Chat with us directly on WhatsApp</div></div>
           <span class="lc-arrow">›</span>
         </a>
         <a href="tel:+917020392423" class="link-card">
           <span class="lc-icon lc-call">📞</span>
-          <div>
-            <div class="lc-name">Call Now</div>
-            <div class="lc-sub">Tap to call +91-7020392423</div>
-          </div>
+          <div><div class="lc-name">Call Now</div><div class="lc-sub">Tap to call +91-7020392423</div></div>
           <span class="lc-arrow">›</span>
         </a>
       </div>
     </section>
 
-
-    <!-- ═══ GALLERY ════════════════════════════════════ -->
+    <!-- GALLERY -->
     <section class="section reveal" id="gallery-section">
       <h2 class="section-title"><span class="st-icon">🖼️</span>Gallery</h2>
       <div class="gallery-carousel" id="galleryCarousel">
-        <span class="gallery-counter" id="galCounter">1 / 9</span>
+        <span class="gallery-counter" id="galCounter">1 / 18</span>
         <div class="gallery-track" id="galleryTrack">
-          <div class="gallery-slide"><img src="assets/gallery-1.jpeg" alt="Gallery 1" loading="lazy" /></div>
-          <div class="gallery-slide"><img src="assets/gallery-2.jpeg" alt="Gallery 2" loading="lazy" /></div>
-          <div class="gallery-slide"><img src="assets/gallery-3.jpeg" alt="Gallery 3" loading="lazy" /></div>
-          <div class="gallery-slide"><img src="assets/gallery-4.jpeg" alt="Gallery 4" loading="lazy" /></div>
-          <div class="gallery-slide"><img src="assets/gallery-5.jpeg" alt="Gallery 5" loading="lazy" /></div>
-          <div class="gallery-slide"><img src="assets/gallery-6.jpeg" alt="Gallery 6" loading="lazy" /></div>
-          <div class="gallery-slide"><img src="assets/gallery-7.jpeg" alt="Gallery 7" loading="lazy" /></div>
-          <div class="gallery-slide"><img src="assets/gallery-8.jpeg" alt="Gallery 8" loading="lazy" /></div>
-          <div class="gallery-slide"><img src="assets/gallery-9.jpeg" alt="Gallery 9" loading="lazy" /></div>
-          <div class="gallery-slide"><img src="assets/gallery-10.jpeg" alt="Gallery 9" loading="lazy" /></div>
-          <div class="gallery-slide"><img src="assets/gallery-11.jpeg" alt="Gallery 9" loading="lazy" /></div>
-          <div class="gallery-slide"><img src="assets/gallery-12.jpeg" alt="Gallery 9" loading="lazy" /></div>
-          <div class="gallery-slide"><img src="assets/gallery-13.jpeg" alt="Gallery 9" loading="lazy" /></div>
-          <div class="gallery-slide"><img src="assets/gallery-14.jpeg" alt="Gallery 9" loading="lazy" /></div>
-          <div class="gallery-slide"><img src="assets/gallery-15.jpeg" alt="Gallery 9" loading="lazy" /></div>
-          <div class="gallery-slide"><img src="assets/gallery-16.jpeg" alt="Gallery 9" loading="lazy" /></div>
-          <div class="gallery-slide"><img src="assets/gallery-17.jpeg" alt="Gallery 9" loading="lazy" /></div>
-          <div class="gallery-slide"><img src="assets/gallery-18.jpeg" alt="Gallery 9" loading="lazy" /></div>
+          <div class="gallery-slide"><img src="assets/gallery-1.jpeg"  alt="Gallery 1"  loading="lazy"/></div>
+          <div class="gallery-slide"><img src="assets/gallery-2.jpeg"  alt="Gallery 2"  loading="lazy"/></div>
+          <div class="gallery-slide"><img src="assets/gallery-3.jpeg"  alt="Gallery 3"  loading="lazy"/></div>
+          <div class="gallery-slide"><img src="assets/gallery-4.jpeg"  alt="Gallery 4"  loading="lazy"/></div>
+          <div class="gallery-slide"><img src="assets/gallery-5.jpeg"  alt="Gallery 5"  loading="lazy"/></div>
+          <div class="gallery-slide"><img src="assets/gallery-6.jpeg"  alt="Gallery 6"  loading="lazy"/></div>
+          <div class="gallery-slide"><img src="assets/gallery-7.jpeg"  alt="Gallery 7"  loading="lazy"/></div>
+          <div class="gallery-slide"><img src="assets/gallery-8.jpeg"  alt="Gallery 8"  loading="lazy"/></div>
+          <div class="gallery-slide"><img src="assets/gallery-9.jpeg"  alt="Gallery 9"  loading="lazy"/></div>
+          <div class="gallery-slide"><img src="assets/gallery-10.jpeg" alt="Gallery 10" loading="lazy"/></div>
+          <div class="gallery-slide"><img src="assets/gallery-11.jpeg" alt="Gallery 11" loading="lazy"/></div>
+          <div class="gallery-slide"><img src="assets/gallery-12.jpeg" alt="Gallery 12" loading="lazy"/></div>
+          <div class="gallery-slide"><img src="assets/gallery-13.jpeg" alt="Gallery 13" loading="lazy"/></div>
+          <div class="gallery-slide"><img src="assets/gallery-14.jpeg" alt="Gallery 14" loading="lazy"/></div>
+          <div class="gallery-slide"><img src="assets/gallery-15.jpeg" alt="Gallery 15" loading="lazy"/></div>
+          <div class="gallery-slide"><img src="assets/gallery-16.jpeg" alt="Gallery 16" loading="lazy"/></div>
+          <div class="gallery-slide"><img src="assets/gallery-17.jpeg" alt="Gallery 17" loading="lazy"/></div>
+          <div class="gallery-slide"><img src="assets/gallery-18.jpeg" alt="Gallery 18" loading="lazy"/></div>
         </div>
         <button class="gallery-nav-btn gal-prev" id="galPrev" aria-label="Previous image">‹</button>
         <button class="gallery-nav-btn gal-next" id="galNext" aria-label="Next image">›</button>
@@ -2483,435 +751,262 @@
       </div>
     </section>
 
-    <!-- Lightbox -->
+    <!-- LIGHTBOX -->
     <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
       <button class="lb-close" id="lbClose" aria-label="Close">✕</button>
       <button class="lb-nav lb-prev" id="lbPrev" aria-label="Previous">‹</button>
-      <img class="lb-img" id="lbImg" src="" alt="Gallery image" />
+      <img class="lb-img" id="lbImg" src="" alt="Gallery image"/>
       <button class="lb-nav lb-next" id="lbNext" aria-label="Next">›</button>
     </div>
 
-    <!-- ═══ PARENT TESTIMONIALS ═════════════════════════ -->
+    <!-- TESTIMONIALS -->
     <section class="section reveal" id="testimonials-section">
       <h2 class="section-title"><span class="st-icon">💬</span>Parent's Testimonials</h2>
-
       <div class="testimonials-wrapper">
         <div class="testimonials-track" id="testimonialsTrack">
-
-          <div class="testimonial-slide">
-            <div class="testimonial-card">
-              <div class="tc-stars">⭐⭐⭐⭐⭐</div>
-              <p class="tc-quote">"My daughter has been learning at Sarita's Brilliance Academy for 2 years now. Her
-                concentration and math skills have improved dramatically. She now solves complex calculations mentally
-                in seconds! Truly grateful to Sarita ma'am for her dedication."</p>
-              <div class="tc-author">
-                <div class="tc-avatar">S</div>
-                <div>
-                  <div class="tc-name">Mrs. Sunita Patil</div>
-                  <div class="tc-role">Parent of Ananya, Class 4</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="testimonial-slide">
-            <div class="testimonial-card">
-              <div class="tc-stars">⭐⭐⭐⭐⭐</div>
-              <p class="tc-quote">"The SIP Abacus program at this academy is exceptional. My son Arjun was struggling
-                with numbers, but after joining, he topped his school math exam and won a medal at the regional
-                competition. The teaching methodology is truly world-class."</p>
-              <div class="tc-author">
-                <div class="tc-avatar">R</div>
-                <div>
-                  <div class="tc-name">Mr. Rajesh Deshmukh</div>
-                  <div class="tc-role">Parent of Arjun, Class 5</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="testimonial-slide">
-            <div class="testimonial-card">
-              <div class="tc-stars">⭐⭐⭐⭐⭐</div>
-              <p class="tc-quote">"We enrolled both our children at Sarita's Academy. The small batch sizes ensure each
-                child gets personal attention. The Brain Gym exercises have noticeably improved their memory and focus.
-                Highly recommended for every parent!"</p>
-              <div class="tc-author">
-                <div class="tc-avatar">P</div>
-                <div>
-                  <div class="tc-name">Mrs. Priya Joshi</div>
-                  <div class="tc-role">Parent of Riya & Rohan, Class 3 & 6</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="testimonial-slide">
-            <div class="testimonial-card">
-              <div class="tc-stars">⭐⭐⭐⭐⭐</div>
-              <p class="tc-quote">"My child was very shy and lacked confidence. After joining the abacus classes, not
-                only has she become confident in math but also participates in competitions. Sarita ma'am's personal
-                involvement makes all the difference."</p>
-              <div class="tc-author">
-                <div class="tc-avatar">A</div>
-                <div>
-                  <div class="tc-name">Mrs. Anjali Kulkarni</div>
-                  <div class="tc-role">Parent of Meera, Class 2</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="testimonial-slide">
-            <div class="testimonial-card">
-              <div class="tc-stars">⭐⭐⭐⭐⭐</div>
-              <p class="tc-quote">"Outstanding academy! The structured learning in 4 modules ensures gradual
-                progression. My son represented Jalna at the national-level abacus competition. Thank you Sarita ma'am
-                for nurturing these young minds."</p>
-              <div class="tc-author">
-                <div class="tc-avatar">V</div>
-                <div>
-                  <div class="tc-name">Mr. Vikram Jadhav</div>
-                  <div class="tc-role">Parent of Aarav, Class 7</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="testimonial-slide">
-            <div class="testimonial-card">
-              <div class="tc-stars">⭐⭐⭐⭐⭐</div>
-              <p class="tc-quote">"As a teacher myself, I can vouch for the quality of education here. The fun-based
-                approach with games and puzzles keeps children engaged. Both online and offline modes give great
-                flexibility. A must for every child in Jalna!"</p>
-              <div class="tc-author">
-                <div class="tc-avatar">N</div>
-                <div>
-                  <div class="tc-name">Mrs. Neha Sharma</div>
-                  <div class="tc-role">Parent of Ishaan, Class 4</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
+          <div class="testimonial-slide"><div class="testimonial-card"><div class="tc-stars">⭐⭐⭐⭐⭐</div><p class="tc-quote">"My daughter has been learning at Sarita's Brilliance Academy for 2 years now. Her concentration and math skills have improved dramatically. She now solves complex calculations mentally in seconds! Truly grateful to Sarita ma'am for her dedication."</p><div class="tc-author"><div class="tc-avatar">S</div><div><div class="tc-name">Mrs. Sunita Patil</div><div class="tc-role">Parent of Ananya, Class 4</div></div></div></div></div>
+          <div class="testimonial-slide"><div class="testimonial-card"><div class="tc-stars">⭐⭐⭐⭐⭐</div><p class="tc-quote">"The SIP Abacus program at this academy is exceptional. My son Arjun was struggling with numbers, but after joining, he topped his school math exam and won a medal at the regional competition. The teaching methodology is truly world-class."</p><div class="tc-author"><div class="tc-avatar">R</div><div><div class="tc-name">Mr. Rajesh Deshmukh</div><div class="tc-role">Parent of Arjun, Class 5</div></div></div></div></div>
+          <div class="testimonial-slide"><div class="testimonial-card"><div class="tc-stars">⭐⭐⭐⭐⭐</div><p class="tc-quote">"We enrolled both our children at Sarita's Academy. The small batch sizes ensure each child gets personal attention. The Brain Gym exercises have noticeably improved their memory and focus. Highly recommended for every parent!"</p><div class="tc-author"><div class="tc-avatar">P</div><div><div class="tc-name">Mrs. Priya Joshi</div><div class="tc-role">Parent of Riya &amp; Rohan, Class 3 &amp; 6</div></div></div></div></div>
+          <div class="testimonial-slide"><div class="testimonial-card"><div class="tc-stars">⭐⭐⭐⭐⭐</div><p class="tc-quote">"My child was very shy and lacked confidence. After joining the abacus classes, not only has she become confident in math but also participates in competitions. Sarita ma'am's personal involvement makes all the difference."</p><div class="tc-author"><div class="tc-avatar">A</div><div><div class="tc-name">Mrs. Anjali Kulkarni</div><div class="tc-role">Parent of Meera, Class 2</div></div></div></div></div>
+          <div class="testimonial-slide"><div class="testimonial-card"><div class="tc-stars">⭐⭐⭐⭐⭐</div><p class="tc-quote">"Outstanding academy! The structured learning in 4 modules ensures gradual progression. My son represented Jalna at the national-level abacus competition. Thank you Sarita ma'am for nurturing these young minds."</p><div class="tc-author"><div class="tc-avatar">V</div><div><div class="tc-name">Mr. Vikram Jadhav</div><div class="tc-role">Parent of Aarav, Class 7</div></div></div></div></div>
+          <div class="testimonial-slide"><div class="testimonial-card"><div class="tc-stars">⭐⭐⭐⭐⭐</div><p class="tc-quote">"As a teacher myself, I can vouch for the quality of education here. The fun-based approach with games and puzzles keeps children engaged. Both online and offline modes give great flexibility. A must for every child in Jalna!"</p><div class="tc-author"><div class="tc-avatar">N</div><div><div class="tc-name">Mrs. Neha Sharma</div><div class="tc-role">Parent of Ishaan, Class 4</div></div></div></div></div>
         </div>
       </div>
-
       <div class="testimonials-nav">
         <button class="tn-btn" id="tnPrev" aria-label="Previous testimonial">‹</button>
         <div class="tn-dots" id="tnDots"></div>
         <button class="tn-btn" id="tnNext" aria-label="Next testimonial">›</button>
       </div>
-
     </section>
 
-    <!-- ═══ FEEDBACK ════════════════════════════════════ -->
+    <!-- FEEDBACK -->
     <section class="section reveal" id="feedback-section">
       <h2 class="section-title"><span class="st-icon">⭐</span>Feedback</h2>
       <div class="feedback-card">
         <p>Love what we do? Leave us a review on Google and help other parents discover Sarita's Brilliance Academy!</p>
-        <a href="https://www.google.com/maps/place/SIP+Abacus+Jalna/@19.850269,75.902385,17z/data=!3m1!4b1!4m6!3m5!1s0x3bda59fd1b50ab0b:0x454f78c52f824c51!8m2!3d19.850269!4d75.902385!16s%2Fg%2F11fy2pgzvq"
-          target="_blank" rel="noopener" class="google-review-btn" aria-label="Rate us on Google">
-          <span class="g-logo">G</span>
-          Rate us on Google
+        <a href="https://www.google.com/maps/place/SIP+Abacus+Jalna/@19.850269,75.902385,17z/data=!3m1!4b1!4m6!3m5!1s0x3bda59fd1b50ab0b:0x454f78c52f824c51!8m2!3d19.850269!4d75.902385!16s%2Fg%2F11fy2pgzvq" target="_blank" rel="noopener" class="google-review-btn" aria-label="Rate us on Google">
+          <span class="g-logo">G</span>Rate us on Google
         </a>
-        <div class="rating-preview" aria-hidden="true">
-          <span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span>
-        </div>
+        <div class="rating-preview" aria-hidden="true"><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span></div>
       </div>
     </section>
 
-    <!-- ═══ ENQUIRY ════════════════════════════════════ -->
+    <!-- ENQUIRY -->
     <section class="section reveal" id="enquiry-section">
       <h2 class="section-title"><span class="st-icon">📩</span>Enquiry</h2>
       <div class="enquiry-card">
         <div class="form-row">
-          <div class="form-group">
-            <label for="eq-name">Your Name</label>
-            <input type="text" id="eq-name" placeholder="Full name" autocomplete="name" />
-          </div>
-          <div class="form-group">
-            <label for="eq-phone">Mobile Number</label>
-            <input type="tel" id="eq-phone" placeholder="+91 XXXXXXXXXX" autocomplete="tel" />
-          </div>
+          <div class="form-group"><label for="eq-name">Your Name</label><input type="text" id="eq-name" placeholder="Full name" autocomplete="name"/></div>
+          <div class="form-group"><label for="eq-phone">Mobile Number</label><input type="tel" id="eq-phone" placeholder="+91 XXXXXXXXXX" autocomplete="tel"/></div>
         </div>
-        <div class="form-group">
-          <label for="eq-email">Email Address</label>
-          <input type="email" id="eq-email" placeholder="email@example.com" autocomplete="email" />
-        </div>
-        <div class="form-group">
-          <label for="eq-child">Child's Age / Grade (optional)</label>
-          <input type="text" id="eq-child" placeholder="e.g. 7 years / Class 2" />
-        </div>
-        <div class="form-group">
-          <label for="eq-msg">Message</label>
-          <textarea id="eq-msg" rows="3" placeholder="I'd like to know more about…"></textarea>
-        </div>
-        <button class="wa-submit" id="enqSubmit" aria-label="Send enquiry on WhatsApp">
-          💬&nbsp;&nbsp;Send Enquiry on WhatsApp
-        </button>
+        <div class="form-group"><label for="eq-email">Email Address</label><input type="email" id="eq-email" placeholder="email@example.com" autocomplete="email"/></div>
+        <div class="form-group"><label for="eq-child">Child's Age / Grade (optional)</label><input type="text" id="eq-child" placeholder="e.g. 7 years / Class 2"/></div>
+        <div class="form-group"><label for="eq-msg">Message</label><textarea id="eq-msg" rows="3" placeholder="I'd like to know more about…"></textarea></div>
+        <button class="wa-submit" id="enqSubmit" aria-label="Send enquiry on WhatsApp">💬&nbsp;&nbsp;Send Enquiry on WhatsApp</button>
       </div>
     </section>
 
-    <!-- ═══ SHARE ════════════════════════════════════════ -->
+    <!-- SHARE -->
     <section class="section reveal" id="share-section">
       <h2 class="section-title"><span class="st-icon">📤</span>Share</h2>
       <div class="share-card">
         <div class="share-url-box">🔗&nbsp;&nbsp;sipabacusjalna.in</div>
         <div class="share-btns">
-          <a href="https://wa.me/?text=Check%20out%20Sarita%27s%20Brilliance%20Academy%20%E2%80%93%20SIP%20Abacus%20Jalna%20https://sipabacusjalna.in"
-            class="share-btn sb-wa" target="_blank" rel="noopener">💬 Share on WhatsApp</a>
+          <a href="https://wa.me/?text=Check%20out%20Sarita%27s%20Brilliance%20Academy%20%E2%80%93%20SIP%20Abacus%20Jalna%20https://sipabacusjalna.in" class="share-btn sb-wa" target="_blank" rel="noopener">💬 Share on WhatsApp</a>
           <button class="share-btn sb-copy" id="copyBtn">📋 Copy Link</button>
         </div>
-        <!-- <div>
-          <img src="https://vcard-bucket.s3.us-east-2.amazonaws.com/A160/4642/4642_qr.png" alt="QR Code"
-            style="width:140px;height:140px;object-fit:contain;border-radius:12px;border:4px solid #fde8da;display:block;margin:0 auto;" />
-          <div class="qr-label">Scan QR to open profile</div>
-        </div> -->
       </div>
     </section>
 
   </main>
 
-  <!-- ═══ FOOTER ══════════════════════════════════════ -->
-  <footer>
-    © 2026 <a href="https://sipabacusjalna.in" target="_blank" rel="noopener">sipabacusjalna.in</a>
-    &nbsp;·&nbsp; Sarita's Brilliance Academy, Jalna
+  <!-- ═══ FOOTER (rich 3-column layout) ══════════════ -->
+  <footer class="site-footer">
+    <div class="footer-top">
+
+      <!-- Col 1: Brand + Both Addresses -->
+      <div class="footer-brand">
+        <h2>Sarita's<br/><em>Brilliance Academy</em></h2>
+        <p class="footer-tagline">SIP Abacus Institute · Est. 2008</p>
+
+        <div class="footer-addr-block">
+          <span class="footer-addr-label">Main Branch – R P Road</span>
+          <p>Opp. Buldhana Urban Bank, R P Road,<br/>Jalna, Maharashtra 431203</p>
+          <a href="https://www.google.com/maps/place/SIP+Abacus+Jalna/@19.850269,75.8998101,17z" target="_blank" rel="noopener">📍 Open in Maps</a>
+        </div>
+
+        <div class="footer-addr-block">
+          <span class="footer-addr-label">Branch 2 – Old Jalna</span>
+          <p>Behind Topes House, Bhagya Nagar,<br/>Old Jalna, Maharashtra 431203</p>
+          <a href="https://www.google.com/maps/search/SIP+Abacus+Bhagya+Nagar+Old+Jalna" target="_blank" rel="noopener">📍 Open in Maps</a>
+        </div>
+      </div>
+
+      <!-- Col 2: Nav links + Social -->
+      <div class="footer-links-col">
+        <h4>Quick Links</h4>
+        <ul class="footer-nav-links">
+          <li><a href="#about-section">ℹ️ About Us</a></li>
+          <li><a href="#abacus-section">🧮 SIP Abacus</a></li>
+          <li><a href="#gallery-section">🖼️ Gallery</a></li>
+          <li><a href="#testimonials-section">💬 Testimonials</a></li>
+          <li><a href="#payment-section">💳 Payment</a></li>
+          <li><a href="#enquiry-section">📩 Enquiry</a></li>
+        </ul>
+
+        <h4 style="margin-bottom:12px;">Follow Us</h4>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/sipabacusjalna" target="_blank" rel="noopener" class="social-btn sb-instagram" aria-label="Instagram">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            Instagram
+          </a>
+          <a href="https://www.facebook.com/sipabacusjalna" target="_blank" rel="noopener" class="social-btn sb-facebook" aria-label="Facebook">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            Facebook
+          </a>
+        </div>
+      </div>
+
+      <!-- Col 3: Book a 1:1 Session (Google Calendar) -->
+      <div class="footer-book-col">
+        <h4>📅 Book a 1:1 Session</h4>
+        <p>Schedule a free consultation with Mrs. Sarita Zanwar to discuss your child's learning journey and find the right Abacus module.</p>
+        <a href="https://calendar.google.com/calendar/r/eventedit?text=1:1+Session+with+Sarita%27s+Brilliance+Academy&details=Free+consultation+for+SIP+Abacus+enrolment.+Contact:+%2B91-7020392423&location=R+P+Road,+Jalna,+Maharashtra+431203&add=sipabacusjalna@gmail.com"
+           target="_blank" rel="noopener"
+           class="book-session-btn"
+           aria-label="Book a 1:1 session via Google Calendar">
+          📅&nbsp; Book a Session
+        </a>
+        <p style="margin-top:14px;font-size:11.5px;color:rgba(255,255,255,.45);">Opens Google Calendar pre-filled with session details. Confirm a time that works for you!</p>
+
+        <!-- Contact quick row -->
+        <div style="margin-top:18px;display:flex;flex-direction:column;gap:8px;">
+          <a href="tel:+917020392423" style="color:rgba(255,255,255,.7);text-decoration:none;font-size:13px;font-weight:600;display:flex;align-items:center;gap:8px;">
+            <span style="background:rgba(255,255,255,.12);border-radius:8px;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-size:14px;">📞</span>
+            +91-7020392423
+          </a>
+          <a href="mailto:sipabacusjalna@gmail.com" style="color:rgba(255,255,255,.7);text-decoration:none;font-size:13px;font-weight:600;display:flex;align-items:center;gap:8px;">
+            <span style="background:rgba(255,255,255,.12);border-radius:8px;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-size:14px;">✉️</span>
+            sipabacusjalna@gmail.com
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Footer bottom bar -->
+    <div class="footer-bottom">
+      <span>© 2026 <a href="https://sipabacusjalna.in" target="_blank" rel="noopener">sipabacusjalna.in</a> · Sarita's Brilliance Academy, Jalna</span>
+      <span style="display:flex;align-items:center;gap:12px;">
+        <a href="https://www.instagram.com/sipabacusjalna" target="_blank" rel="noopener" aria-label="Instagram" style="color:rgba(255,255,255,.45);">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        </a>
+        <a href="https://www.facebook.com/sipabacusjalna" target="_blank" rel="noopener" aria-label="Facebook" style="color:rgba(255,255,255,.45);">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </a>
+        <a href="https://wa.me/917020392423" target="_blank" rel="noopener" aria-label="WhatsApp" style="color:rgba(255,255,255,.45);">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </a>
+      </span>
+    </div>
   </footer>
 
   <div class="toast" id="toast" aria-live="polite"></div>
 
   <script>
-    /* ── View counter ────────────────────────────────── */
-    (function () {
-      const STORAGE_KEY = 'sba_view_count';
-      const SESSION_KEY = 'sba_counted_session';
-      const ANIM_KEY = 'sba_animated';
-      const BASE_COUNT = 586;
+  /* ── View counter ── */
+  (function(){
+    const SK='sba_view_count',SS='sba_counted_session',AK='sba_animated',BASE=586;
+    let c=parseInt(localStorage.getItem(SK)||BASE,10);
+    if(!sessionStorage.getItem(SS)){c++;localStorage.setItem(SK,c);sessionStorage.setItem(SS,'1');setTimeout(()=>{const b=document.getElementById('viewsBadge');b.classList.add('bumped');setTimeout(()=>b.classList.remove('bumped'),1100);},900);}
+    const el=document.getElementById('viewCount');
+    if(!sessionStorage.getItem(AK)){sessionStorage.setItem(AK,'1');let cur=Math.max(BASE,c-20);const tick=()=>{cur++;el.textContent=cur.toLocaleString('en-IN');if(cur<c)requestAnimationFrame(tick);else el.innerHTML=`<span class="count-flip">${c.toLocaleString('en-IN')}</span>`;};setTimeout(tick,700);}
+    else el.textContent=c.toLocaleString('en-IN');
+  })();
 
-      let count = parseInt(localStorage.getItem(STORAGE_KEY) || BASE_COUNT, 10);
+  /* ── Scroll reveal ── */
+  const ro=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');ro.unobserve(x.target);}});},{threshold:0.08});
+  document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
 
-      if (!sessionStorage.getItem(SESSION_KEY)) {
-        count += 1;
-        localStorage.setItem(STORAGE_KEY, count);
-        sessionStorage.setItem(SESSION_KEY, '1');
-        setTimeout(() => {
-          const badge = document.getElementById('viewsBadge');
-          badge.classList.add('bumped');
-          setTimeout(() => badge.classList.remove('bumped'), 1100);
-        }, 900);
-      }
+  /* ── Active nav ── */
+  const navLinks=document.querySelectorAll('.nav-tabs a');
+  const no=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){const id=x.target.id;navLinks.forEach(a=>{const h=a.getAttribute('href')==='#'+id;a.classList.toggle('active',h);if(h)a.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});});}});},{rootMargin:'-40% 0px -55% 0px'});
+  document.querySelectorAll('section[id]').forEach(s=>no.observe(s));
+  navLinks.forEach(a=>a.addEventListener('click',e=>{e.preventDefault();const t=document.querySelector(a.getAttribute('href'));if(t)window.scrollTo({top:t.getBoundingClientRect().top+scrollY-52,behavior:'smooth'});}));
 
-      const el = document.getElementById('viewCount');
-      if (!sessionStorage.getItem(ANIM_KEY)) {
-        sessionStorage.setItem(ANIM_KEY, '1');
-        let current = Math.max(BASE_COUNT, count - 20);
-        const tick = () => {
-          current++;
-          el.textContent = current.toLocaleString('en-IN');
-          if (current < count) requestAnimationFrame(tick);
-          else el.innerHTML = `<span class="count-flip">${count.toLocaleString('en-IN')}</span>`;
-        };
-        setTimeout(tick, 700);
-      } else {
-        el.textContent = count.toLocaleString('en-IN');
-      }
-    })();
+  /* ── Terms ── */
+  const tb=document.getElementById('termsBtn'),tbody=document.getElementById('termsBody');
+  tb.addEventListener('click',()=>{const o=tbody.classList.toggle('open');tb.classList.toggle('open',o);tb.setAttribute('aria-expanded',o);});
 
-    /* ── Scroll reveal ───────────────────────────────── */
-    const revealObs = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); } });
-    }, { threshold: 0.08 });
-    document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+  /* ── Gallery carousel ── */
+  (function(){
+    const track=document.getElementById('galleryTrack'),slides=track.querySelectorAll('.gallery-slide');
+    const dotsWrap=document.getElementById('galDots'),counter=document.getElementById('galCounter');
+    const prev=document.getElementById('galPrev'),next=document.getElementById('galNext');
+    let cur=0,timer;
+    slides.forEach((_,i)=>{const d=document.createElement('button');d.className='gallery-dot'+(i===0?' active':'');d.setAttribute('aria-label','Go to image '+(i+1));d.addEventListener('click',()=>goTo(i));dotsWrap.appendChild(d);});
+    function goTo(idx){cur=idx;track.style.transform=`translateX(-${cur*100}%)`;dotsWrap.querySelectorAll('.gallery-dot').forEach((d,i)=>d.classList.toggle('active',i===cur));counter.textContent=`${cur+1} / ${slides.length}`;reset();}
+    prev.addEventListener('click',()=>goTo((cur-1+slides.length)%slides.length));
+    next.addEventListener('click',()=>goTo((cur+1)%slides.length));
+    function reset(){clearInterval(timer);timer=setInterval(()=>goTo((cur+1)%slides.length),4000);}
+    reset();
+    let tx=null;
+    track.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;},{passive:true});
+    track.addEventListener('touchend',e=>{if(tx===null)return;const d=e.changedTouches[0].clientX-tx;if(Math.abs(d)>50)goTo((cur+(d<0?1:-1)+slides.length)%slides.length);tx=null;});
+    track.querySelectorAll('img').forEach((img,i)=>img.addEventListener('click',()=>openLB(i)));
+  })();
 
-    /* ── Active nav highlight ────────────────────────── */
-    const navLinks = document.querySelectorAll('.nav-tabs a');
-    const navObs = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          const id = e.target.id;
-          navLinks.forEach(a => {
-            const hit = a.getAttribute('href') === '#' + id;
-            a.classList.toggle('active', hit);
-            if (hit) a.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-          });
-        }
-      });
-    }, { rootMargin: '-40% 0px -55% 0px' });
-    document.querySelectorAll('section[id]').forEach(s => navObs.observe(s));
+  /* ── Lightbox ── */
+  const lb=document.getElementById('lightbox'),lbImg=document.getElementById('lbImg');
+  const allImgs=[...document.querySelectorAll('#galleryTrack img')];
+  let lbIdx=0;
+  function openLB(i){lbIdx=i;lbImg.src=allImgs[i].src;lbImg.alt=allImgs[i].alt;lb.classList.add('open');document.body.style.overflow='hidden';}
+  function closeLB(){lb.classList.remove('open');document.body.style.overflow='';lbImg.src='';}
+  function lbNav(d){lbIdx=(lbIdx+d+allImgs.length)%allImgs.length;lbImg.src=allImgs[lbIdx].src;lbImg.alt=allImgs[lbIdx].alt;}
+  document.getElementById('lbClose').addEventListener('click',closeLB);
+  document.getElementById('lbPrev').addEventListener('click',()=>lbNav(-1));
+  document.getElementById('lbNext').addEventListener('click',()=>lbNav(1));
+  lb.addEventListener('click',e=>{if(e.target===lb)closeLB();});
+  document.addEventListener('keydown',e=>{if(!lb.classList.contains('open'))return;if(e.key==='Escape')closeLB();if(e.key==='ArrowLeft')lbNav(-1);if(e.key==='ArrowRight')lbNav(1);});
+  let lbTX=null;
+  lb.addEventListener('touchstart',e=>{lbTX=e.touches[0].clientX;},{passive:true});
+  lb.addEventListener('touchend',e=>{if(lbTX===null)return;if(Math.abs(e.changedTouches[0].clientX-lbTX)>50)lbNav(e.changedTouches[0].clientX<lbTX?1:-1);lbTX=null;});
 
-    /* ── Smooth nav click ────────────────────────────── */
-    navLinks.forEach(a => {
-      a.addEventListener('click', e => {
-        e.preventDefault();
-        const t = document.querySelector(a.getAttribute('href'));
-        if (t) window.scrollTo({ top: t.getBoundingClientRect().top + scrollY - 52, behavior: 'smooth' });
-      });
-    });
+  /* ── Toast ── */
+  function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2800);}
 
-    /* ── Terms accordion ─────────────────────────────── */
-    const termsBtn = document.getElementById('termsBtn');
-    const termsBody = document.getElementById('termsBody');
-    termsBtn.addEventListener('click', () => {
-      const open = termsBody.classList.toggle('open');
-      termsBtn.classList.toggle('open', open);
-      termsBtn.setAttribute('aria-expanded', open);
-    });
+  /* ── Copy link ── */
+  document.getElementById('copyBtn').addEventListener('click',()=>{navigator.clipboard.writeText('https://sipabacusjalna.in').then(()=>showToast('✅ Link copied!')).catch(()=>showToast('Please copy manually.'));});
 
-    /* ── Gallery carousel ─────────────────────────────── */
-    (function () {
-      const track = document.getElementById('galleryTrack');
-      const slides = track.querySelectorAll('.gallery-slide');
-      const dotsWrap = document.getElementById('galDots');
-      const counter = document.getElementById('galCounter');
-      const prevBtn = document.getElementById('galPrev');
-      const nextBtn = document.getElementById('galNext');
-      let cur = 0;
-      let autoTimer;
+  /* ── WhatsApp enquiry ── */
+  document.getElementById('enqSubmit').addEventListener('click',()=>{
+    const n=document.getElementById('eq-name').value.trim(),p=document.getElementById('eq-phone').value.trim();
+    const e=document.getElementById('eq-email').value.trim(),c=document.getElementById('eq-child').value.trim(),m=document.getElementById('eq-msg').value.trim();
+    if(!n){showToast('⚠️ Please enter your name.');return;}
+    if(!p){showToast('⚠️ Please enter your mobile number.');return;}
+    let txt=`Hi! I am interested in Sarita%27s Brilliance Academy (SIP Abacus).%0A%0A`;
+    txt+=`*Name:* ${encodeURIComponent(n)}%0A*Phone:* ${encodeURIComponent(p)}%0A`;
+    if(e)txt+=`*Email:* ${encodeURIComponent(e)}%0A`;
+    if(c)txt+=`*Child%27s Age%2FGrade:* ${encodeURIComponent(c)}%0A`;
+    if(m)txt+=`*Message:* ${encodeURIComponent(m)}%0A`;
+    window.open(`https://wa.me/917020392423?text=${txt}`,'_blank');
+  });
 
-      slides.forEach((_, i) => {
-        const dot = document.createElement('button');
-        dot.className = 'gallery-dot' + (i === 0 ? ' active' : '');
-        dot.setAttribute('aria-label', 'Go to image ' + (i + 1));
-        dot.addEventListener('click', () => goTo(i));
-        dotsWrap.appendChild(dot);
-      });
-
-      function goTo(idx) {
-        cur = idx;
-        track.style.transform = `translateX(-${cur * 100}%)`;
-        dotsWrap.querySelectorAll('.gallery-dot').forEach((d, i) => d.classList.toggle('active', i === cur));
-        counter.textContent = `${cur + 1} / ${slides.length}`;
-        resetAuto();
-      }
-
-      prevBtn.addEventListener('click', () => goTo((cur - 1 + slides.length) % slides.length));
-      nextBtn.addEventListener('click', () => goTo((cur + 1) % slides.length));
-
-      function resetAuto() {
-        clearInterval(autoTimer);
-        autoTimer = setInterval(() => goTo((cur + 1) % slides.length), 4000);
-      }
-      resetAuto();
-
-      let tx = null;
-      track.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
-      track.addEventListener('touchend', e => {
-        if (tx === null) return;
-        const diff = e.changedTouches[0].clientX - tx;
-        if (Math.abs(diff) > 50) goTo((cur + (diff < 0 ? 1 : -1) + slides.length) % slides.length);
-        tx = null;
-      });
-
-      // Click image to open lightbox
-      const galleryImgs = [...track.querySelectorAll('img')];
-      galleryImgs.forEach((img, i) => img.addEventListener('click', () => openLB(i)));
-    })();
-
-    /* ── Lightbox ────────────────────────────────────── */
-    const lb = document.getElementById('lightbox');
-    const lbImg = document.getElementById('lbImg');
-    const allGalImgs = [...document.querySelectorAll('#galleryTrack img')];
-    let lbIdx = 0;
-    function openLB(idx) { lbIdx = idx; lbImg.src = allGalImgs[idx].src; lbImg.alt = allGalImgs[idx].alt; lb.classList.add('open'); document.body.style.overflow = 'hidden'; }
-    function closeLB() { lb.classList.remove('open'); document.body.style.overflow = ''; lbImg.src = ''; }
-    function lbNav(dir) { lbIdx = (lbIdx + dir + allGalImgs.length) % allGalImgs.length; lbImg.src = allGalImgs[lbIdx].src; lbImg.alt = allGalImgs[lbIdx].alt; }
-    document.getElementById('lbClose').addEventListener('click', closeLB);
-    document.getElementById('lbPrev').addEventListener('click', () => lbNav(-1));
-    document.getElementById('lbNext').addEventListener('click', () => lbNav(1));
-    lb.addEventListener('click', e => { if (e.target === lb) closeLB(); });
-    document.addEventListener('keydown', e => {
-      if (!lb.classList.contains('open')) return;
-      if (e.key === 'Escape') closeLB();
-      if (e.key === 'ArrowLeft') lbNav(-1);
-      if (e.key === 'ArrowRight') lbNav(1);
-    });
-    let lbTX = null;
-    lb.addEventListener('touchstart', e => { lbTX = e.touches[0].clientX; }, { passive: true });
-    lb.addEventListener('touchend', e => {
-      if (lbTX === null) return;
-      if (Math.abs(e.changedTouches[0].clientX - lbTX) > 50) lbNav(e.changedTouches[0].clientX < lbTX ? 1 : -1);
-      lbTX = null;
-    });
-
-    /* ── Toast ───────────────────────────────────────── */
-    function showToast(msg) {
-      const t = document.getElementById('toast');
-      t.textContent = msg; t.classList.add('show');
-      setTimeout(() => t.classList.remove('show'), 2800);
-    }
-
-    /* ── Copy link ───────────────────────────────────── */
-    document.getElementById('copyBtn').addEventListener('click', () => {
-      navigator.clipboard.writeText('https://sipabacusjalna.in')
-        .then(() => showToast('✅ Link copied!'))
-        .catch(() => showToast('Please copy manually.'));
-    });
-
-    /* ── WhatsApp enquiry ────────────────────────────── */
-    document.getElementById('enqSubmit').addEventListener('click', () => {
-      const name = document.getElementById('eq-name').value.trim();
-      const phone = document.getElementById('eq-phone').value.trim();
-      const email = document.getElementById('eq-email').value.trim();
-      const child = document.getElementById('eq-child').value.trim();
-      const msg = document.getElementById('eq-msg').value.trim();
-      if (!name) { showToast('⚠️ Please enter your name.'); return; }
-      if (!phone) { showToast('⚠️ Please enter your mobile number.'); return; }
-      let text = `Hi! I am interested in Sarita%27s Brilliance Academy (SIP Abacus).%0A%0A`;
-      text += `*Name:* ${encodeURIComponent(name)}%0A`;
-      text += `*Phone:* ${encodeURIComponent(phone)}%0A`;
-      if (email) text += `*Email:* ${encodeURIComponent(email)}%0A`;
-      if (child) text += `*Child%27s Age%2FGrade:* ${encodeURIComponent(child)}%0A`;
-      if (msg) text += `*Message:* ${encodeURIComponent(msg)}%0A`;
-      window.open(`https://wa.me/917020392423?text=${text}`, '_blank');
-    });
-
-    /* ── Testimonials carousel ────────────────────────── */
-    (function () {
-      const track = document.getElementById('testimonialsTrack');
-      const slides = track.querySelectorAll('.testimonial-slide');
-      const dotsWrap = document.getElementById('tnDots');
-      const prevBtn = document.getElementById('tnPrev');
-      const nextBtn = document.getElementById('tnNext');
-      let current = 0;
-      let autoTimer;
-
-      // Build dots
-      slides.forEach((_, i) => {
-        const dot = document.createElement('button');
-        dot.className = 'tn-dot' + (i === 0 ? ' active' : '');
-        dot.setAttribute('aria-label', 'Go to testimonial ' + (i + 1));
-        dot.addEventListener('click', () => goTo(i));
-        dotsWrap.appendChild(dot);
-      });
-
-      function goTo(idx) {
-        current = idx;
-        track.style.transform = `translateX(-${current * 100}%)`;
-        dotsWrap.querySelectorAll('.tn-dot').forEach((d, i) => d.classList.toggle('active', i === current));
-        resetAuto();
-      }
-
-      prevBtn.addEventListener('click', () => goTo((current - 1 + slides.length) % slides.length));
-      nextBtn.addEventListener('click', () => goTo((current + 1) % slides.length));
-
-      function resetAuto() {
-        clearInterval(autoTimer);
-        autoTimer = setInterval(() => goTo((current + 1) % slides.length), 5000);
-      }
-      resetAuto();
-
-      // Touch swipe support
-      let tx = null;
-      track.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
-      track.addEventListener('touchend', e => {
-        if (tx === null) return;
-        const diff = e.changedTouches[0].clientX - tx;
-        if (Math.abs(diff) > 50) goTo((current + (diff < 0 ? 1 : -1) + slides.length) % slides.length);
-        tx = null;
-      });
-    })();
+  /* ── Testimonials carousel ── */
+  (function(){
+    const track=document.getElementById('testimonialsTrack'),slides=track.querySelectorAll('.testimonial-slide');
+    const dotsWrap=document.getElementById('tnDots'),prev=document.getElementById('tnPrev'),next=document.getElementById('tnNext');
+    let cur=0,timer;
+    slides.forEach((_,i)=>{const d=document.createElement('button');d.className='tn-dot'+(i===0?' active':'');d.setAttribute('aria-label','Go to testimonial '+(i+1));d.addEventListener('click',()=>goTo(i));dotsWrap.appendChild(d);});
+    function goTo(idx){cur=idx;track.style.transform=`translateX(-${cur*100}%)`;dotsWrap.querySelectorAll('.tn-dot').forEach((d,i)=>d.classList.toggle('active',i===cur));reset();}
+    prev.addEventListener('click',()=>goTo((cur-1+slides.length)%slides.length));
+    next.addEventListener('click',()=>goTo((cur+1)%slides.length));
+    function reset(){clearInterval(timer);timer=setInterval(()=>goTo((cur+1)%slides.length),5000);}
+    reset();
+    let tx=null;
+    track.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;},{passive:true});
+    track.addEventListener('touchend',e=>{if(tx===null)return;const d=e.changedTouches[0].clientX-tx;if(Math.abs(d)>50)goTo((cur+(d<0?1:-1)+slides.length)%slides.length);tx=null;});
+  })();
   </script>
 </body>
-
 </html>
