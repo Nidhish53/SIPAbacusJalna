@@ -1256,6 +1256,514 @@
       font-weight: 600;
     }
 
+    /* ─── WHY SIP ABACUS SECTION ────────────────── */
+    .why-sip-wrap {
+      background: var(--card);
+      border-radius: var(--radius);
+      border: 1px solid var(--border-lt);
+      box-shadow: var(--shadow-card);
+      padding: 28px 22px;
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+
+    .why-sip-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    @media (max-width: 640px) {
+      .why-sip-inner {
+        grid-template-columns: 1fr;
+        gap: 22px;
+      }
+    }
+
+    .wsa-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.15rem, 3.5vw, 1.4rem);
+      font-weight: 900;
+      color: var(--orange-dk);
+      margin-bottom: 18px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .wsa-title::before {
+      content: '';
+      position: absolute;
+      left: -6px;
+      right: -6px;
+      bottom: 2px;
+      height: 40%;
+      background: linear-gradient(90deg, var(--amber), var(--orange-mist));
+      border-radius: 4px 14px 4px 10px;
+      z-index: 0;
+      opacity: .5;
+      transform: rotate(-0.8deg);
+    }
+
+    .wsa-title span {
+      position: relative;
+      z-index: 1;
+    }
+
+    .wsa-text {
+      font-size: 14px;
+      line-height: 1.85;
+      color: var(--text-soft);
+    }
+
+    .wsa-text p {
+      margin-bottom: 14px;
+    }
+
+    .wsa-text strong {
+      color: var(--orange-dk);
+      font-weight: 800;
+    }
+
+    .wsa-text .wsa-highlight {
+      color: var(--orange);
+      font-weight: 800;
+    }
+
+    /* Right side - visual area with floating labels */
+    .wsa-visual {
+      position: relative;
+      min-height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    @media (max-width: 640px) {
+      .wsa-visual {
+        min-height: 260px;
+      }
+    }
+
+    .wsa-child-img {
+      width: clamp(180px, 50vw, 260px);
+      height: auto;
+      position: relative;
+      z-index: 1;
+      filter: drop-shadow(0 6px 20px rgba(232, 80, 10, .12));
+    }
+
+    .problem-label {
+      position: absolute;
+      background: transparent;
+      padding: 7px 14px;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: clamp(10px, 2.2vw, 13px);
+      color: var(--text);
+      z-index: 2;
+      white-space: nowrap;
+      line-height: 1.3;
+      text-align: center;
+    }
+
+    .problem-label::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, var(--amber), var(--orange-mist));
+      border-radius: 4px var(--radius-sm) 4px 10px;
+      z-index: -1;
+      opacity: .55;
+      transform: rotate(-1deg);
+    }
+
+    .pl-1 { top: 8%; left: 5%; transform: rotate(-3deg); }
+    .pl-2 { top: 5%; right: 0%; transform: rotate(2deg); }
+    .pl-3 { bottom: 25%; left: -2%; transform: rotate(-2deg); }
+    .pl-4 { bottom: 8%; right: -2%; transform: rotate(1.5deg); }
+
+    @media (max-width: 420px) {
+      .problem-label { font-size: 9.5px; padding: 5px 10px; }
+      .pl-1 { left: 0; }
+      .pl-2 { right: 0; }
+      .pl-3 { left: 0; }
+      .pl-4 { right: 0; }
+    }
+
+    @keyframes floatLabel {
+      0%, 100% { transform: translateY(0) rotate(var(--rot, -2deg)); }
+      50% { transform: translateY(-6px) rotate(var(--rot, -2deg)); }
+    }
+
+    .problem-label { animation: floatLabel 3s ease-in-out infinite; }
+    .pl-1 { --rot: -3deg; animation-delay: 0s; }
+    .pl-2 { --rot: 2deg; animation-delay: .6s; }
+    .pl-3 { --rot: -2deg; animation-delay: 1.2s; }
+    .pl-4 { --rot: 1.5deg; animation-delay: 1.8s; }
+
+    /* ─── MODULES SECTION ───────────────────────── */
+    .modules-wrap {
+      background: linear-gradient(150deg, var(--amber) 0%, #ffb347 50%, #ffa726 100%);
+      border-radius: var(--radius);
+      padding: 28px 22px;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .modules-wrap::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--orange-dk), var(--orange), var(--amber), var(--orange), var(--orange-dk));
+    }
+
+    .modules-inner {
+      max-width: 100%;
+    }
+
+    .modules-header {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1rem, 3.5vw, 1.2rem);
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+
+    .module-cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+
+    @media (max-width: 520px) {
+      .module-cards {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .module-card {
+      border-radius: var(--radius-sm);
+      padding: 16px 10px 14px;
+      text-align: center;
+      border: 1px solid var(--border-lt);
+      box-shadow: var(--shadow-card);
+      transition: transform .25s, box-shadow .25s;
+      cursor: default;
+    }
+
+    .module-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .mc-junior { background: #f3e5f5; }
+    .mc-foundation { background: #fce4ec; }
+    .mc-advanced { background: #e8f5e9; }
+    .mc-grandmaster { background: #ffebee; }
+
+    .module-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-sm);
+      margin: 0 auto 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      background: rgba(255,255,255,.6);
+    }
+
+    .module-card h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(12px, 2.5vw, 14px);
+      font-weight: 700;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.25;
+    }
+
+    /* Feature grid */
+    .mod-features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px 24px;
+      margin-bottom: 22px;
+    }
+
+    @media (max-width: 500px) {
+      .mod-features {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+    }
+
+    .mod-feat-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .mf-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+      border: 1px solid rgba(255,255,255,.5);
+    }
+
+    .mf-text {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.45;
+    }
+
+    /* CTA row */
+    .mod-cta-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .mod-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 26px;
+      border-radius: var(--radius-sm);
+      font-weight: 800;
+      font-size: 14px;
+      text-decoration: none;
+      letter-spacing: .03em;
+      transition: transform .18s, box-shadow .2s;
+      -webkit-tap-highlight-color: transparent;
+      cursor: pointer;
+    }
+
+    .mod-cta:hover { transform: translateY(-2px); }
+    .mod-cta:active { transform: scale(.97); }
+
+    .cta-know-more {
+      background: var(--card);
+      color: var(--orange-dk);
+      border: 2px solid var(--orange-dk);
+    }
+
+    .cta-know-more:hover {
+      box-shadow: var(--shadow-md);
+    }
+
+    .cta-trial {
+      background: linear-gradient(135deg, var(--orange), var(--orange-dk));
+      color: var(--white);
+      border: 2px solid transparent;
+      box-shadow: 0 4px 14px rgba(232, 80, 10, .3);
+    }
+
+    .cta-trial:hover {
+      box-shadow: 0 8px 22px rgba(232, 80, 10, .4);
+    }
+
+    /* ─── PARENT TESTIMONIALS ─────────────────────────── */
+    .testimonials-wrapper {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius);
+    }
+
+    .testimonials-track {
+      display: flex;
+      transition: transform .55s cubic-bezier(.4, 0, .2, 1);
+    }
+
+    .testimonial-slide {
+      min-width: 100%;
+      padding: 0 2px;
+      box-sizing: border-box;
+    }
+
+    .testimonial-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      border: 1px solid var(--border-lt);
+      box-shadow: var(--shadow-card);
+      padding: 28px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .testimonial-card::before {
+      content: '\201C';
+      position: absolute;
+      top: -8px;
+      left: 16px;
+      font-family: 'Playfair Display', serif;
+      font-size: 80px;
+      color: var(--orange-pale);
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .tc-stars {
+      display: flex;
+      gap: 3px;
+      margin-bottom: 14px;
+      font-size: 18px;
+    }
+
+    .tc-quote {
+      font-size: 14px;
+      line-height: 1.8;
+      color: var(--text-soft);
+      font-style: italic;
+      margin-bottom: 18px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .tc-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .tc-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--orange), var(--orange-lt));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 900;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .tc-name {
+      font-weight: 800;
+      font-size: 14px;
+      color: var(--orange-dk);
+    }
+
+    .tc-role {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 1px;
+    }
+
+    .testimonials-nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .tn-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      background: var(--card);
+      color: var(--orange-dk);
+      font-size: 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .2s, border-color .2s, transform .18s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .tn-btn:hover {
+      background: var(--orange-pale);
+      border-color: var(--orange);
+      transform: scale(1.08);
+    }
+
+    .tn-btn:active {
+      transform: scale(.95);
+    }
+
+    .tn-dots {
+      display: flex;
+      gap: 8px;
+    }
+
+    .tn-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--border);
+      border: none;
+      cursor: pointer;
+      transition: background .25s, transform .2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .tn-dot.active {
+      background: var(--orange);
+      transform: scale(1.25);
+    }
+
+    .tn-dot:hover:not(.active) {
+      background: var(--orange-lt);
+    }
+
+    .testimonials-summary {
+      background: linear-gradient(135deg, var(--orange-pale), #fff);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      margin-top: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      text-align: center;
+    }
+
+    .ts-stat {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .ts-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: var(--orange-dk);
+    }
+
+    .ts-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
+    .ts-divider {
+      width: 1px;
+      height: 40px;
+      background: var(--border);
+    }
+
     /* ─── TOAST ──────────────────────────────────────── */
     .toast {
       position: fixed;
@@ -1374,9 +1882,11 @@
       <a href="#contact-section" class="active">Contact</a>
       <a href="#links-section">Links</a>
       <a href="#about-section">About</a>
+      <a href="#abacus-section">Abacus</a>
       <a href="#services-section">Services</a>
       <a href="#payment-section">Payment</a>
       <a href="#gallery-section">Gallery</a>
+      <a href="#testimonials-section">Testimonials</a>
       <a href="#feedback-section">Feedback</a>
       <a href="#enquiry-section">Enquiry</a>
       <a href="#share-section">Share</a>
@@ -1594,6 +2104,91 @@
       </div>
     </section>
 
+    <!-- ═══ WHY SIP ABACUS (white section) ═════════════ -->
+    <section class="section reveal" id="abacus-section">
+      <h2 class="section-title"><span class="st-icon">🧮</span>Abacus Instrument</h2>
+
+      <!-- Part 1: Why SIP Abacus? -->
+      <div class="why-sip-wrap">
+        <div class="why-sip-inner">
+          <div class="wsa-left">
+            <h3 class="wsa-title"><span>Why SIP Abacus?</span></h3>
+            <div class="wsa-text">
+              <p><strong>SIP Abacus</strong> is a skill development programme that can help in various aspects of your child's development. SIP Abacus courses are designed to develop soft-skills, numerical abilities and overall intelligence.</p>
+              <p>Children in today's smartphone-enabled world have just one problem – the constant distraction of stimuli from smartphones, streaming platforms, and other devices.</p>
+              <p><strong>SIP Abacus program</strong> is tailored to engage your child productively, learning <span class="wsa-highlight">MATH in a fun way.</span></p>
+              <p>SIP Abacus makes your child <span class="wsa-highlight">5 times better</span>. To know how, click on Know more.</p>
+            </div>
+          </div>
+          <div class="wsa-visual">
+            <img src="assets/child-thinking.svg" alt="Child thinking about math" class="wsa-child-img" />
+            <div class="problem-label pl-1">Lower learning<br>ability</div>
+            <div class="problem-label pl-2">Poor attention span</div>
+            <div class="problem-label pl-3">Poor Academic<br>performance</div>
+            <div class="problem-label pl-4">Lack of focus<br>&amp; concentration</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Part 2: Modules (yellow section) -->
+      <div class="modules-wrap">
+        <div class="modules-inner">
+          <p class="modules-header">SIP Abacus offers four modules of Abacus learning.</p>
+
+          <div class="module-cards">
+            <div class="module-card mc-junior">
+              <div class="module-icon">🌱</div>
+              <h4>Junior<br>Module</h4>
+            </div>
+            <div class="module-card mc-foundation">
+              <div class="module-icon">🌿</div>
+              <h4>Foundation<br>Module</h4>
+            </div>
+            <div class="module-card mc-advanced">
+              <div class="module-icon">🌳</div>
+              <h4>Advanced<br>Module</h4>
+            </div>
+            <div class="module-card mc-grandmaster">
+              <div class="module-icon">🏆</div>
+              <h4>Grand Master<br>Module</h4>
+            </div>
+          </div>
+
+          <div class="mod-features">
+            <div class="mod-feat-item">
+              <span class="mf-icon">👩‍🏫</span>
+              <span class="mf-text">Rigorously trained teachers with assessments</span>
+            </div>
+            <div class="mod-feat-item">
+              <span class="mf-icon">📈</span>
+              <span class="mf-text">Annual teacher up-gradation</span>
+            </div>
+            <div class="mod-feat-item">
+              <span class="mf-icon">👶</span>
+              <span class="mf-text">Small batch size for individual attention</span>
+            </div>
+            <div class="mod-feat-item">
+              <span class="mf-icon">📖</span>
+              <span class="mf-text">Periodic Course revision</span>
+            </div>
+            <div class="mod-feat-item">
+              <span class="mf-icon">💻</span>
+              <span class="mf-text">Both online and offline classes</span>
+            </div>
+            <div class="mod-feat-item">
+              <span class="mf-icon">🏅</span>
+              <span class="mf-text">Annual regional / National and International Competitions</span>
+            </div>
+          </div>
+
+          <div class="mod-cta-row">
+            <a href="https://wa.me/917020392423?text=Hi!%20I%20would%20like%20to%20know%20more%20about%20SIP%20Abacus%20courses." class="mod-cta cta-know-more" target="_blank" rel="noopener">Know more</a>
+            <a href="https://wa.me/917020392423?text=Hi!%20I%20would%20like%20to%20book%20a%20free%20trial%20class%20for%20my%20child." class="mod-cta cta-trial" target="_blank" rel="noopener">Book a Free Trial Class</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ═══ SERVICES ════════════════════════════════════ -->
     <section class="section reveal" id="services-section">
       <h2 class="section-title"><span class="st-icon">🎒</span>Our Services</h2>
@@ -1696,6 +2291,124 @@
       <img class="lb-img" id="lbImg" src="" alt="Gallery image" />
       <button class="lb-nav lb-next" id="lbNext" aria-label="Next">›</button>
     </div>
+
+    <!-- ═══ PARENT TESTIMONIALS ═════════════════════════ -->
+    <section class="section reveal" id="testimonials-section">
+      <h2 class="section-title"><span class="st-icon">💬</span>Parent's Testimonials</h2>
+
+      <div class="testimonials-wrapper">
+        <div class="testimonials-track" id="testimonialsTrack">
+
+          <div class="testimonial-slide">
+            <div class="testimonial-card">
+              <div class="tc-stars">⭐⭐⭐⭐⭐</div>
+              <p class="tc-quote">"My daughter has been learning at Sarita's Brilliance Academy for 2 years now. Her concentration and math skills have improved dramatically. She now solves complex calculations mentally in seconds! Truly grateful to Sarita ma'am for her dedication."</p>
+              <div class="tc-author">
+                <div class="tc-avatar">S</div>
+                <div>
+                  <div class="tc-name">Mrs. Sunita Patil</div>
+                  <div class="tc-role">Parent of Ananya, Class 4</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-slide">
+            <div class="testimonial-card">
+              <div class="tc-stars">⭐⭐⭐⭐⭐</div>
+              <p class="tc-quote">"The SIP Abacus program at this academy is exceptional. My son Arjun was struggling with numbers, but after joining, he topped his school math exam and won a medal at the regional competition. The teaching methodology is truly world-class."</p>
+              <div class="tc-author">
+                <div class="tc-avatar">R</div>
+                <div>
+                  <div class="tc-name">Mr. Rajesh Deshmukh</div>
+                  <div class="tc-role">Parent of Arjun, Class 5</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-slide">
+            <div class="testimonial-card">
+              <div class="tc-stars">⭐⭐⭐⭐⭐</div>
+              <p class="tc-quote">"We enrolled both our children at Sarita's Academy. The small batch sizes ensure each child gets personal attention. The Brain Gym exercises have noticeably improved their memory and focus. Highly recommended for every parent!"</p>
+              <div class="tc-author">
+                <div class="tc-avatar">P</div>
+                <div>
+                  <div class="tc-name">Mrs. Priya Joshi</div>
+                  <div class="tc-role">Parent of Riya & Rohan, Class 3 & 6</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-slide">
+            <div class="testimonial-card">
+              <div class="tc-stars">⭐⭐⭐⭐⭐</div>
+              <p class="tc-quote">"My child was very shy and lacked confidence. After joining the abacus classes, not only has she become confident in math but also participates in competitions. Sarita ma'am's personal involvement makes all the difference."</p>
+              <div class="tc-author">
+                <div class="tc-avatar">A</div>
+                <div>
+                  <div class="tc-name">Mrs. Anjali Kulkarni</div>
+                  <div class="tc-role">Parent of Meera, Class 2</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-slide">
+            <div class="testimonial-card">
+              <div class="tc-stars">⭐⭐⭐⭐⭐</div>
+              <p class="tc-quote">"Outstanding academy! The structured learning in 4 modules ensures gradual progression. My son represented Jalna at the national-level abacus competition. Thank you Sarita ma'am for nurturing these young minds."</p>
+              <div class="tc-author">
+                <div class="tc-avatar">V</div>
+                <div>
+                  <div class="tc-name">Mr. Vikram Jadhav</div>
+                  <div class="tc-role">Parent of Aarav, Class 7</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-slide">
+            <div class="testimonial-card">
+              <div class="tc-stars">⭐⭐⭐⭐⭐</div>
+              <p class="tc-quote">"As a teacher myself, I can vouch for the quality of education here. The fun-based approach with games and puzzles keeps children engaged. Both online and offline modes give great flexibility. A must for every child in Jalna!"</p>
+              <div class="tc-author">
+                <div class="tc-avatar">N</div>
+                <div>
+                  <div class="tc-name">Mrs. Neha Sharma</div>
+                  <div class="tc-role">Parent of Ishaan, Class 4</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="testimonials-nav">
+        <button class="tn-btn" id="tnPrev" aria-label="Previous testimonial">‹</button>
+        <div class="tn-dots" id="tnDots"></div>
+        <button class="tn-btn" id="tnNext" aria-label="Next testimonial">›</button>
+      </div>
+
+      <div class="testimonials-summary">
+        <div class="ts-stat">
+          <span class="ts-number">5,000+</span>
+          <span class="ts-label">Students Trained</span>
+        </div>
+        <div class="ts-divider"></div>
+        <div class="ts-stat">
+          <span class="ts-number">18+</span>
+          <span class="ts-label">Years Experience</span>
+        </div>
+        <div class="ts-divider"></div>
+        <div class="ts-stat">
+          <span class="ts-number">4.9 ⭐</span>
+          <span class="ts-label">Parent Rating</span>
+        </div>
+      </div>
+    </section>
 
     <!-- ═══ FEEDBACK ════════════════════════════════════ -->
     <section class="section reveal" id="feedback-section">
@@ -1908,6 +2621,52 @@
       if (msg) text += `*Message:* ${encodeURIComponent(msg)}%0A`;
       window.open(`https://wa.me/917020392423?text=${text}`, '_blank');
     });
+
+    /* ── Testimonials carousel ────────────────────────── */
+    (function () {
+      const track = document.getElementById('testimonialsTrack');
+      const slides = track.querySelectorAll('.testimonial-slide');
+      const dotsWrap = document.getElementById('tnDots');
+      const prevBtn = document.getElementById('tnPrev');
+      const nextBtn = document.getElementById('tnNext');
+      let current = 0;
+      let autoTimer;
+
+      // Build dots
+      slides.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.className = 'tn-dot' + (i === 0 ? ' active' : '');
+        dot.setAttribute('aria-label', 'Go to testimonial ' + (i + 1));
+        dot.addEventListener('click', () => goTo(i));
+        dotsWrap.appendChild(dot);
+      });
+
+      function goTo(idx) {
+        current = idx;
+        track.style.transform = `translateX(-${current * 100}%)`;
+        dotsWrap.querySelectorAll('.tn-dot').forEach((d, i) => d.classList.toggle('active', i === current));
+        resetAuto();
+      }
+
+      prevBtn.addEventListener('click', () => goTo((current - 1 + slides.length) % slides.length));
+      nextBtn.addEventListener('click', () => goTo((current + 1) % slides.length));
+
+      function resetAuto() {
+        clearInterval(autoTimer);
+        autoTimer = setInterval(() => goTo((current + 1) % slides.length), 5000);
+      }
+      resetAuto();
+
+      // Touch swipe support
+      let tx = null;
+      track.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
+      track.addEventListener('touchend', e => {
+        if (tx === null) return;
+        const diff = e.changedTouches[0].clientX - tx;
+        if (Math.abs(diff) > 50) goTo((current + (diff < 0 ? 1 : -1) + slides.length) % slides.length);
+        tx = null;
+      });
+    })();
   </script>
 </body>
 
